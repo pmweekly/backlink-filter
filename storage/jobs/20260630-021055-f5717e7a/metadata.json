@@ -1,0 +1,1455 @@
+{
+  "job_id": "20260630-021055-f5717e7a",
+  "status": "completed",
+  "stage": "done",
+  "progress": 100.0,
+  "created_at": "2026-06-30T02:10:55",
+  "updated_at": "2026-06-30T02:16:18",
+  "files": [
+    {
+      "name": "bratgen.io-backlinks.xlsx",
+      "size": 22954
+    }
+  ],
+  "logs": [
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "开始 processor 清洗"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "找到 1 个新文件（已跳过 0 个已处理文件）："
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "  bratgen.io-backlinks.xlsx"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "正在读取 bratgen.io-backlinks.xlsx"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "  读取 bratgen.io-backlinks.xlsx：161 行"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "正在合并文件"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "\n合并后总行数：161"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "正在按注册域名去重"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "去重后行数：75"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "共去除重复行：86"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "正在保存 processor 输出"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "\n已保存到：/app/storage/jobs/20260630-021055-f5717e7a/processor/processed_backlinks.xlsx"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "processor 清洗完成"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "开始博客评论检测"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "正在读取 check_blogs 输入"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "正在检测第 1/75 行"
+    },
+    {
+      "time": "02:10:55",
+      "level": "INFO",
+      "message": "[1] 检测: https://www.keatingfirmlaw.com/post/legal-limit-for-window-tint"
+    },
+    {
+      "time": "02:10:57",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:10:59",
+      "level": "INFO",
+      "message": "正在检测第 2/75 行"
+    },
+    {
+      "time": "02:10:59",
+      "level": "INFO",
+      "message": "[2] 检测: https://theneguide.com/sezane-clothing-pieces-for-summer/"
+    },
+    {
+      "time": "02:10:59",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单 · 需注册）"
+    },
+    {
+      "time": "02:10:59",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-23 04:48"
+    },
+    {
+      "time": "02:11:01",
+      "level": "INFO",
+      "message": "正在检测第 3/75 行"
+    },
+    {
+      "time": "02:11:01",
+      "level": "INFO",
+      "message": "[3] 检测: https://puppenzimmer.com/2020/05/glutenfreie-orangen-mandel-tarte.html"
+    },
+    {
+      "time": "02:11:02",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:11:02",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-30 02:39"
+    },
+    {
+      "time": "02:11:04",
+      "level": "INFO",
+      "message": "正在检测第 4/75 行"
+    },
+    {
+      "time": "02:11:04",
+      "level": "INFO",
+      "message": "[4] 检测: https://squatuniversity.com/2016/04/07/how-to-perfect-the-front-squat/"
+    },
+    {
+      "time": "02:11:05",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:06",
+      "level": "INFO",
+      "message": "正在检测第 5/75 行"
+    },
+    {
+      "time": "02:11:06",
+      "level": "INFO",
+      "message": "[5] 检测: https://forum.plarium.com/es/throne-kingdom-at-war/667_game-database/1702215_a-guide-to-the-schedule-of-temporary-bonuses-and-rebels--towers/5/"
+    },
+    {
+      "time": "02:11:07",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:08",
+      "level": "INFO",
+      "message": "正在检测第 6/75 行"
+    },
+    {
+      "time": "02:11:08",
+      "level": "INFO",
+      "message": "[6] 检测: https://sites.williams.edu/srd4/2015/12/page/2/"
+    },
+    {
+      "time": "02:11:08",
+      "level": "INFO",
+      "message": "  [ERROR] https://sites.williams.edu/srd4/2015/12/page/2/ -> 403 Client Error: Forbidden for url: https://sites.williams.edu/srd4/2015/12/page/2/"
+    },
+    {
+      "time": "02:11:08",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:11:10",
+      "level": "INFO",
+      "message": "正在检测第 7/75 行"
+    },
+    {
+      "time": "02:11:10",
+      "level": "INFO",
+      "message": "[7] 检测: https://blogs.deusto.es/innovandis/marca-digital-en-la-era-de-la-ia/"
+    },
+    {
+      "time": "02:11:11",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:13",
+      "level": "INFO",
+      "message": "正在检测第 8/75 行"
+    },
+    {
+      "time": "02:11:13",
+      "level": "INFO",
+      "message": "[8] 检测: https://castbox.fm/channel/Olivia's-House-with-Olivia-Attwood-id6850123"
+    },
+    {
+      "time": "02:11:14",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:16",
+      "level": "INFO",
+      "message": "正在检测第 9/75 行"
+    },
+    {
+      "time": "02:11:16",
+      "level": "INFO",
+      "message": "[9] 检测: https://www.reneeroaming.com/incredible-sedona-hikes/"
+    },
+    {
+      "time": "02:11:18",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:11:18",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-28 23:34"
+    },
+    {
+      "time": "02:11:20",
+      "level": "INFO",
+      "message": "正在检测第 10/75 行"
+    },
+    {
+      "time": "02:11:20",
+      "level": "INFO",
+      "message": "[10] 检测: https://techbullion.com/why-instant-visual-generators-are-the-new-toolkit-for-social-media-creators-in-2026/"
+    },
+    {
+      "time": "02:11:21",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:23",
+      "level": "INFO",
+      "message": "正在检测第 11/75 行"
+    },
+    {
+      "time": "02:11:23",
+      "level": "INFO",
+      "message": "[11] 检测: https://blogs.ubc.ca/ellgotoguide/ell-methods/"
+    },
+    {
+      "time": "02:11:24",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:11:24",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-27 00:09"
+    },
+    {
+      "time": "02:11:25",
+      "level": "INFO",
+      "message": "正在检测第 12/75 行"
+    },
+    {
+      "time": "02:11:25",
+      "level": "INFO",
+      "message": "[12] 检测: https://programminginsider.com/developers-text-generators-ux-content-workflows/"
+    },
+    {
+      "time": "02:11:26",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:11:28",
+      "level": "INFO",
+      "message": "正在检测第 13/75 行"
+    },
+    {
+      "time": "02:11:28",
+      "level": "INFO",
+      "message": "[13] 检测: https://siit.co/blog/how-browser-based-creative-tools-are-changing-digital-content-creation/52723"
+    },
+    {
+      "time": "02:11:29",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:11:31",
+      "level": "INFO",
+      "message": "正在检测第 14/75 行"
+    },
+    {
+      "time": "02:11:31",
+      "level": "INFO",
+      "message": "[14] 检测: https://gymnasticshq.com/flexibility-in-gymnastics/"
+    },
+    {
+      "time": "02:11:35",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:11:35",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-18 13:06"
+    },
+    {
+      "time": "02:11:37",
+      "level": "INFO",
+      "message": "正在检测第 15/75 行"
+    },
+    {
+      "time": "02:11:37",
+      "level": "INFO",
+      "message": "[15] 检测: https://jonnegroni.com/2017/08/29/best-worst-time-travel-movies-according-to-science-part-time-characters/"
+    },
+    {
+      "time": "02:11:37",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:38",
+      "level": "INFO",
+      "message": "正在检测第 16/75 行"
+    },
+    {
+      "time": "02:11:38",
+      "level": "INFO",
+      "message": "[16] 检测: https://www.brandersmagazine.com/post/what-happened-to-the-meaning-behind-the-mark"
+    },
+    {
+      "time": "02:11:41",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:11:42",
+      "level": "INFO",
+      "message": "正在检测第 17/75 行"
+    },
+    {
+      "time": "02:11:42",
+      "level": "INFO",
+      "message": "[17] 检测: http://ipsnews.net/business/2026/04/18/bratgen-io-launches-full-featured-free-brat-generator-for-charli-xcx-fans-and-content-creators-worldwide/"
+    },
+    {
+      "time": "02:11:43",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:11:44",
+      "level": "INFO",
+      "message": "正在检测第 18/75 行"
+    },
+    {
+      "time": "02:11:44",
+      "level": "INFO",
+      "message": "[18] 检测: https://admin.phacility.com/F524530"
+    },
+    {
+      "time": "02:11:45",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:47",
+      "level": "INFO",
+      "message": "正在检测第 19/75 行"
+    },
+    {
+      "time": "02:11:47",
+      "level": "INFO",
+      "message": "[19] 检测: https://gympik.com/articles/how-to-differentiate-and-buy-organic-food-here-is-your-health-guide/"
+    },
+    {
+      "time": "02:11:48",
+      "level": "INFO",
+      "message": "  [ERROR] https://gympik.com/articles/how-to-differentiate-and-buy-organic-food-here-is-your-health-guide/ -> 503 Server Error: Service Temporarily Unavailable for url: https://gympik.com/articles/how-to-differentiate-and-buy-organic-food-here-is-your-health-guide/"
+    },
+    {
+      "time": "02:11:48",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:11:49",
+      "level": "INFO",
+      "message": "正在检测第 20/75 行"
+    },
+    {
+      "time": "02:11:49",
+      "level": "INFO",
+      "message": "[20] 检测: https://ourcodeworld.com/articles/read/3040/why-developers-are-using-custom-image-generators-for-social-media-in-2026"
+    },
+    {
+      "time": "02:11:49",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:51",
+      "level": "INFO",
+      "message": "正在检测第 21/75 行"
+    },
+    {
+      "time": "02:11:51",
+      "level": "INFO",
+      "message": "[21] 检测: https://www.repeatcrafterme.com/2014/09/instagram-logo-brownie.html"
+    },
+    {
+      "time": "02:11:52",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:11:52",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-04-02 04:20"
+    },
+    {
+      "time": "02:11:53",
+      "level": "INFO",
+      "message": "正在检测第 22/75 行"
+    },
+    {
+      "time": "02:11:53",
+      "level": "INFO",
+      "message": "[22] 检测: https://www.spectral.ro/Media/spectral-mobila-se-extinde-profit-25-05-2021"
+    },
+    {
+      "time": "02:11:54",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:11:56",
+      "level": "INFO",
+      "message": "正在检测第 23/75 行"
+    },
+    {
+      "time": "02:11:56",
+      "level": "INFO",
+      "message": "[23] 检测: https://aprilgolightly.com/bella-reina-spa-west-palm-beach-spa-upcoming-specials-cant-miss/"
+    },
+    {
+      "time": "02:11:56",
+      "level": "INFO",
+      "message": "  [ERROR] https://aprilgolightly.com/bella-reina-spa-west-palm-beach-spa-upcoming-specials-cant-miss/ -> 403 Client Error: Forbidden for url: https://aprilgolightly.com/bella-reina-spa-west-palm-beach-spa-upcoming-specials-cant-miss/"
+    },
+    {
+      "time": "02:11:56",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:11:58",
+      "level": "INFO",
+      "message": "正在检测第 24/75 行"
+    },
+    {
+      "time": "02:11:58",
+      "level": "INFO",
+      "message": "[24] 检测: https://brandmarketingblog.com/articles/branding-definitions/what-is-direct-response-marketing/"
+    },
+    {
+      "time": "02:11:58",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:11:58",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-25 04:16"
+    },
+    {
+      "time": "02:12:00",
+      "level": "INFO",
+      "message": "正在检测第 25/75 行"
+    },
+    {
+      "time": "02:12:00",
+      "level": "INFO",
+      "message": "[25] 检测: https://indianjadibooti.com/Jadistore/blog-headlines/indianjadibooti-shankhapushpi-shankhawali-sankhpushpi-convolvulus-pluricaulis"
+    },
+    {
+      "time": "02:12:01",
+      "level": "INFO",
+      "message": "  [ERROR] https://indianjadibooti.com/Jadistore/blog-headlines/indianjadibooti-shankhapushpi-shankhawali-sankhpushpi-convolvulus-pluricaulis -> 503 Server Error: Service Unavailable for url: https://indianjadibooti.com/Jadistore/blog-headlines/indianjadibooti-shankhapushpi-shankhawali-sankhpushpi-convolvulus-pluricaulis"
+    },
+    {
+      "time": "02:12:01",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:12:02",
+      "level": "INFO",
+      "message": "正在检测第 26/75 行"
+    },
+    {
+      "time": "02:12:02",
+      "level": "INFO",
+      "message": "[26] 检测: http://blog.babelcube.com/2014/02/tips-for-writing-authors-bio.html"
+    },
+    {
+      "time": "02:12:04",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:12:06",
+      "level": "INFO",
+      "message": "正在检测第 27/75 行"
+    },
+    {
+      "time": "02:12:06",
+      "level": "INFO",
+      "message": "[27] 检测: http://howei.com/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word"
+    },
+    {
+      "time": "02:12:07",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:12:08",
+      "level": "INFO",
+      "message": "正在检测第 28/75 行"
+    },
+    {
+      "time": "02:12:08",
+      "level": "INFO",
+      "message": "[28] 检测: https://inhonorofdesign.com/2025/09/paint-like-a-pro-simple-tips-tricks-for-every-homeowner/"
+    },
+    {
+      "time": "02:12:11",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:12:11",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "02:12:12",
+      "level": "INFO",
+      "message": "正在检测第 29/75 行"
+    },
+    {
+      "time": "02:12:12",
+      "level": "INFO",
+      "message": "[29] 检测: https://questions.pratique.fr/question-est-ce-faites-attention-mode-habiller-47129.html"
+    },
+    {
+      "time": "02:12:13",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "02:12:14",
+      "level": "INFO",
+      "message": "正在检测第 30/75 行"
+    },
+    {
+      "time": "02:12:14",
+      "level": "INFO",
+      "message": "[30] 检测: https://www.ampfluence.com/linkedin-ssi-score-explained-what-it-is-how-to-improve-it/"
+    },
+    {
+      "time": "02:12:16",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:12:16",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-26 08:53"
+    },
+    {
+      "time": "02:12:18",
+      "level": "INFO",
+      "message": "正在检测第 31/75 行"
+    },
+    {
+      "time": "02:12:18",
+      "level": "INFO",
+      "message": "[31] 检测: https://www.totschooling.net/2017/05/transportation-activities-preschool.html"
+    },
+    {
+      "time": "02:12:19",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:12:20",
+      "level": "INFO",
+      "message": "正在检测第 32/75 行"
+    },
+    {
+      "time": "02:12:20",
+      "level": "INFO",
+      "message": "[32] 检测: https://entrepreneursbreak.com/free-text-generators.html"
+    },
+    {
+      "time": "02:12:23",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:12:25",
+      "level": "INFO",
+      "message": "正在检测第 33/75 行"
+    },
+    {
+      "time": "02:12:25",
+      "level": "INFO",
+      "message": "[33] 检测: https://loveandmarriageblog.com/air-dry-clay-ideas/"
+    },
+    {
+      "time": "02:12:26",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:12:26",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "02:12:27",
+      "level": "INFO",
+      "message": "正在检测第 34/75 行"
+    },
+    {
+      "time": "02:12:27",
+      "level": "INFO",
+      "message": "[34] 检测: https://twelveoeightblog.com/a-little-wooden-footstool-makeover-before-after/"
+    },
+    {
+      "time": "02:12:29",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:12:30",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-29 17:04"
+    },
+    {
+      "time": "02:12:31",
+      "level": "INFO",
+      "message": "正在检测第 35/75 行"
+    },
+    {
+      "time": "02:12:31",
+      "level": "INFO",
+      "message": "[35] 检测: https://www.dinnerwithjulie.com/2012/12/29/homemade-irish-cream/irish-cream-3/"
+    },
+    {
+      "time": "02:12:33",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:12:33",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "02:12:34",
+      "level": "INFO",
+      "message": "正在检测第 36/75 行"
+    },
+    {
+      "time": "02:12:34",
+      "level": "INFO",
+      "message": "[36] 检测: https://www.ewebdiscussion.com/members/brat.125704/about"
+    },
+    {
+      "time": "02:12:35",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:12:36",
+      "level": "INFO",
+      "message": "正在检测第 37/75 行"
+    },
+    {
+      "time": "02:12:36",
+      "level": "INFO",
+      "message": "[37] 检测: https://answers.themler.io/questions/193668/latest-wordpress-5-3-update-causing-themler-themes-to-break?order=Newest"
+    },
+    {
+      "time": "02:12:38",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:12:39",
+      "level": "INFO",
+      "message": "正在检测第 38/75 行"
+    },
+    {
+      "time": "02:12:39",
+      "level": "INFO",
+      "message": "[38] 检测: https://brownbagteacher.com/classroom-storage-container/"
+    },
+    {
+      "time": "02:12:39",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:12:41",
+      "level": "INFO",
+      "message": "正在检测第 39/75 行"
+    },
+    {
+      "time": "02:12:41",
+      "level": "INFO",
+      "message": "[39] 检测: https://fashionablefoods.com/2018/03/06/greek-grilled-chicken-tzatziki/"
+    },
+    {
+      "time": "02:12:43",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单 · 需注册）"
+    },
+    {
+      "time": "02:12:44",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-29 09:19"
+    },
+    {
+      "time": "02:12:46",
+      "level": "INFO",
+      "message": "正在检测第 40/75 行"
+    },
+    {
+      "time": "02:12:46",
+      "level": "INFO",
+      "message": "[40] 检测: https://forum.electric-scooter.guide/d/1422-apollo-phantom-folding?page=5"
+    },
+    {
+      "time": "02:13:41",
+      "level": "INFO",
+      "message": "  [TIMEOUT] https://forum.electric-scooter.guide/d/1422-apollo-phantom-folding?page=5 超过 55s 未响应"
+    },
+    {
+      "time": "02:13:41",
+      "level": "INFO",
+      "message": "  -> 访问超时（超过1分钟无响应）"
+    },
+    {
+      "time": "02:13:42",
+      "level": "INFO",
+      "message": "正在检测第 41/75 行"
+    },
+    {
+      "time": "02:13:42",
+      "level": "INFO",
+      "message": "[41] 检测: https://www.cemkrete.com/en/forum/topic/821/presentation-designers-uk-lead-in-content-innovation"
+    },
+    {
+      "time": "02:13:43",
+      "level": "INFO",
+      "message": "  [ERROR] https://www.cemkrete.com/en/forum/topic/821/presentation-designers-uk-lead-in-content-innovation -> 404 Client Error: Not Found for url: https://www.cemkrete.com/en/forum/topic/821/presentation-designers-uk-lead-in-content-innovation"
+    },
+    {
+      "time": "02:13:43",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:13:45",
+      "level": "INFO",
+      "message": "正在检测第 42/75 行"
+    },
+    {
+      "time": "02:13:45",
+      "level": "INFO",
+      "message": "[42] 检测: https://solacebase.com/just-in-president-buhari-cancels-zamfara-visit/"
+    },
+    {
+      "time": "02:13:47",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:13:47",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-24 12:06"
+    },
+    {
+      "time": "02:13:49",
+      "level": "INFO",
+      "message": "正在检测第 43/75 行"
+    },
+    {
+      "time": "02:13:49",
+      "level": "INFO",
+      "message": "[43] 检测: https://www.cornbeanspigskids.com/2020/06/iowa-ice-cream-road-trip-at-dan-debbies.html"
+    },
+    {
+      "time": "02:13:50",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:13:52",
+      "level": "INFO",
+      "message": "正在检测第 44/75 行"
+    },
+    {
+      "time": "02:13:52",
+      "level": "INFO",
+      "message": "[44] 检测: https://www.pathumratjotun.com/en/forum/topic/97108/how-buying-spotify-listeners-can-help-you-grow-your-music-naturally"
+    },
+    {
+      "time": "02:13:53",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:13:54",
+      "level": "INFO",
+      "message": "正在检测第 45/75 行"
+    },
+    {
+      "time": "02:13:54",
+      "level": "INFO",
+      "message": "[45] 检测: https://www.yarnharlot.ca/2024/08/day-zero/"
+    },
+    {
+      "time": "02:13:58",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单 · 需注册）"
+    },
+    {
+      "time": "02:13:59",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-27 03:32"
+    },
+    {
+      "time": "02:14:00",
+      "level": "INFO",
+      "message": "正在检测第 46/75 行"
+    },
+    {
+      "time": "02:14:00",
+      "level": "INFO",
+      "message": "[46] 检测: https://gwa-calculator.net/best-free-online-tools-for-students/"
+    },
+    {
+      "time": "02:14:02",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:14:03",
+      "level": "INFO",
+      "message": "正在检测第 47/75 行"
+    },
+    {
+      "time": "02:14:03",
+      "level": "INFO",
+      "message": "[47] 检测: https://vatonlinecalculator.co.uk/best-online-calculators-and-tools-2026/"
+    },
+    {
+      "time": "02:14:04",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:14:06",
+      "level": "INFO",
+      "message": "正在检测第 48/75 行"
+    },
+    {
+      "time": "02:14:06",
+      "level": "INFO",
+      "message": "[48] 检测: https://www.steffisrecipes.com/2016/12/munthiri-kothu-recipe.html"
+    },
+    {
+      "time": "02:14:07",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:14:09",
+      "level": "INFO",
+      "message": "正在检测第 49/75 行"
+    },
+    {
+      "time": "02:14:09",
+      "level": "INFO",
+      "message": "[49] 检测: https://www.lilistravelplans.com/chemka-hot-springs-moshi-tanzania/"
+    },
+    {
+      "time": "02:14:14",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单 · 需注册）"
+    },
+    {
+      "time": "02:14:18",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-30 02:56"
+    },
+    {
+      "time": "02:14:19",
+      "level": "INFO",
+      "message": "正在检测第 50/75 行"
+    },
+    {
+      "time": "02:14:19",
+      "level": "INFO",
+      "message": "[50] 检测: http://musicforums.net/members/limosdagod.1954/"
+    },
+    {
+      "time": "02:14:20",
+      "level": "INFO",
+      "message": "  [ERROR] http://musicforums.net/members/limosdagod.1954/ -> 403 Client Error: Forbidden for url: http://musicforums.net/members/limosdagod.1954/"
+    },
+    {
+      "time": "02:14:20",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:14:21",
+      "level": "INFO",
+      "message": "正在检测第 51/75 行"
+    },
+    {
+      "time": "02:14:21",
+      "level": "INFO",
+      "message": "[51] 检测: https://bim-run.com/forum/discussion/news-updates/commemorative-badges-for-penang-hill-visitors-using-funicular-railway-on-100th-anniversary"
+    },
+    {
+      "time": "02:14:22",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:14:23",
+      "level": "INFO",
+      "message": "正在检测第 52/75 行"
+    },
+    {
+      "time": "02:14:23",
+      "level": "INFO",
+      "message": "[52] 检测: https://bratstextgenerator.blogspot.com/2026/04/free-online-brat-tool-for-stylish.html"
+    },
+    {
+      "time": "02:14:23",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:14:25",
+      "level": "INFO",
+      "message": "正在检测第 53/75 行"
+    },
+    {
+      "time": "02:14:25",
+      "level": "INFO",
+      "message": "[53] 检测: https://businesnewswire.com/bratgen-io-launches-full-featured-free-brat-generator-for-charli-xcx-fans-and-content-creators-worldwide/"
+    },
+    {
+      "time": "02:14:26",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:14:27",
+      "level": "INFO",
+      "message": "正在检测第 54/75 行"
+    },
+    {
+      "time": "02:14:27",
+      "level": "INFO",
+      "message": "[54] 检测: https://bye.fyi/report/134831"
+    },
+    {
+      "time": "02:14:28",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:14:30",
+      "level": "INFO",
+      "message": "正在检测第 55/75 行"
+    },
+    {
+      "time": "02:14:30",
+      "level": "INFO",
+      "message": "[55] 检测: https://colourfulrun.com/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word"
+    },
+    {
+      "time": "02:14:30",
+      "level": "INFO",
+      "message": "  [ERROR] https://colourfulrun.com/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word -> HTTPSConnectionPool(host='colourfulrun.com', port=443): Max retries exceeded with url: /forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word (Caused by NewConnectionError(\"HTTPSConnection(host='colourfulrun.com', port=443): Failed to establish a new connection: [Errno 113] No route to host\"))"
+    },
+    {
+      "time": "02:14:30",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:14:32",
+      "level": "INFO",
+      "message": "正在检测第 56/75 行"
+    },
+    {
+      "time": "02:14:32",
+      "level": "INFO",
+      "message": "[56] 检测: https://community.weddingwire.in/forum/best-website-design-for-wedding-photos--t255411"
+    },
+    {
+      "time": "02:14:32",
+      "level": "INFO",
+      "message": "  [ERROR] https://community.weddingwire.in/forum/best-website-design-for-wedding-photos--t255411 -> 403 Client Error: Forbidden for url: https://community.weddingwire.in/forum/best-website-design-for-wedding-photos--t255411"
+    },
+    {
+      "time": "02:14:32",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:14:33",
+      "level": "INFO",
+      "message": "正在检测第 57/75 行"
+    },
+    {
+      "time": "02:14:33",
+      "level": "INFO",
+      "message": "[57] 检测: https://creativeposts.top/stats/134831"
+    },
+    {
+      "time": "02:14:34",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:14:36",
+      "level": "INFO",
+      "message": "正在检测第 58/75 行"
+    },
+    {
+      "time": "02:14:36",
+      "level": "INFO",
+      "message": "[58] 检测: https://dailymusings.top/stats/134830"
+    },
+    {
+      "time": "02:14:37",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:14:38",
+      "level": "INFO",
+      "message": "正在检测第 59/75 行"
+    },
+    {
+      "time": "02:14:38",
+      "level": "INFO",
+      "message": "[59] 检测: https://guestpostnow.com/website/brat-gen_910744"
+    },
+    {
+      "time": "02:14:38",
+      "level": "INFO",
+      "message": "  [ERROR] https://guestpostnow.com/website/brat-gen_910744 -> 403 Client Error: Forbidden for url: https://guestpostnow.com/website/brat-gen_910744"
+    },
+    {
+      "time": "02:14:38",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:14:40",
+      "level": "INFO",
+      "message": "正在检测第 60/75 行"
+    },
+    {
+      "time": "02:14:40",
+      "level": "INFO",
+      "message": "[60] 检测: https://harisukanegara.com/forum/discussion/news-updates/commemorative-badges-for-penang-hill-visitors-using-funicular-railway-on-100th-anniversary"
+    },
+    {
+      "time": "02:15:35",
+      "level": "INFO",
+      "message": "  [TIMEOUT] https://harisukanegara.com/forum/discussion/news-updates/commemorative-badges-for-penang-hill-visitors-using-funicular-railway-on-100th-anniversary 超过 55s 未响应"
+    },
+    {
+      "time": "02:15:35",
+      "level": "INFO",
+      "message": "  -> 访问超时（超过1分钟无响应）"
+    },
+    {
+      "time": "02:15:37",
+      "level": "INFO",
+      "message": "正在检测第 61/75 行"
+    },
+    {
+      "time": "02:15:37",
+      "level": "INFO",
+      "message": "[61] 检测: https://harisukannegara.com/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word"
+    },
+    {
+      "time": "02:15:37",
+      "level": "INFO",
+      "message": "  [ERROR] https://harisukannegara.com/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word -> HTTPSConnectionPool(host='harisukannegara.com', port=443): Max retries exceeded with url: /forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word (Caused by NameResolutionError(\"HTTPSConnection(host='harisukannegara.com', port=443): Failed to resolve 'harisukannegara.com' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "time": "02:15:37",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:15:38",
+      "level": "INFO",
+      "message": "正在检测第 62/75 行"
+    },
+    {
+      "time": "02:15:38",
+      "level": "INFO",
+      "message": "[62] 检测: https://howei.my/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word"
+    },
+    {
+      "time": "02:15:43",
+      "level": "INFO",
+      "message": "  [ERROR] https://howei.my/forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word -> HTTPSConnectionPool(host='howei.my', port=443): Max retries exceeded with url: /forum/discussion/free-stuff/easy-guide-to-convert-json-files-to-word (Caused by NameResolutionError(\"HTTPSConnection(host='howei.my', port=443): Failed to resolve 'howei.my' ([Errno -3] Temporary failure in name resolution)\"))"
+    },
+    {
+      "time": "02:15:43",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:15:45",
+      "level": "INFO",
+      "message": "正在检测第 63/75 行"
+    },
+    {
+      "time": "02:15:45",
+      "level": "INFO",
+      "message": "[63] 检测: https://metamagic.top/stats/134830"
+    },
+    {
+      "time": "02:15:46",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:15:47",
+      "level": "INFO",
+      "message": "正在检测第 64/75 行"
+    },
+    {
+      "time": "02:15:47",
+      "level": "INFO",
+      "message": "[64] 检测: https://newsblogsports.site/all/86/1"
+    },
+    {
+      "time": "02:15:48",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:15:50",
+      "level": "INFO",
+      "message": "正在检测第 65/75 行"
+    },
+    {
+      "time": "02:15:50",
+      "level": "INFO",
+      "message": "[65] 检测: https://piclur.com/tag/albumart"
+    },
+    {
+      "time": "02:15:50",
+      "level": "INFO",
+      "message": "  [ERROR] https://piclur.com/tag/albumart -> HTTPSConnectionPool(host='piclur.com', port=443): Max retries exceeded with url: /tag/albumart (Caused by NameResolutionError(\"HTTPSConnection(host='piclur.com', port=443): Failed to resolve 'piclur.com' ([Errno -3] Temporary failure in name resolution)\"))"
+    },
+    {
+      "time": "02:15:50",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "02:15:52",
+      "level": "INFO",
+      "message": "正在检测第 66/75 行"
+    },
+    {
+      "time": "02:15:52",
+      "level": "INFO",
+      "message": "[66] 检测: https://podcastcalculator.com/best-tools-for-podcast-creators/"
+    },
+    {
+      "time": "02:15:52",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:15:52",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "02:15:54",
+      "level": "INFO",
+      "message": "正在检测第 67/75 行"
+    },
+    {
+      "time": "02:15:54",
+      "level": "INFO",
+      "message": "[67] 检测: https://q4quotes.net/brother-quotes-in-urdu/"
+    },
+    {
+      "time": "02:15:56",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:15:56",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-09 04:48"
+    },
+    {
+      "time": "02:15:58",
+      "level": "INFO",
+      "message": "正在检测第 68/75 行"
+    },
+    {
+      "time": "02:15:58",
+      "level": "INFO",
+      "message": "[68] 检测: https://renee-roaming.com/a-first-timers-guide-to-visiting-vienna-christmas-markets/"
+    },
+    {
+      "time": "02:15:59",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:15:59",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-05-31 03:26"
+    },
+    {
+      "time": "02:16:00",
+      "level": "INFO",
+      "message": "正在检测第 69/75 行"
+    },
+    {
+      "time": "02:16:00",
+      "level": "INFO",
+      "message": "[69] 检测: https://sharefast.co/tools/bratgen-io"
+    },
+    {
+      "time": "02:16:01",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:16:03",
+      "level": "INFO",
+      "message": "正在检测第 70/75 行"
+    },
+    {
+      "time": "02:16:03",
+      "level": "INFO",
+      "message": "[70] 检测: https://shortenurls.eu/share/134831"
+    },
+    {
+      "time": "02:16:04",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:16:05",
+      "level": "INFO",
+      "message": "正在检测第 71/75 行"
+    },
+    {
+      "time": "02:16:05",
+      "level": "INFO",
+      "message": "[71] 检测: https://techhealthblog.com/2026/06/11/how-ai-agents-are-replacing-traditional-workflows-in-2026/"
+    },
+    {
+      "time": "02:16:06",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:16:06",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2026-06-24 10:08"
+    },
+    {
+      "time": "02:16:08",
+      "level": "INFO",
+      "message": "正在检测第 72/75 行"
+    },
+    {
+      "time": "02:16:08",
+      "level": "INFO",
+      "message": "[72] 检测: https://thenewswiremedia.info/rising-demand-for-aesthetic-text-tools-drives-growth-of-digital-platforms-like-bratgen/"
+    },
+    {
+      "time": "02:16:08",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "02:16:08",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "02:16:10",
+      "level": "INFO",
+      "message": "正在检测第 73/75 行"
+    },
+    {
+      "time": "02:16:10",
+      "level": "INFO",
+      "message": "[73] 检测: https://vinayvyas836865.wixsite.com/emotionalindia/post/transfroms-160mb"
+    },
+    {
+      "time": "02:16:11",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:16:13",
+      "level": "INFO",
+      "message": "正在检测第 74/75 行"
+    },
+    {
+      "time": "02:16:13",
+      "level": "INFO",
+      "message": "[74] 检测: https://websitelaunches.com/site/bratgen.io"
+    },
+    {
+      "time": "02:16:14",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "02:16:15",
+      "level": "INFO",
+      "message": "正在检测第 75/75 行"
+    },
+    {
+      "time": "02:16:15",
+      "level": "INFO",
+      "message": "[75] 检测: https://www.pinterest.com/bratgenio/"
+    },
+    {
+      "time": "02:16:16",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "02:16:18",
+      "level": "INFO",
+      "message": "正在生成带颜色标注的 Excel"
+    },
+    {
+      "time": "02:16:18",
+      "level": "INFO",
+      "message": "[XLSX] 带颜色标注的 Excel 已生成: /app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a.xlsx"
+    },
+    {
+      "time": "02:16:18",
+      "level": "INFO",
+      "message": "\n完成！CSV: /app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a.csv"
+    },
+    {
+      "time": "02:16:18",
+      "level": "INFO",
+      "message": "Excel（含颜色）: /app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a.xlsx"
+    },
+    {
+      "time": "02:16:18",
+      "level": "INFO",
+      "message": "check_blogs 检测完成"
+    },
+    {
+      "time": "02:16:18",
+      "level": "INFO",
+      "message": "导出结果已生成"
+    }
+  ],
+  "stats": {
+    "processor": {
+      "output_file": "/app/storage/jobs/20260630-021055-f5717e7a/processor/processed_backlinks.xlsx",
+      "input_files": [
+        "bratgen.io-backlinks.xlsx"
+      ],
+      "failed_files": [],
+      "rows_read": 161,
+      "rows_output": 75,
+      "duplicate_rows_removed": 86,
+      "skipped_processed_files": 0
+    },
+    "check_blogs": {
+      "output_file": "/app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a.xlsx",
+      "output_csv": "/app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a.csv",
+      "checkpoint_file": "/app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a_checkpoint.json",
+      "input_file": "/app/storage/jobs/20260630-021055-f5717e7a/processor/processed_backlinks.xlsx",
+      "raw_rows": 75,
+      "processed_rows": 75,
+      "skipped_duplicate_domains": 0,
+      "empty_url_rows": 0,
+      "label_counts": {
+        "无评论功能": 14,
+        "博客网站 · 需注册": 4,
+        "博客网站": 17,
+        "评论网站": 25,
+        "访问失败": 12,
+        "游戏站": 1,
+        "访问超时": 2
+      }
+    }
+  },
+  "error": null,
+  "download_path": "/app/storage/jobs/20260630-021055-f5717e7a/result/check_blogs_result_20260630-021055-f5717e7a.xlsx"
+}

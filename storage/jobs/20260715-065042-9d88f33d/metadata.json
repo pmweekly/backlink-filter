@@ -1,0 +1,1561 @@
+{
+  "job_id": "20260715-065042-9d88f33d",
+  "status": "completed",
+  "stage": "done",
+  "progress": 100.0,
+  "created_at": "2026-07-15T06:50:42",
+  "updated_at": "2026-07-15T13:07:41",
+  "files": [
+    {
+      "name": "buckshotroulette.com-backlinks.xlsx",
+      "size": 1661738
+    },
+    {
+      "name": "cartoongames.io-backlinks.xlsx",
+      "size": 946096
+    },
+    {
+      "name": "ezremove.ai-backlinks.xlsx",
+      "size": 2160814
+    }
+  ],
+  "logs": [
+    {
+      "time": "12:59:03",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:59:05",
+      "level": "INFO",
+      "message": "正在检测第 4800/4887 行"
+    },
+    {
+      "time": "12:59:05",
+      "level": "INFO",
+      "message": "[4800] 检测: https://nekhii.mn/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:06",
+      "level": "INFO",
+      "message": "  [ERROR] https://nekhii.mn/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://nekhii.mn/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:06",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:59:07",
+      "level": "INFO",
+      "message": "正在检测第 4801/4887 行"
+    },
+    {
+      "time": "12:59:07",
+      "level": "INFO",
+      "message": "[4801] 检测: https://nav.shengchao.vip/"
+    },
+    {
+      "time": "12:59:08",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:59:09",
+      "level": "INFO",
+      "message": "正在检测第 4802/4887 行"
+    },
+    {
+      "time": "12:59:09",
+      "level": "INFO",
+      "message": "[4802] 检测: https://nasrinerosemarrakech.com/fr/Price-list/"
+    },
+    {
+      "time": "12:59:10",
+      "level": "INFO",
+      "message": "  [ERROR] https://nasrinerosemarrakech.com/fr/Price-list/ -> 403 Client Error: Forbidden for url: https://nasrinerosemarrakech.com/cgi-sys/suspendedpage.cgi"
+    },
+    {
+      "time": "12:59:10",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:59:11",
+      "level": "INFO",
+      "message": "正在检测第 4803/4887 行"
+    },
+    {
+      "time": "12:59:11",
+      "level": "INFO",
+      "message": "[4803] 检测: https://mypurohith.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:16",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:59:17",
+      "level": "INFO",
+      "message": "正在检测第 4804/4887 行"
+    },
+    {
+      "time": "12:59:17",
+      "level": "INFO",
+      "message": "[4804] 检测: https://myhomeandi.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:18",
+      "level": "INFO",
+      "message": "  [ERROR] https://myhomeandi.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://myhomeandi.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:18",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:59:19",
+      "level": "INFO",
+      "message": "正在检测第 4805/4887 行"
+    },
+    {
+      "time": "12:59:19",
+      "level": "INFO",
+      "message": "[4805] 检测: https://mutufaskes.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:20",
+      "level": "INFO",
+      "message": "  [ERROR] https://mutufaskes.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://mutufaskes.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:20",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:59:22",
+      "level": "INFO",
+      "message": "正在检测第 4806/4887 行"
+    },
+    {
+      "time": "12:59:22",
+      "level": "INFO",
+      "message": "[4806] 检测: https://murdoconline.net/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:26",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:59:28",
+      "level": "INFO",
+      "message": "正在检测第 4807/4887 行"
+    },
+    {
+      "time": "12:59:28",
+      "level": "INFO",
+      "message": "[4807] 检测: https://mttijara.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "12:59:29",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "12:59:31",
+      "level": "INFO",
+      "message": "正在检测第 4808/4887 行"
+    },
+    {
+      "time": "12:59:31",
+      "level": "INFO",
+      "message": "[4808] 检测: https://mrwiggles.biz/category/seo-linkk-order/"
+    },
+    {
+      "time": "13:00:24",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:00:25",
+      "level": "INFO",
+      "message": "正在检测第 4809/4887 行"
+    },
+    {
+      "time": "13:00:25",
+      "level": "INFO",
+      "message": "[4809] 检测: https://mrmomo.ink/"
+    },
+    {
+      "time": "13:00:27",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:00:28",
+      "level": "INFO",
+      "message": "正在检测第 4810/4887 行"
+    },
+    {
+      "time": "13:00:28",
+      "level": "INFO",
+      "message": "[4810] 检测: https://ousoonerexperiences.com/packages/michigan-land/"
+    },
+    {
+      "time": "13:00:29",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:00:30",
+      "level": "INFO",
+      "message": "正在检测第 4811/4887 行"
+    },
+    {
+      "time": "13:00:30",
+      "level": "INFO",
+      "message": "[4811] 检测: https://onlinemakingmoneyblueprint.com/tg-seo-linkk-order-seo-backlinks-homepage-links-7/"
+    },
+    {
+      "time": "13:00:38",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:00:40",
+      "level": "INFO",
+      "message": "正在检测第 4812/4887 行"
+    },
+    {
+      "time": "13:00:40",
+      "level": "INFO",
+      "message": "[4812] 检测: https://omniscientglobalopulence.com/contact/"
+    },
+    {
+      "time": "13:00:40",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:00:42",
+      "level": "INFO",
+      "message": "正在检测第 4813/4887 行"
+    },
+    {
+      "time": "13:00:42",
+      "level": "INFO",
+      "message": "[4813] 检测: https://objectswithoutmeaning.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:01:08",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:01:09",
+      "level": "INFO",
+      "message": "正在检测第 4814/4887 行"
+    },
+    {
+      "time": "13:01:09",
+      "level": "INFO",
+      "message": "[4814] 检测: https://oaxaca.broker/our-marketing-tools/"
+    },
+    {
+      "time": "13:01:11",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:01:12",
+      "level": "INFO",
+      "message": "正在检测第 4815/4887 行"
+    },
+    {
+      "time": "13:01:12",
+      "level": "INFO",
+      "message": "[4815] 检测: https://nexanav.huiuiu.com/sites/cartoongames"
+    },
+    {
+      "time": "13:01:13",
+      "level": "INFO",
+      "message": "  [ERROR] https://nexanav.huiuiu.com/sites/cartoongames -> HTTPSConnectionPool(host='nexanav.huiuiu.com', port=443): Max retries exceeded with url: /sites/cartoongames (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)')))"
+    },
+    {
+      "time": "13:01:13",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:01:15",
+      "level": "INFO",
+      "message": "正在检测第 4816/4887 行"
+    },
+    {
+      "time": "13:01:15",
+      "level": "INFO",
+      "message": "[4816] 检测: https://nevafixtore.com/tg-links-dealer-black-hat-seo-services-mass-links-2-7/"
+    },
+    {
+      "time": "13:01:15",
+      "level": "INFO",
+      "message": "  [ERROR] https://nevafixtore.com/tg-links-dealer-black-hat-seo-services-mass-links-2-7/ -> 521 Server Error: <none> for url: https://nevafixtore.com/tg-links-dealer-black-hat-seo-services-mass-links-2-7/"
+    },
+    {
+      "time": "13:01:15",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:01:17",
+      "level": "INFO",
+      "message": "正在检测第 4817/4887 行"
+    },
+    {
+      "time": "13:01:17",
+      "level": "INFO",
+      "message": "[4817] 检测: https://roadfox-logistics.pl/contact-us.php"
+    },
+    {
+      "time": "13:01:17",
+      "level": "INFO",
+      "message": "  [ERROR] https://roadfox-logistics.pl/contact-us.php -> HTTPSConnectionPool(host='roadfox-logistics.pl', port=443): Max retries exceeded with url: /contact-us.php (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'roadfox-logistics.pl'. (_ssl.c:1010)\")))"
+    },
+    {
+      "time": "13:01:17",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:01:18",
+      "level": "INFO",
+      "message": "正在检测第 4818/4887 行"
+    },
+    {
+      "time": "13:01:18",
+      "level": "INFO",
+      "message": "[4818] 检测: https://roadfox-logistics.com/contact-us.php"
+    },
+    {
+      "time": "13:01:21",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:01:22",
+      "level": "INFO",
+      "message": "正在检测第 4819/4887 行"
+    },
+    {
+      "time": "13:01:22",
+      "level": "INFO",
+      "message": "[4819] 检测: https://riyanshconstructions.site/contact.html"
+    },
+    {
+      "time": "13:01:33",
+      "level": "INFO",
+      "message": "  [ERROR] https://riyanshconstructions.site/contact.html -> HTTPSConnectionPool(host='riyanshconstructions.site', port=443): Max retries exceeded with url: /contact.html (Caused by NameResolutionError(\"HTTPSConnection(host='riyanshconstructions.site', port=443): Failed to resolve 'riyanshconstructions.site' ([Errno -3] Temporary failure in name resolution)\"))"
+    },
+    {
+      "time": "13:01:33",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:01:34",
+      "level": "INFO",
+      "message": "正在检测第 4820/4887 行"
+    },
+    {
+      "time": "13:01:35",
+      "level": "INFO",
+      "message": "[4820] 检测: https://rippleartspace.org/visit"
+    },
+    {
+      "time": "13:01:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:01:38",
+      "level": "INFO",
+      "message": "正在检测第 4821/4887 行"
+    },
+    {
+      "time": "13:01:38",
+      "level": "INFO",
+      "message": "[4821] 检测: https://reverb.coffee/pages/contact-1"
+    },
+    {
+      "time": "13:01:38",
+      "level": "INFO",
+      "message": "  [ERROR] https://reverb.coffee/pages/contact-1 -> 404 Client Error: Not Found for url: https://reverb.coffee/pages/contact-1"
+    },
+    {
+      "time": "13:01:38",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:01:40",
+      "level": "INFO",
+      "message": "正在检测第 4822/4887 行"
+    },
+    {
+      "time": "13:01:40",
+      "level": "INFO",
+      "message": "[4822] 检测: https://reisepresse.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:01:40",
+      "level": "INFO",
+      "message": "  [ERROR] https://reisepresse.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://reisepresse.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:01:40",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:01:42",
+      "level": "INFO",
+      "message": "正在检测第 4823/4887 行"
+    },
+    {
+      "time": "13:01:42",
+      "level": "INFO",
+      "message": "[4823] 检测: https://rainbow-park.com/archives/96480"
+    },
+    {
+      "time": "13:01:56",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:01:58",
+      "level": "INFO",
+      "message": "正在检测第 4824/4887 行"
+    },
+    {
+      "time": "13:01:58",
+      "level": "INFO",
+      "message": "[4824] 检测: https://quantumjobs.fr/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:01:58",
+      "level": "INFO",
+      "message": "  [ERROR] https://quantumjobs.fr/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://quantumjobs.fr/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:01:58",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:02:00",
+      "level": "INFO",
+      "message": "正在检测第 4825/4887 行"
+    },
+    {
+      "time": "13:02:00",
+      "level": "INFO",
+      "message": "[4825] 检测: https://riannahairstudio.me/"
+    },
+    {
+      "time": "13:02:00",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:02:02",
+      "level": "INFO",
+      "message": "正在检测第 4826/4887 行"
+    },
+    {
+      "time": "13:02:02",
+      "level": "INFO",
+      "message": "[4826] 检测: https://mahihospital.com/forms/forms/contact.php"
+    },
+    {
+      "time": "13:02:03",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:04",
+      "level": "INFO",
+      "message": "正在检测第 4827/4887 行"
+    },
+    {
+      "time": "13:02:04",
+      "level": "INFO",
+      "message": "[4827] 检测: https://m88links.net/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:02:15",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:02:17",
+      "level": "INFO",
+      "message": "正在检测第 4828/4887 行"
+    },
+    {
+      "time": "13:02:17",
+      "level": "INFO",
+      "message": "[4828] 检测: https://m4mlmsoftware.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:02:20",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:02:21",
+      "level": "INFO",
+      "message": "正在检测第 4829/4887 行"
+    },
+    {
+      "time": "13:02:21",
+      "level": "INFO",
+      "message": "[4829] 检测: https://luminlaundry.com/self-service-laundry/"
+    },
+    {
+      "time": "13:02:23",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:24",
+      "level": "INFO",
+      "message": "正在检测第 4830/4887 行"
+    },
+    {
+      "time": "13:02:24",
+      "level": "INFO",
+      "message": "[4830] 检测: https://lukeandkinsley.com/default.asp"
+    },
+    {
+      "time": "13:02:25",
+      "level": "INFO",
+      "message": "  [ERROR] https://lukeandkinsley.com/default.asp -> HTTPSConnectionPool(host='lukeandkinsley.com', port=443): Max retries exceeded with url: /default.asp (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)')))"
+    },
+    {
+      "time": "13:02:25",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:02:26",
+      "level": "INFO",
+      "message": "正在检测第 4831/4887 行"
+    },
+    {
+      "time": "13:02:26",
+      "level": "INFO",
+      "message": "[4831] 检测: https://luanatrentin.com.br/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:02:26",
+      "level": "INFO",
+      "message": "  [ERROR] https://luanatrentin.com.br/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> HTTPSConnectionPool(host='luanatrentin.com.br', port=443): Max retries exceeded with url: /tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ (Caused by NameResolutionError(\"HTTPSConnection(host='luanatrentin.com.br', port=443): Failed to resolve 'luanatrentin.com.br' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "time": "13:02:26",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:02:28",
+      "level": "INFO",
+      "message": "正在检测第 4832/4887 行"
+    },
+    {
+      "time": "13:02:28",
+      "level": "INFO",
+      "message": "[4832] 检测: https://look-my.com/search"
+    },
+    {
+      "time": "13:02:30",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:31",
+      "level": "INFO",
+      "message": "正在检测第 4833/4887 行"
+    },
+    {
+      "time": "13:02:31",
+      "level": "INFO",
+      "message": "[4833] 检测: https://lolyrecipes.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:02:36",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:02:36",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:02:38",
+      "level": "INFO",
+      "message": "正在检测第 4834/4887 行"
+    },
+    {
+      "time": "13:02:38",
+      "level": "INFO",
+      "message": "[4834] 检测: https://metalroofingelpasotx.net/professional-roofing-solutions-in-vinton-tx-get-a-free-quote/"
+    },
+    {
+      "time": "13:02:42",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:44",
+      "level": "INFO",
+      "message": "正在检测第 4835/4887 行"
+    },
+    {
+      "time": "13:02:44",
+      "level": "INFO",
+      "message": "[4835] 检测: https://metalroofingdenton.com/roofing-contractor-in-allen-tx-request-a-quote/"
+    },
+    {
+      "time": "13:02:45",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:47",
+      "level": "INFO",
+      "message": "正在检测第 4836/4887 行"
+    },
+    {
+      "time": "13:02:47",
+      "level": "INFO",
+      "message": "[4836] 检测: https://metalroofingchandler.com/roofing-contractor-apache-junction-az-request-a-free-quote-today/"
+    },
+    {
+      "time": "13:02:48",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:50",
+      "level": "INFO",
+      "message": "正在检测第 4837/4887 行"
+    },
+    {
+      "time": "13:02:50",
+      "level": "INFO",
+      "message": "[4837] 检测: https://mendenarena.de/tg-links-dealer-black-hat-seo-services-mass-links-2-9/"
+    },
+    {
+      "time": "13:02:50",
+      "level": "INFO",
+      "message": "  [ERROR] https://mendenarena.de/tg-links-dealer-black-hat-seo-services-mass-links-2-9/ -> 403 Client Error: Forbidden for url: https://mendenarena.de/tg-links-dealer-black-hat-seo-services-mass-links-2-9/"
+    },
+    {
+      "time": "13:02:50",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:02:52",
+      "level": "INFO",
+      "message": "正在检测第 4838/4887 行"
+    },
+    {
+      "time": "13:02:52",
+      "level": "INFO",
+      "message": "[4838] 检测: https://mencenergy.ca/"
+    },
+    {
+      "time": "13:02:55",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:02:56",
+      "level": "INFO",
+      "message": "正在检测第 4839/4887 行"
+    },
+    {
+      "time": "13:02:56",
+      "level": "INFO",
+      "message": "[4839] 检测: https://mawdi.com/sites/6352.html"
+    },
+    {
+      "time": "13:02:59",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:03:01",
+      "level": "INFO",
+      "message": "正在检测第 4840/4887 行"
+    },
+    {
+      "time": "13:03:01",
+      "level": "INFO",
+      "message": "[4840] 检测: https://maureenchapdelaine.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:03:07",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:03:08",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:03:10",
+      "level": "INFO",
+      "message": "正在检测第 4841/4887 行"
+    },
+    {
+      "time": "13:03:10",
+      "level": "INFO",
+      "message": "[4841] 检测: https://marketingdepartment.org/tg-seo-linkk-order-seo-backlinks-homepage-links-4/"
+    },
+    {
+      "time": "13:03:11",
+      "level": "INFO",
+      "message": "  [ERROR] https://marketingdepartment.org/tg-seo-linkk-order-seo-backlinks-homepage-links-4/ -> 404 Client Error: Not Found for url: https://marketingdepartment.org/tg-seo-linkk-order-seo-backlinks-homepage-links-4/"
+    },
+    {
+      "time": "13:03:11",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:03:12",
+      "level": "INFO",
+      "message": "正在检测第 4842/4887 行"
+    },
+    {
+      "time": "13:03:12",
+      "level": "INFO",
+      "message": "[4842] 检测: https://mariamoorehomes.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:03:17",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:03:20",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:03:22",
+      "level": "INFO",
+      "message": "正在检测第 4843/4887 行"
+    },
+    {
+      "time": "13:03:22",
+      "level": "INFO",
+      "message": "[4843] 检测: https://makhetcenter.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:03:22",
+      "level": "INFO",
+      "message": "  [ERROR] https://makhetcenter.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://makhetcenter.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:03:23",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:03:24",
+      "level": "INFO",
+      "message": "正在检测第 4844/4887 行"
+    },
+    {
+      "time": "13:03:24",
+      "level": "INFO",
+      "message": "[4844] 检测: https://mahina-corse.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:03:24",
+      "level": "INFO",
+      "message": "  [ERROR] https://mahina-corse.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://www.mahina-corse.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:03:24",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:03:26",
+      "level": "INFO",
+      "message": "正在检测第 4845/4887 行"
+    },
+    {
+      "time": "13:03:26",
+      "level": "INFO",
+      "message": "[4845] 检测: https://medetai-denpo.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-3/"
+    },
+    {
+      "time": "13:03:30",
+      "level": "INFO",
+      "message": "  [ERROR] https://medetai-denpo.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-3/ -> 404 Client Error: Not Found for url: https://medetai-denpo.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-3/"
+    },
+    {
+      "time": "13:03:30",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:03:31",
+      "level": "INFO",
+      "message": "正在检测第 4846/4887 行"
+    },
+    {
+      "time": "13:03:31",
+      "level": "INFO",
+      "message": "[4846] 检测: https://jbpackersandmovers.com/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:03:33",
+      "level": "INFO",
+      "message": "  [ERROR] https://jbpackersandmovers.com/tg-seo-linkk-order-seo-backlinks-homepage-links-6/ -> 404 Client Error: Not Found for url: https://jbpackersandmovers.com/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:03:33",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:03:35",
+      "level": "INFO",
+      "message": "正在检测第 4847/4887 行"
+    },
+    {
+      "time": "13:03:35",
+      "level": "INFO",
+      "message": "[4847] 检测: https://jbclinicudi.com/"
+    },
+    {
+      "time": "13:03:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:03:38",
+      "level": "INFO",
+      "message": "正在检测第 4848/4887 行"
+    },
+    {
+      "time": "13:03:38",
+      "level": "INFO",
+      "message": "[4848] 检测: https://j38hu6ywzd.uerfyi14.info/Scg523e0699970/"
+    },
+    {
+      "time": "13:03:38",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:03:40",
+      "level": "INFO",
+      "message": "正在检测第 4849/4887 行"
+    },
+    {
+      "time": "13:03:40",
+      "level": "INFO",
+      "message": "[4849] 检测: https://ivantsoi.myds.me/other/"
+    },
+    {
+      "time": "13:03:41",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:03:43",
+      "level": "INFO",
+      "message": "正在检测第 4850/4887 行"
+    },
+    {
+      "time": "13:03:43",
+      "level": "INFO",
+      "message": "[4850] 检测: https://isff.indodax.com/post/watch-review-top-15-isff-2022-giveaway"
+    },
+    {
+      "time": "13:03:46",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:03:47",
+      "level": "INFO",
+      "message": "正在检测第 4851/4887 行"
+    },
+    {
+      "time": "13:03:47",
+      "level": "INFO",
+      "message": "[4851] 检测: https://iowahawkeyeexperiences.com/packages/tab-demo/"
+    },
+    {
+      "time": "13:03:48",
+      "level": "INFO",
+      "message": "  [ERROR] https://iowahawkeyeexperiences.com/packages/tab-demo/ -> 404 Client Error: Not Found for url: https://iowahawkeyeexperiences.com/packages/tab-demo/"
+    },
+    {
+      "time": "13:03:48",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:03:49",
+      "level": "INFO",
+      "message": "正在检测第 4852/4887 行"
+    },
+    {
+      "time": "13:03:49",
+      "level": "INFO",
+      "message": "[4852] 检测: https://insulationboston.net/insulation-experts-in-arlington-get-a-free-quote/"
+    },
+    {
+      "time": "13:03:53",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:03:54",
+      "level": "INFO",
+      "message": "正在检测第 4853/4887 行"
+    },
+    {
+      "time": "13:03:54",
+      "level": "INFO",
+      "message": "[4853] 检测: https://liveyourbestfulllife.com/tg-seo-linkk-order-seo-backlinks-homepage-links-7/"
+    },
+    {
+      "time": "13:03:58",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:04:00",
+      "level": "INFO",
+      "message": "正在检测第 4854/4887 行"
+    },
+    {
+      "time": "13:04:00",
+      "level": "INFO",
+      "message": "[4854] 检测: https://indianlegend.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-3/"
+    },
+    {
+      "time": "13:04:29",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:04:31",
+      "level": "INFO",
+      "message": "正在检测第 4855/4887 行"
+    },
+    {
+      "time": "13:04:31",
+      "level": "INFO",
+      "message": "[4855] 检测: https://livelycity.com/play-cartoon-network-games-online-at-cartoongames-io/"
+    },
+    {
+      "time": "13:04:32",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "13:04:33",
+      "level": "INFO",
+      "message": "正在检测第 4856/4887 行"
+    },
+    {
+      "time": "13:04:33",
+      "level": "INFO",
+      "message": "[4856] 检测: https://lionsroyalhotel.com/2026/06/03/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:04:39",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:04:40",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:04:42",
+      "level": "INFO",
+      "message": "正在检测第 4857/4887 行"
+    },
+    {
+      "time": "13:04:42",
+      "level": "INFO",
+      "message": "[4857] 检测: https://letgoservice.com/contact-us/"
+    },
+    {
+      "time": "13:04:45",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:04:47",
+      "level": "INFO",
+      "message": "正在检测第 4858/4887 行"
+    },
+    {
+      "time": "13:04:47",
+      "level": "INFO",
+      "message": "[4858] 检测: https://letgoart.com/contact-us/"
+    },
+    {
+      "time": "13:04:50",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:04:52",
+      "level": "INFO",
+      "message": "正在检测第 4859/4887 行"
+    },
+    {
+      "time": "13:04:52",
+      "level": "INFO",
+      "message": "[4859] 检测: https://lafiresysteminspections.com/fire-protection-system-alhambra-get-a-free-quote-today/"
+    },
+    {
+      "time": "13:04:55",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:04:57",
+      "level": "INFO",
+      "message": "正在检测第 4860/4887 行"
+    },
+    {
+      "time": "13:04:57",
+      "level": "INFO",
+      "message": "[4860] 检测: https://kualumniexperiences.com/packages/4nt-wimbledon/"
+    },
+    {
+      "time": "13:04:57",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:04:59",
+      "level": "INFO",
+      "message": "正在检测第 4861/4887 行"
+    },
+    {
+      "time": "13:04:59",
+      "level": "INFO",
+      "message": "[4861] 检测: https://koftechsolutionsgh.com/locateus/"
+    },
+    {
+      "time": "13:04:59",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:05:01",
+      "level": "INFO",
+      "message": "正在检测第 4862/4887 行"
+    },
+    {
+      "time": "13:05:01",
+      "level": "INFO",
+      "message": "[4862] 检测: https://kofc50.com/contact-us/"
+    },
+    {
+      "time": "13:05:03",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:05:04",
+      "level": "INFO",
+      "message": "正在检测第 4863/4887 行"
+    },
+    {
+      "time": "13:05:04",
+      "level": "INFO",
+      "message": "[4863] 检测: https://knoxvilleaquarium.org/site.html"
+    },
+    {
+      "time": "13:05:05",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:05:06",
+      "level": "INFO",
+      "message": "正在检测第 4864/4887 行"
+    },
+    {
+      "time": "13:05:06",
+      "level": "INFO",
+      "message": "[4864] 检测: https://khealth.kressup.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4.html"
+    },
+    {
+      "time": "13:05:22",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:05:26",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:05:28",
+      "level": "INFO",
+      "message": "正在检测第 4865/4887 行"
+    },
+    {
+      "time": "13:05:28",
+      "level": "INFO",
+      "message": "[4865] 检测: https://kaymeekcentre.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:05:37",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:05:39",
+      "level": "INFO",
+      "message": "正在检测第 4866/4887 行"
+    },
+    {
+      "time": "13:05:39",
+      "level": "INFO",
+      "message": "[4866] 检测: https://jobshub.online/tg-seo-linkk-order-seo-backlinks-homepage-links-7/"
+    },
+    {
+      "time": "13:05:40",
+      "level": "INFO",
+      "message": "  [ERROR] https://jobshub.online/tg-seo-linkk-order-seo-backlinks-homepage-links-7/ -> 525 Server Error: <none> for url: https://jobshub.online/tg-seo-linkk-order-seo-backlinks-homepage-links-7/"
+    },
+    {
+      "time": "13:05:40",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:05:42",
+      "level": "INFO",
+      "message": "正在检测第 4867/4887 行"
+    },
+    {
+      "time": "13:05:42",
+      "level": "INFO",
+      "message": "[4867] 检测: https://joarte.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:05:42",
+      "level": "INFO",
+      "message": "  [ERROR] https://joarte.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/ -> 404 Client Error: Not Found for url: https://joarte.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:05:42",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:05:44",
+      "level": "INFO",
+      "message": "正在检测第 4868/4887 行"
+    },
+    {
+      "time": "13:05:44",
+      "level": "INFO",
+      "message": "[4868] 检测: https://jiyouhou.com/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:05:52",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "13:05:53",
+      "level": "INFO",
+      "message": "正在检测第 4869/4887 行"
+    },
+    {
+      "time": "13:05:53",
+      "level": "INFO",
+      "message": "[4869] 检测: https://jirathaimassage.co.uk/wp/2026/06/20/tg-masslinker-software-to-publish-backlinks-3-2/"
+    },
+    {
+      "time": "13:06:02",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:06:06",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:06:07",
+      "level": "INFO",
+      "message": "正在检测第 4870/4887 行"
+    },
+    {
+      "time": "13:06:07",
+      "level": "INFO",
+      "message": "[4870] 检测: https://jili.taxi/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:06:11",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:13",
+      "level": "INFO",
+      "message": "正在检测第 4871/4887 行"
+    },
+    {
+      "time": "13:06:13",
+      "level": "INFO",
+      "message": "[4871] 检测: https://jiafangbb.com/sites/5924.html"
+    },
+    {
+      "time": "13:06:16",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:17",
+      "level": "INFO",
+      "message": "正在检测第 4872/4887 行"
+    },
+    {
+      "time": "13:06:17",
+      "level": "INFO",
+      "message": "[4872] 检测: https://millbraealf.com/contact.html"
+    },
+    {
+      "time": "13:06:18",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:19",
+      "level": "INFO",
+      "message": "正在检测第 4873/4887 行"
+    },
+    {
+      "time": "13:06:19",
+      "level": "INFO",
+      "message": "[4873] 检测: https://middleeastdaily.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:06:23",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:25",
+      "level": "INFO",
+      "message": "正在检测第 4874/4887 行"
+    },
+    {
+      "time": "13:06:25",
+      "level": "INFO",
+      "message": "[4874] 检测: https://mianfeidaohang.cn/sites/1642.html"
+    },
+    {
+      "time": "13:06:33",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:35",
+      "level": "INFO",
+      "message": "正在检测第 4875/4887 行"
+    },
+    {
+      "time": "13:06:35",
+      "level": "INFO",
+      "message": "[4875] 检测: https://metalroofingphoenix.net/roofing-contractor-in-anthem-az-get-a-free-quote/"
+    },
+    {
+      "time": "13:06:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:38",
+      "level": "INFO",
+      "message": "正在检测第 4876/4887 行"
+    },
+    {
+      "time": "13:06:38",
+      "level": "INFO",
+      "message": "[4876] 检测: https://mfw-xu.com.hk/seo-linkk-order/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:06:38",
+      "level": "INFO",
+      "message": "  [ERROR] https://mfw-xu.com.hk/seo-linkk-order/tg-seo-linkk-order-seo-backlinks-homepage-links-6/ -> 403 Client Error: Forbidden for url: https://mfw-xu.com.hk/seo-linkk-order/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:06:38",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:06:40",
+      "level": "INFO",
+      "message": "正在检测第 4877/4887 行"
+    },
+    {
+      "time": "13:06:40",
+      "level": "INFO",
+      "message": "[4877] 检测: https://meysammazrae.com/tg-seo-linkk-order-seo-backlinks-homepage-links-2-4/"
+    },
+    {
+      "time": "13:06:43",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:45",
+      "level": "INFO",
+      "message": "正在检测第 4878/4887 行"
+    },
+    {
+      "time": "13:06:45",
+      "level": "INFO",
+      "message": "[4878] 检测: https://metalroofingtempe.com/metal-roofing-solutions-in-tempe-request-a-quote/"
+    },
+    {
+      "time": "13:06:47",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:49",
+      "level": "INFO",
+      "message": "正在检测第 4879/4887 行"
+    },
+    {
+      "time": "13:06:49",
+      "level": "INFO",
+      "message": "[4879] 检测: https://moyuwu.org/sites/99.html/"
+    },
+    {
+      "time": "13:06:51",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:52",
+      "level": "INFO",
+      "message": "正在检测第 4880/4887 行"
+    },
+    {
+      "time": "13:06:53",
+      "level": "INFO",
+      "message": "[4880] 检测: https://mocchauxanh.com/2026/05/28/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:06:54",
+      "level": "INFO",
+      "message": "  [ERROR] https://mocchauxanh.com/2026/05/28/tg-seo-linkk-order-seo-backlinks-homepage-links-6/ -> 404 Client Error: Not Found for url: https://mocchauxanh.com/2026/05/28/tg-seo-linkk-order-seo-backlinks-homepage-links-6/"
+    },
+    {
+      "time": "13:06:54",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "13:06:55",
+      "level": "INFO",
+      "message": "正在检测第 4881/4887 行"
+    },
+    {
+      "time": "13:06:55",
+      "level": "INFO",
+      "message": "[4881] 检测: https://movetohappiness.com/en/contact"
+    },
+    {
+      "time": "13:06:56",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:06:58",
+      "level": "INFO",
+      "message": "正在检测第 4882/4887 行"
+    },
+    {
+      "time": "13:06:58",
+      "level": "INFO",
+      "message": "[4882] 检测: https://momentimhhrepairs.com/tg-seo-linkk-order-seo-backlinks-homepage-links-5/"
+    },
+    {
+      "time": "13:07:02",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "13:07:02",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "13:07:04",
+      "level": "INFO",
+      "message": "正在检测第 4883/4887 行"
+    },
+    {
+      "time": "13:07:04",
+      "level": "INFO",
+      "message": "[4883] 检测: https://momentcentar.com/stranice/tretmani-lica.html"
+    },
+    {
+      "time": "13:07:04",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:07:06",
+      "level": "INFO",
+      "message": "正在检测第 4884/4887 行"
+    },
+    {
+      "time": "13:07:06",
+      "level": "INFO",
+      "message": "[4884] 检测: https://molinoolavarria.com/2026/06/20/tg-masslinker-software-to-publish-backlinks-3-4/"
+    },
+    {
+      "time": "13:07:14",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:07:16",
+      "level": "INFO",
+      "message": "正在检测第 4885/4887 行"
+    },
+    {
+      "time": "13:07:16",
+      "level": "INFO",
+      "message": "[4885] 检测: https://metalroofingprovo.com/roofing-contractor-in-lehi-ut-request-a-free-estimate/"
+    },
+    {
+      "time": "13:07:17",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:07:19",
+      "level": "INFO",
+      "message": "正在检测第 4886/4887 行"
+    },
+    {
+      "time": "13:07:19",
+      "level": "INFO",
+      "message": "[4886] 检测: https://metalroofingphoenixaz.com/metal-roofing-expert-in-sun-city-az-get-a-free-estimate/"
+    },
+    {
+      "time": "13:07:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "13:07:22",
+      "level": "INFO",
+      "message": "正在检测第 4887/4887 行"
+    },
+    {
+      "time": "13:07:22",
+      "level": "INFO",
+      "message": "正在生成带颜色标注的 Excel"
+    },
+    {
+      "time": "13:07:41",
+      "level": "INFO",
+      "message": "[XLSX] 带颜色标注的 Excel 已生成: /app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d.xlsx"
+    },
+    {
+      "time": "13:07:41",
+      "level": "INFO",
+      "message": "\n完成！CSV: /app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d.csv"
+    },
+    {
+      "time": "13:07:41",
+      "level": "INFO",
+      "message": "Excel（含颜色）: /app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d.xlsx"
+    },
+    {
+      "time": "13:07:41",
+      "level": "INFO",
+      "message": "check_blogs 检测完成"
+    },
+    {
+      "time": "13:07:41",
+      "level": "INFO",
+      "message": "导出结果已生成"
+    }
+  ],
+  "stats": {
+    "processor": {
+      "output_file": "/app/storage/jobs/20260715-065042-9d88f33d/processor/processed_backlinks.xlsx",
+      "input_files": [
+        "buckshotroulette.com-backlinks.xlsx",
+        "cartoongames.io-backlinks.xlsx",
+        "ezremove.ai-backlinks.xlsx"
+      ],
+      "failed_files": [],
+      "rows_read": 50228,
+      "rows_output": 4887,
+      "duplicate_rows_removed": 45341,
+      "skipped_processed_files": 0
+    },
+    "check_blogs": {
+      "output_file": "/app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d.xlsx",
+      "output_csv": "/app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d.csv",
+      "checkpoint_file": "/app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d_checkpoint.json",
+      "input_file": "/app/storage/jobs/20260715-065042-9d88f33d/processor/processed_backlinks.xlsx",
+      "raw_rows": 4887,
+      "processed_rows": 4887,
+      "skipped_duplicate_domains": 0,
+      "empty_url_rows": 1,
+      "label_counts": {
+        "无评论功能": 3064,
+        "评论网站": 576,
+        "访问超时": 46,
+        "游戏站": 188,
+        "访问失败": 819,
+        "博客网站": 186,
+        "博客网站 · 需注册": 5,
+        "博客网站 · 需登录": 2
+      }
+    }
+  },
+  "error": null,
+  "download_path": "/app/storage/jobs/20260715-065042-9d88f33d/result/check_blogs_result_20260715-065042-9d88f33d.xlsx"
+}

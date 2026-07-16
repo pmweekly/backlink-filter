@@ -1,0 +1,18 @@
+{
+  "job_id": "20260713-143540-2bc602e4",
+  "status": "queued",
+  "stage": "upload",
+  "progress": 5,
+  "created_at": "2026-07-13T14:35:40",
+  "updated_at": "2026-07-13T14:35:40",
+  "files": [
+    {
+      "name": "spacewavesgame.io-backlinks.xlsx",
+      "size": 2308953
+    }
+  ],
+  "logs": [],
+  "stats": {},
+  "error": null,
+  "download_path": null
+}

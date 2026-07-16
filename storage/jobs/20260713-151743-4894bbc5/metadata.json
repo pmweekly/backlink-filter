@@ -1,0 +1,1567 @@
+{
+  "job_id": "20260713-151743-4894bbc5",
+  "status": "completed",
+  "stage": "done",
+  "progress": 100.0,
+  "created_at": "2026-07-13T15:17:43",
+  "updated_at": "2026-07-13T22:46:19",
+  "files": [
+    {
+      "name": "doodleroad.com-backlinks.xlsx",
+      "size": 390846
+    },
+    {
+      "name": "driftbossgame.io-backlinks.xlsx",
+      "size": 1584235
+    },
+    {
+      "name": "elgoog.im-backlinks.xlsx",
+      "size": 2411181
+    },
+    {
+      "name": "spacewavesgame.io-backlinks.xlsx",
+      "size": 2308953
+    }
+  ],
+  "logs": [
+    {
+      "time": "22:41:52",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "22:41:53",
+      "level": "INFO",
+      "message": "正在检测第 5869/5955 行"
+    },
+    {
+      "time": "22:41:53",
+      "level": "INFO",
+      "message": "[5869] 检测: https://miniupnp.tuxfamily.org/forum/viewtopic.php?t=2470"
+    },
+    {
+      "time": "22:41:54",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:41:55",
+      "level": "INFO",
+      "message": "正在检测第 5870/5955 行"
+    },
+    {
+      "time": "22:41:55",
+      "level": "INFO",
+      "message": "[5870] 检测: https://ibufuliiru.wixstudio.com/imyazi/post/imyazi-mu-kifuliiru"
+    },
+    {
+      "time": "22:41:58",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:00",
+      "level": "INFO",
+      "message": "正在检测第 5871/5955 行"
+    },
+    {
+      "time": "22:42:00",
+      "level": "INFO",
+      "message": "[5871] 检测: https://iadmintest.wixsite.com/i-adminglobal/post/why-legacy-payroll-systems-are-holding-back-ai-powered-hr-transformation"
+    },
+    {
+      "time": "22:42:02",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:04",
+      "level": "INFO",
+      "message": "正在检测第 5872/5955 行"
+    },
+    {
+      "time": "22:42:04",
+      "level": "INFO",
+      "message": "[5872] 检测: https://laurhidil.alloforum.com/tips-surviving-drift-boss-game-t391496-1.html"
+    },
+    {
+      "time": "22:42:04",
+      "level": "INFO",
+      "message": "  [ERROR] https://laurhidil.alloforum.com/tips-surviving-drift-boss-game-t391496-1.html -> 404 Client Error: Not Found for url: https://laurhidil.alloforum.com/tips-surviving-drift-boss-game-t391496-1.html"
+    },
+    {
+      "time": "22:42:04",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:06",
+      "level": "INFO",
+      "message": "正在检测第 5873/5955 行"
+    },
+    {
+      "time": "22:42:06",
+      "level": "INFO",
+      "message": "[5873] 检测: https://lalinguanostra.com/blogs/151034/What-Is-Drift-Boss-Online-Game"
+    },
+    {
+      "time": "22:42:08",
+      "level": "INFO",
+      "message": "  [ERROR] https://lalinguanostra.com/blogs/151034/What-Is-Drift-Boss-Online-Game -> ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+    },
+    {
+      "time": "22:42:08",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:10",
+      "level": "INFO",
+      "message": "正在检测第 5874/5955 行"
+    },
+    {
+      "time": "22:42:10",
+      "level": "INFO",
+      "message": "[5874] 检测: https://kurator.webd.pl/phpBB3/viewtopic.php?f=1&t=3756"
+    },
+    {
+      "time": "22:42:10",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:12",
+      "level": "INFO",
+      "message": "正在检测第 5875/5955 行"
+    },
+    {
+      "time": "22:42:12",
+      "level": "INFO",
+      "message": "[5875] 检测: https://kulinarnyswiat.pl/members/courtclover/profile/"
+    },
+    {
+      "time": "22:42:12",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:14",
+      "level": "INFO",
+      "message": "正在检测第 5876/5955 行"
+    },
+    {
+      "time": "22:42:14",
+      "level": "INFO",
+      "message": "[5876] 检测: https://guffiz.com/d/37661-iphone-is-more-vulnerable-to-hacking-than-android"
+    },
+    {
+      "time": "22:42:14",
+      "level": "INFO",
+      "message": "  [ERROR] https://guffiz.com/d/37661-iphone-is-more-vulnerable-to-hacking-than-android -> HTTPSConnectionPool(host='guffiz.com', port=443): Max retries exceeded with url: /d/37661-iphone-is-more-vulnerable-to-hacking-than-android (Caused by NameResolutionError(\"HTTPSConnection(host='guffiz.com', port=443): Failed to resolve 'guffiz.com' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "time": "22:42:14",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:16",
+      "level": "INFO",
+      "message": "正在检测第 5877/5955 行"
+    },
+    {
+      "time": "22:42:16",
+      "level": "INFO",
+      "message": "[5877] 检测: https://go.famuse.co/post/112567_enjoy-a-thrilling-and-action-packed-drifting-experience-in-drift-boss-it-039-s-a.html"
+    },
+    {
+      "time": "22:42:17",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:42:18",
+      "level": "INFO",
+      "message": "正在检测第 5878/5955 行"
+    },
+    {
+      "time": "22:42:18",
+      "level": "INFO",
+      "message": "[5878] 检测: https://forum.protocase.com/viewtopic.php?t=720"
+    },
+    {
+      "time": "22:42:19",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:42:21",
+      "level": "INFO",
+      "message": "正在检测第 5879/5955 行"
+    },
+    {
+      "time": "22:42:21",
+      "level": "INFO",
+      "message": "[5879] 检测: https://jobs.sudburychamber.ca/employer/drift-boss/"
+    },
+    {
+      "time": "22:42:21",
+      "level": "INFO",
+      "message": "  [ERROR] https://jobs.sudburychamber.ca/employer/drift-boss/ -> HTTPSConnectionPool(host='jobs.sudburychamber.ca', port=443): Max retries exceeded with url: /employer/drift-boss/ (Caused by SSLError(SSLError(1, '[SSL: SSLV3_ALERT_HANDSHAKE_FAILURE] ssl/tls alert handshake failure (_ssl.c:1010)')))"
+    },
+    {
+      "time": "22:42:21",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:22",
+      "level": "INFO",
+      "message": "正在检测第 5880/5955 行"
+    },
+    {
+      "time": "22:42:22",
+      "level": "INFO",
+      "message": "[5880] 检测: https://jeromesville.nationbuilder.com/ways_means_committee_16_july_2024"
+    },
+    {
+      "time": "22:42:23",
+      "level": "INFO",
+      "message": "  [ERROR] https://jeromesville.nationbuilder.com/ways_means_committee_16_july_2024 -> 403 Client Error: Forbidden for url: https://jeromesville.nationbuilder.com/ways_means_committee_16_july_2024"
+    },
+    {
+      "time": "22:42:23",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:24",
+      "level": "INFO",
+      "message": "正在检测第 5881/5955 行"
+    },
+    {
+      "time": "22:42:24",
+      "level": "INFO",
+      "message": "[5881] 检测: https://insta.tel/read-blog/82662_do-you-have-enough-talents-to-prevent-unanticipated-turns.html"
+    },
+    {
+      "time": "22:42:24",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:26",
+      "level": "INFO",
+      "message": "正在检测第 5882/5955 行"
+    },
+    {
+      "time": "22:42:26",
+      "level": "INFO",
+      "message": "[5882] 检测: https://infinitessays.com/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-addition-you-will-receive-point/"
+    },
+    {
+      "time": "22:42:28",
+      "level": "INFO",
+      "message": "  [ERROR] https://infinitessays.com/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-addition-you-will-receive-point/ -> 404 Client Error: Not Found for url: https://infinitessays.com/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-addition-you-will-receive-point/"
+    },
+    {
+      "time": "22:42:28",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:29",
+      "level": "INFO",
+      "message": "正在检测第 5883/5955 行"
+    },
+    {
+      "time": "22:42:29",
+      "level": "INFO",
+      "message": "[5883] 检测: https://indimusic.tv/m/videos/view/CARSEX-Landmine"
+    },
+    {
+      "time": "22:42:30",
+      "level": "INFO",
+      "message": "  [ERROR] https://indimusic.tv/m/videos/view/CARSEX-Landmine -> 404 Client Error: Not Found for url: https://indimusic.tv/m/videos/view/CARSEX-Landmine"
+    },
+    {
+      "time": "22:42:30",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:32",
+      "level": "INFO",
+      "message": "正在检测第 5884/5955 行"
+    },
+    {
+      "time": "22:42:32",
+      "level": "INFO",
+      "message": "[5884] 检测: https://ftp.redskiesdesign.com/sickofrozen/page/2?userheight=1200&userwidth=3840"
+    },
+    {
+      "time": "22:42:32",
+      "level": "INFO",
+      "message": "  [ERROR] https://ftp.redskiesdesign.com/sickofrozen/page/2?userheight=1200&userwidth=3840 -> HTTPSConnectionPool(host='ftp.redskiesdesign.com', port=443): Max retries exceeded with url: /sickofrozen/page/2?userheight=1200&userwidth=3840 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'ftp.redskiesdesign.com'. (_ssl.c:1010)\")))"
+    },
+    {
+      "time": "22:42:32",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:33",
+      "level": "INFO",
+      "message": "正在检测第 5885/5955 行"
+    },
+    {
+      "time": "22:42:33",
+      "level": "INFO",
+      "message": "[5885] 检测: https://forum.cruisingclub.org/thread-990-post-1420.html"
+    },
+    {
+      "time": "22:42:34",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.cruisingclub.org/thread-990-post-1420.html -> 404 Client Error: Not Found for url: https://forum.cruisingclub.org/thread-990-post-1420.html"
+    },
+    {
+      "time": "22:42:34",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:36",
+      "level": "INFO",
+      "message": "正在检测第 5886/5955 行"
+    },
+    {
+      "time": "22:42:36",
+      "level": "INFO",
+      "message": "[5886] 检测: https://froodl.com/the-endless-road-of-drift-boss"
+    },
+    {
+      "time": "22:42:36",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:42:37",
+      "level": "INFO",
+      "message": "正在检测第 5887/5955 行"
+    },
+    {
+      "time": "22:42:38",
+      "level": "INFO",
+      "message": "[5887] 检测: https://highonessays.com/business-finance-homework-help-2/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in/99189/"
+    },
+    {
+      "time": "22:42:39",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:41",
+      "level": "INFO",
+      "message": "正在检测第 5888/5955 行"
+    },
+    {
+      "time": "22:42:41",
+      "level": "INFO",
+      "message": "[5888] 检测: https://heyjinni.com/read-blog/141649_enjoy-a-thrilling-drifting-experience.html"
+    },
+    {
+      "time": "22:42:41",
+      "level": "INFO",
+      "message": "  [ERROR] https://heyjinni.com/read-blog/141649_enjoy-a-thrilling-drifting-experience.html -> 403 Client Error: Forbidden for url: https://heyjinni.com/read-blog/141649_enjoy-a-thrilling-drifting-experience.html"
+    },
+    {
+      "time": "22:42:41",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:42",
+      "level": "INFO",
+      "message": "正在检测第 5889/5955 行"
+    },
+    {
+      "time": "22:42:42",
+      "level": "INFO",
+      "message": "[5889] 检测: https://helpdesk.coresystems.ch/hc/en-us/community/posts/4409037052050-What-is-the-Easy-Row-Function-to-open-UDT-Handler"
+    },
+    {
+      "time": "22:42:43",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:44",
+      "level": "INFO",
+      "message": "正在检测第 5890/5955 行"
+    },
+    {
+      "time": "22:42:44",
+      "level": "INFO",
+      "message": "[5890] 检测: https://hacksnation.com/d/12652-publisher-rocket"
+    },
+    {
+      "time": "22:42:44",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:46",
+      "level": "INFO",
+      "message": "正在检测第 5891/5955 行"
+    },
+    {
+      "time": "22:42:46",
+      "level": "INFO",
+      "message": "[5891] 检测: https://forum.unipark.com/reply/4622/"
+    },
+    {
+      "time": "22:42:46",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.unipark.com/reply/4622/ -> 500 Server Error: Internal Server Error for url: https://forum.unipark.com/reply/4622/"
+    },
+    {
+      "time": "22:42:46",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:48",
+      "level": "INFO",
+      "message": "正在检测第 5892/5955 行"
+    },
+    {
+      "time": "22:42:48",
+      "level": "INFO",
+      "message": "[5892] 检测: https://forum.rajce.idnes.cz/d/106-videa"
+    },
+    {
+      "time": "22:42:48",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:50",
+      "level": "INFO",
+      "message": "正在检测第 5893/5955 行"
+    },
+    {
+      "time": "22:42:50",
+      "level": "INFO",
+      "message": "[5893] 检测: https://forum.proidee-online.de/viewtopic.php?t=69804"
+    },
+    {
+      "time": "22:42:50",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.proidee-online.de/viewtopic.php?t=69804 -> HTTPSConnectionPool(host='forum.proidee-online.de', port=443): Max retries exceeded with url: /viewtopic.php?t=69804 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
+    },
+    {
+      "time": "22:42:50",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:52",
+      "level": "INFO",
+      "message": "正在检测第 5894/5955 行"
+    },
+    {
+      "time": "22:42:52",
+      "level": "INFO",
+      "message": "[5894] 检测: https://gazeta.vobu.ua/forum/topic/discover-new-characters-in-run-3"
+    },
+    {
+      "time": "22:42:52",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:42:54",
+      "level": "INFO",
+      "message": "正在检测第 5895/5955 行"
+    },
+    {
+      "time": "22:42:54",
+      "level": "INFO",
+      "message": "[5895] 检测: https://forum.eedomus.fr/viewtopic.php?f=5&p=108993&t=11969"
+    },
+    {
+      "time": "22:42:54",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.eedomus.fr/viewtopic.php?f=5&p=108993&t=11969 -> HTTPSConnectionPool(host='forum.eedomus.fr', port=443): Max retries exceeded with url: /viewtopic.php?f=5&p=108993&t=11969 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'forum.eedomus.fr'. (_ssl.c:1010)\")))"
+    },
+    {
+      "time": "22:42:54",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:42:56",
+      "level": "INFO",
+      "message": "正在检测第 5896/5955 行"
+    },
+    {
+      "time": "22:42:56",
+      "level": "INFO",
+      "message": "[5896] 检测: https://frisbeegolfradat.fi/members/womensstew/"
+    },
+    {
+      "time": "22:42:58",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:00",
+      "level": "INFO",
+      "message": "正在检测第 5897/5955 行"
+    },
+    {
+      "time": "22:43:00",
+      "level": "INFO",
+      "message": "[5897] 检测: https://freelancer.logicspice.com/jobs/drift-boss/"
+    },
+    {
+      "time": "22:43:00",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:43:02",
+      "level": "INFO",
+      "message": "正在检测第 5898/5955 行"
+    },
+    {
+      "time": "22:43:02",
+      "level": "INFO",
+      "message": "[5898] 检测: https://forums.mmorpg.com/discussion/478349/merry-xmas-everyone"
+    },
+    {
+      "time": "22:43:02",
+      "level": "INFO",
+      "message": "  [ERROR] https://forums.mmorpg.com/discussion/478349/merry-xmas-everyone -> 403 Client Error: Forbidden for url: https://forums.mmorpg.com/discussion/478349/merry-xmas-everyone"
+    },
+    {
+      "time": "22:43:02",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:04",
+      "level": "INFO",
+      "message": "正在检测第 5899/5955 行"
+    },
+    {
+      "time": "22:43:04",
+      "level": "INFO",
+      "message": "[5899] 检测: https://forums.hitched.co.uk/chat/forums/thread/wedding-abroad-1161751/"
+    },
+    {
+      "time": "22:43:04",
+      "level": "INFO",
+      "message": "  [ERROR] https://forums.hitched.co.uk/chat/forums/thread/wedding-abroad-1161751/ -> 403 Client Error: Forbidden for url: https://forums.hitched.co.uk/chat/forums/thread/wedding-abroad-1161751/"
+    },
+    {
+      "time": "22:43:04",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:05",
+      "level": "INFO",
+      "message": "正在检测第 5900/5955 行"
+    },
+    {
+      "time": "22:43:05",
+      "level": "INFO",
+      "message": "[5900] 检测: https://discussion.atarnotes.com/d/3869-note-ethical-debates-essay"
+    },
+    {
+      "time": "22:43:07",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:08",
+      "level": "INFO",
+      "message": "正在检测第 5901/5955 行"
+    },
+    {
+      "time": "22:43:08",
+      "level": "INFO",
+      "message": "[5901] 检测: https://forum.onlinesoccermanager.com/topic/73881/442oons-suuuper-league"
+    },
+    {
+      "time": "22:43:13",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.onlinesoccermanager.com/topic/73881/442oons-suuuper-league -> 503 Server Error: Service Unavailable for url: https://forum.onlinesoccermanager.com/topic/73881/442oons-suuuper-league"
+    },
+    {
+      "time": "22:43:13",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:14",
+      "level": "INFO",
+      "message": "正在检测第 5902/5955 行"
+    },
+    {
+      "time": "22:43:14",
+      "level": "INFO",
+      "message": "[5902] 检测: https://forum.odla.nu/lofiversion/index.php/t136152.html"
+    },
+    {
+      "time": "22:43:24",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:26",
+      "level": "INFO",
+      "message": "正在检测第 5903/5955 行"
+    },
+    {
+      "time": "22:43:26",
+      "level": "INFO",
+      "message": "[5903] 检测: https://forum.mikroe.com/viewtopic.php?t=80395"
+    },
+    {
+      "time": "22:43:26",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.mikroe.com/viewtopic.php?t=80395 -> 403 Client Error: Forbidden for url: https://forum.mikroe.com/viewtopic.php?t=80395"
+    },
+    {
+      "time": "22:43:26",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:27",
+      "level": "INFO",
+      "message": "正在检测第 5904/5955 行"
+    },
+    {
+      "time": "22:43:27",
+      "level": "INFO",
+      "message": "[5904] 检测: https://culturesbook.com/directory?page-id=3077"
+    },
+    {
+      "time": "22:43:31",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:43:33",
+      "level": "INFO",
+      "message": "正在检测第 5905/5955 行"
+    },
+    {
+      "time": "22:43:33",
+      "level": "INFO",
+      "message": "[5905] 检测: https://forum.axcrypt.net/forums/topic/inflating-invalid-stored-block-lenghts/"
+    },
+    {
+      "time": "22:43:34",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:43:35",
+      "level": "INFO",
+      "message": "正在检测第 5906/5955 行"
+    },
+    {
+      "time": "22:43:35",
+      "level": "INFO",
+      "message": "[5906] 检测: https://forum.autocadre.com/topic/44117-probleme-de-freinage-sur-kia-picanto-diesel-annee-2006/"
+    },
+    {
+      "time": "22:43:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:37",
+      "level": "INFO",
+      "message": "正在检测第 5907/5955 行"
+    },
+    {
+      "time": "22:43:37",
+      "level": "INFO",
+      "message": "[5907] 检测: https://foro.emprender-facil.com/user/operatorfeel"
+    },
+    {
+      "time": "22:43:38",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:39",
+      "level": "INFO",
+      "message": "正在检测第 5908/5955 行"
+    },
+    {
+      "time": "22:43:39",
+      "level": "INFO",
+      "message": "[5908] 检测: https://flashboot.ru/profile/pityingskate/"
+    },
+    {
+      "time": "22:43:40",
+      "level": "INFO",
+      "message": "  [ERROR] https://flashboot.ru/profile/pityingskate/ -> 404 Client Error: Not Found for url: https://flashboot.ru/profile/pityingskate/"
+    },
+    {
+      "time": "22:43:40",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:42",
+      "level": "INFO",
+      "message": "正在检测第 5909/5955 行"
+    },
+    {
+      "time": "22:43:42",
+      "level": "INFO",
+      "message": "[5909] 检测: https://fiverr-cost-effective-seo.site/fiverr-niche-edits-raised-my-sites-authority-to-da45/"
+    },
+    {
+      "time": "22:43:42",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:44",
+      "level": "INFO",
+      "message": "正在检测第 5910/5955 行"
+    },
+    {
+      "time": "22:43:44",
+      "level": "INFO",
+      "message": "[5910] 检测: https://findajobinafrica.com/employer/chubbyscooter/"
+    },
+    {
+      "time": "22:43:46",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "22:43:46",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "22:43:47",
+      "level": "INFO",
+      "message": "正在检测第 5911/5955 行"
+    },
+    {
+      "time": "22:43:47",
+      "level": "INFO",
+      "message": "[5911] 检测: https://diskusijos.l2j.lt/post228648.html"
+    },
+    {
+      "time": "22:43:48",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:49",
+      "level": "INFO",
+      "message": "正在检测第 5912/5955 行"
+    },
+    {
+      "time": "22:43:49",
+      "level": "INFO",
+      "message": "[5912] 检测: https://code.datasciencedojo.com/iaziz/Building-Simple-and-Efficient-Chatbots-Demo/issues/164"
+    },
+    {
+      "time": "22:43:50",
+      "level": "INFO",
+      "message": "  [ERROR] https://code.datasciencedojo.com/iaziz/Building-Simple-and-Efficient-Chatbots-Demo/issues/164 -> 530 Server Error: <none> for url: https://code.datasciencedojo.com/iaziz/Building-Simple-and-Efficient-Chatbots-Demo/issues/164"
+    },
+    {
+      "time": "22:43:50",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:51",
+      "level": "INFO",
+      "message": "正在检测第 5913/5955 行"
+    },
+    {
+      "time": "22:43:51",
+      "level": "INFO",
+      "message": "[5913] 检测: https://essaystudyhelp.com/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in/"
+    },
+    {
+      "time": "22:43:53",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:43:54",
+      "level": "INFO",
+      "message": "正在检测第 5914/5955 行"
+    },
+    {
+      "time": "22:43:54",
+      "level": "INFO",
+      "message": "[5914] 检测: https://essayabode.com/testbank/252731/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-ad/"
+    },
+    {
+      "time": "22:43:55",
+      "level": "INFO",
+      "message": "  [ERROR] https://essayabode.com/testbank/252731/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-ad/ -> 404 Client Error: Not Found for url: https://writeden.com/testbank/252731/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-ad/"
+    },
+    {
+      "time": "22:43:55",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:43:57",
+      "level": "INFO",
+      "message": "正在检测第 5915/5955 行"
+    },
+    {
+      "time": "22:43:57",
+      "level": "INFO",
+      "message": "[5915] 检测: https://dailymusings.top/stats/74326"
+    },
+    {
+      "time": "22:44:03",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:44:05",
+      "level": "INFO",
+      "message": "正在检测第 5916/5955 行"
+    },
+    {
+      "time": "22:44:05",
+      "level": "INFO",
+      "message": "[5916] 检测: https://d2vaopj9xwgout.cloudfront.net/circles/21400"
+    },
+    {
+      "time": "22:44:06",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:07",
+      "level": "INFO",
+      "message": "正在检测第 5917/5955 行"
+    },
+    {
+      "time": "22:44:07",
+      "level": "INFO",
+      "message": "[5917] 检测: https://edu.matsq.com/forums/discussion/faq/UVYVU0cpgMbRyDMRdqM1sU"
+    },
+    {
+      "time": "22:44:10",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:12",
+      "level": "INFO",
+      "message": "正在检测第 5918/5955 行"
+    },
+    {
+      "time": "22:44:12",
+      "level": "INFO",
+      "message": "[5918] 检测: https://drjack.world/report/74326"
+    },
+    {
+      "time": "22:44:15",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:44:17",
+      "level": "INFO",
+      "message": "正在检测第 5919/5955 行"
+    },
+    {
+      "time": "22:44:17",
+      "level": "INFO",
+      "message": "[5919] 检测: https://docs.net0.com/discuss/68e740635f0ea9c5a35fd47c"
+    },
+    {
+      "time": "22:44:17",
+      "level": "INFO",
+      "message": "  [ERROR] https://docs.net0.com/discuss/68e740635f0ea9c5a35fd47c -> 403 Client Error: Forbidden for url: https://docs.net0.com/discuss/68e740635f0ea9c5a35fd47c"
+    },
+    {
+      "time": "22:44:17",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:44:18",
+      "level": "INFO",
+      "message": "正在检测第 5920/5955 行"
+    },
+    {
+      "time": "22:44:18",
+      "level": "INFO",
+      "message": "[5920] 检测: http://collepals.com/2024/12/15/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in-ad/"
+    },
+    {
+      "time": "22:44:19",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:21",
+      "level": "INFO",
+      "message": "正在检测第 5921/5955 行"
+    },
+    {
+      "time": "22:44:21",
+      "level": "INFO",
+      "message": "[5921] 检测: https://de-vakantietotaalclub.clubs.nl/blog/detail/191975_de-leukste-oktoberfesten-in-duitsland-ook-net-over-de-grens"
+    },
+    {
+      "time": "22:44:22",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:23",
+      "level": "INFO",
+      "message": "正在检测第 5922/5955 行"
+    },
+    {
+      "time": "22:44:23",
+      "level": "INFO",
+      "message": "[5922] 检测: https://dawlish.com/user/details/41908"
+    },
+    {
+      "time": "22:44:24",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:25",
+      "level": "INFO",
+      "message": "正在检测第 5923/5955 行"
+    },
+    {
+      "time": "22:44:25",
+      "level": "INFO",
+      "message": "[5923] 检测: https://dailysudoku.org/sudoku/forums/profile.php?mode=viewprofile&u=10922"
+    },
+    {
+      "time": "22:44:26",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:27",
+      "level": "INFO",
+      "message": "正在检测第 5924/5955 行"
+    },
+    {
+      "time": "22:44:27",
+      "level": "INFO",
+      "message": "[5924] 检测: http://languageisfree.com/index-256.html"
+    },
+    {
+      "time": "22:44:28",
+      "level": "INFO",
+      "message": "  [ERROR] http://languageisfree.com/index-256.html -> 503 Server Error: Service Temporarily Unavailable for url: http://languageisfree.com/index-256.html"
+    },
+    {
+      "time": "22:44:28",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:44:29",
+      "level": "INFO",
+      "message": "正在检测第 5925/5955 行"
+    },
+    {
+      "time": "22:44:29",
+      "level": "INFO",
+      "message": "[5925] 检测: http://mail.italgestgroup.info/showthread.php?tid=16649"
+    },
+    {
+      "time": "22:44:30",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:31",
+      "level": "INFO",
+      "message": "正在检测第 5926/5955 行"
+    },
+    {
+      "time": "22:44:31",
+      "level": "INFO",
+      "message": "[5926] 检测: http://programas.cooperativa.cl/enaccion/2015/01/23/empresas-en-accion-equidad-de-genero/"
+    },
+    {
+      "time": "22:44:34",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:44:35",
+      "level": "INFO",
+      "message": "正在检测第 5927/5955 行"
+    },
+    {
+      "time": "22:44:35",
+      "level": "INFO",
+      "message": "[5927] 检测: http://playingwithsuperpower.com/forum/article-discussion/economics-assignment-writer-expert-help-for-analytical-excellence/"
+    },
+    {
+      "time": "22:44:36",
+      "level": "INFO",
+      "message": "  [ERROR] http://playingwithsuperpower.com/forum/article-discussion/economics-assignment-writer-expert-help-for-analytical-excellence/ -> 403 Client Error: Forbidden for url: http://playingwithsuperpower.com/forum/article-discussion/economics-assignment-writer-expert-help-for-analytical-excellence/"
+    },
+    {
+      "time": "22:44:36",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:44:38",
+      "level": "INFO",
+      "message": "正在检测第 5928/5955 行"
+    },
+    {
+      "time": "22:44:38",
+      "level": "INFO",
+      "message": "[5928] 检测: http://www.batico.fr/forums/s1610-lampes-a-poser--une-source.html"
+    },
+    {
+      "time": "22:44:39",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:44:40",
+      "level": "INFO",
+      "message": "正在检测第 5929/5955 行"
+    },
+    {
+      "time": "22:44:40",
+      "level": "INFO",
+      "message": "[5929] 检测: http://форуммузыкантов.рф/buysell/1299848663_last.html"
+    },
+    {
+      "time": "22:44:41",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:43",
+      "level": "INFO",
+      "message": "正在检测第 5930/5955 行"
+    },
+    {
+      "time": "22:44:43",
+      "level": "INFO",
+      "message": "[5930] 检测: http://www.sanmax.co.th/webboard/topic/318887/play-drift-boss-to-practice-your-drifting-skills"
+    },
+    {
+      "time": "22:44:44",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:44:45",
+      "level": "INFO",
+      "message": "正在检测第 5931/5955 行"
+    },
+    {
+      "time": "22:44:45",
+      "level": "INFO",
+      "message": "[5931] 检测: http://www.motomanai.lt/moto-forumas/moto-tema.11605.page-1.html"
+    },
+    {
+      "time": "22:44:46",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:47",
+      "level": "INFO",
+      "message": "正在检测第 5932/5955 行"
+    },
+    {
+      "time": "22:44:47",
+      "level": "INFO",
+      "message": "[5932] 检测: https://autism.jp/forums/topic/crypto-trading-4/"
+    },
+    {
+      "time": "22:44:49",
+      "level": "INFO",
+      "message": "  [ERROR] https://autism.jp/forums/topic/crypto-trading-4/ -> 404 Client Error: Not Found for url: https://autism.jp/forums/topic/crypto-trading-4/"
+    },
+    {
+      "time": "22:44:49",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:44:51",
+      "level": "INFO",
+      "message": "正在检测第 5933/5955 行"
+    },
+    {
+      "time": "22:44:51",
+      "level": "INFO",
+      "message": "[5933] 检测: https://articles.abilogic.com/776930/drift-boss-ultimate-drift-racing.html"
+    },
+    {
+      "time": "22:44:52",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:53",
+      "level": "INFO",
+      "message": "正在检测第 5934/5955 行"
+    },
+    {
+      "time": "22:44:53",
+      "level": "INFO",
+      "message": "[5934] 检测: https://androidrepublic.org/members/realhomeless.653025/about"
+    },
+    {
+      "time": "22:44:53",
+      "level": "INFO",
+      "message": "  [ERROR] https://androidrepublic.org/members/realhomeless.653025/about -> 403 Client Error: Forbidden for url: https://androidrepublic.org/members/realhomeless.653025/about"
+    },
+    {
+      "time": "22:44:53",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:44:55",
+      "level": "INFO",
+      "message": "正在检测第 5935/5955 行"
+    },
+    {
+      "time": "22:44:55",
+      "level": "INFO",
+      "message": "[5935] 检测: https://alpha.brandbazaarbd.com/blog/brand-bazaar-logo"
+    },
+    {
+      "time": "22:44:56",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:44:57",
+      "level": "INFO",
+      "message": "正在检测第 5936/5955 行"
+    },
+    {
+      "time": "22:44:57",
+      "level": "INFO",
+      "message": "[5936] 检测: https://aer.af/user/emmett-robles"
+    },
+    {
+      "time": "22:44:58",
+      "level": "INFO",
+      "message": "  [ERROR] https://aer.af/user/emmett-robles -> HTTPSConnectionPool(host='aer.af', port=443): Max retries exceeded with url: /user/emmett-robles (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'aer.af'. (_ssl.c:1010)\")))"
+    },
+    {
+      "time": "22:44:58",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:44:59",
+      "level": "INFO",
+      "message": "正在检测第 5937/5955 行"
+    },
+    {
+      "time": "22:44:59",
+      "level": "INFO",
+      "message": "[5937] 检测: https://ads.justlogin.com/post/how-you-can-use-ai-to-conduct-fair-and-effective-360-degree-performance-appraisals-1"
+    },
+    {
+      "time": "22:45:03",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:04",
+      "level": "INFO",
+      "message": "正在检测第 5938/5955 行"
+    },
+    {
+      "time": "22:45:04",
+      "level": "INFO",
+      "message": "[5938] 检测: https://blog.gobrunch.com/post/customize-your-virtual-office-with-gobrunch"
+    },
+    {
+      "time": "22:45:07",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:09",
+      "level": "INFO",
+      "message": "正在检测第 5939/5955 行"
+    },
+    {
+      "time": "22:45:09",
+      "level": "INFO",
+      "message": "[5939] 检测: https://blacksocially.com/mushroomare"
+    },
+    {
+      "time": "22:45:11",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:45:12",
+      "level": "INFO",
+      "message": "正在检测第 5940/5955 行"
+    },
+    {
+      "time": "22:45:12",
+      "level": "INFO",
+      "message": "[5940] 检测: https://brandbuilderscommunity.com/members/cuminable/profile/"
+    },
+    {
+      "time": "22:45:13",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:14",
+      "level": "INFO",
+      "message": "正在检测第 5941/5955 行"
+    },
+    {
+      "time": "22:45:15",
+      "level": "INFO",
+      "message": "[5941] 检测: https://brainiacessays.com/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in/"
+    },
+    {
+      "time": "22:45:15",
+      "level": "INFO",
+      "message": "  [ERROR] https://brainiacessays.com/work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in/ -> HTTPSConnectionPool(host='brainiacessays.com', port=443): Max retries exceeded with url: /work-as-individuals-to-do-the-project-management-simulation-written-hand-in-topic-lessons-learned-from-the-project-management-simulation-in/ (Caused by NameResolutionError(\"HTTPSConnection(host='brainiacessays.com', port=443): Failed to resolve 'brainiacessays.com' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "time": "22:45:15",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:45:16",
+      "level": "INFO",
+      "message": "正在检测第 5942/5955 行"
+    },
+    {
+      "time": "22:45:16",
+      "level": "INFO",
+      "message": "[5942] 检测: https://blueinblue.com/report/74326"
+    },
+    {
+      "time": "22:45:19",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:20",
+      "level": "INFO",
+      "message": "正在检测第 5943/5955 行"
+    },
+    {
+      "time": "22:45:21",
+      "level": "INFO",
+      "message": "[5943] 检测: https://blogulr.com/periodic/enjoy-a-thrilling-drifting-experience-116655"
+    },
+    {
+      "time": "22:45:24",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:45:25",
+      "level": "INFO",
+      "message": "正在检测第 5944/5955 行"
+    },
+    {
+      "time": "22:45:25",
+      "level": "INFO",
+      "message": "[5944] 检测: https://cryptoverze.com/question/enjoy-a-thrilling-drifting-experience/"
+    },
+    {
+      "time": "22:45:25",
+      "level": "INFO",
+      "message": "  [ERROR] https://cryptoverze.com/question/enjoy-a-thrilling-drifting-experience/ -> 404 Client Error: Not Found for url: https://cryptoverze.com/question/enjoy-a-thrilling-drifting-experience/"
+    },
+    {
+      "time": "22:45:25",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:45:27",
+      "level": "INFO",
+      "message": "正在检测第 5945/5955 行"
+    },
+    {
+      "time": "22:45:27",
+      "level": "INFO",
+      "message": "[5945] 检测: https://community.smartsheet.com/discussion/130350/exporting-to-ms-project"
+    },
+    {
+      "time": "22:45:27",
+      "level": "INFO",
+      "message": "  [ERROR] https://community.smartsheet.com/discussion/130350/exporting-to-ms-project -> 403 Client Error: Forbidden for url: https://community.smartsheet.com/discussion/130350/exporting-to-ms-project"
+    },
+    {
+      "time": "22:45:27",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:45:29",
+      "level": "INFO",
+      "message": "正在检测第 5946/5955 行"
+    },
+    {
+      "time": "22:45:29",
+      "level": "INFO",
+      "message": "[5946] 检测: https://community.openpreservation.org/user/grosstreaty"
+    },
+    {
+      "time": "22:45:29",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:31",
+      "level": "INFO",
+      "message": "正在检测第 5947/5955 行"
+    },
+    {
+      "time": "22:45:31",
+      "level": "INFO",
+      "message": "[5947] 检测: https://community.oncord.com/user/eskimoboomerang"
+    },
+    {
+      "time": "22:45:31",
+      "level": "INFO",
+      "message": "  [ERROR] https://community.oncord.com/user/eskimoboomerang -> 404 Client Error: Not Found for url: https://community.oncord.com/user/eskimoboomerang"
+    },
+    {
+      "time": "22:45:32",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:45:33",
+      "level": "INFO",
+      "message": "正在检测第 5948/5955 行"
+    },
+    {
+      "time": "22:45:33",
+      "level": "INFO",
+      "message": "[5948] 检测: https://community.fortinet.com/t5/Support-Forum/FortiClient-EMS-API-Vulnerability/m-p/426374"
+    },
+    {
+      "time": "22:45:36",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "22:45:37",
+      "level": "INFO",
+      "message": "正在检测第 5949/5955 行"
+    },
+    {
+      "time": "22:45:37",
+      "level": "INFO",
+      "message": "[5949] 检测: https://alfa.seo-anomaly-lahore.online/jordan-13-10-2025/seo-anomaly-jordan-3/"
+    },
+    {
+      "time": "22:45:40",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:41",
+      "level": "INFO",
+      "message": "正在检测第 5950/5955 行"
+    },
+    {
+      "time": "22:45:41",
+      "level": "INFO",
+      "message": "[5950] 检测: https://alfa.seo-anomaly-lagos.website/jordan-13-10-2025/seo-anomaly-jordan-3/"
+    },
+    {
+      "time": "22:45:43",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:45",
+      "level": "INFO",
+      "message": "正在检测第 5951/5955 行"
+    },
+    {
+      "time": "22:45:45",
+      "level": "INFO",
+      "message": "[5951] 检测: https://alfa.seo-anomaly-lagos.space/jordan-13-10-2025/seo-anomaly-jordan-3/"
+    },
+    {
+      "time": "22:45:47",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:48",
+      "level": "INFO",
+      "message": "正在检测第 5952/5955 行"
+    },
+    {
+      "time": "22:45:48",
+      "level": "INFO",
+      "message": "[5952] 检测: https://alfa.seo-anomaly-lagos.site/jordan-13-10-2025/seo-anomaly-jordan-3/"
+    },
+    {
+      "time": "22:45:50",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:51",
+      "level": "INFO",
+      "message": "正在检测第 5953/5955 行"
+    },
+    {
+      "time": "22:45:51",
+      "level": "INFO",
+      "message": "[5953] 检测: https://alfa.seo-anomaly-lagos.online/jordan-13-10-2025/seo-anomaly-jordan-3/"
+    },
+    {
+      "time": "22:45:53",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "22:45:55",
+      "level": "INFO",
+      "message": "正在检测第 5954/5955 行"
+    },
+    {
+      "time": "22:45:55",
+      "level": "INFO",
+      "message": "[5954] 检测: https://community.agorum.com/index.php?article%2F4-%C3%BCberschriebene-dateien-wiederherstellen%2F"
+    },
+    {
+      "time": "22:45:55",
+      "level": "INFO",
+      "message": "  [ERROR] https://community.agorum.com/index.php?article%2F4-%C3%BCberschriebene-dateien-wiederherstellen%2F -> HTTPSConnectionPool(host='community.agorum.com', port=443): Max retries exceeded with url: /index.php?article%2F4-%C3%BCberschriebene-dateien-wiederherstellen%2F (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)')))"
+    },
+    {
+      "time": "22:45:55",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "22:45:56",
+      "level": "INFO",
+      "message": "正在检测第 5955/5955 行"
+    },
+    {
+      "time": "22:45:56",
+      "level": "INFO",
+      "message": "[5955] 检测: https://colored.club/post/267962_play-drift-boss-online-https-driftbossgame-io-for-free-and-jump-into-a-exciting.html"
+    },
+    {
+      "time": "22:45:57",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "22:45:58",
+      "level": "INFO",
+      "message": "正在生成带颜色标注的 Excel"
+    },
+    {
+      "time": "22:46:19",
+      "level": "INFO",
+      "message": "[XLSX] 带颜色标注的 Excel 已生成: /app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5.xlsx"
+    },
+    {
+      "time": "22:46:19",
+      "level": "INFO",
+      "message": "\n完成！CSV: /app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5.csv"
+    },
+    {
+      "time": "22:46:19",
+      "level": "INFO",
+      "message": "Excel（含颜色）: /app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5.xlsx"
+    },
+    {
+      "time": "22:46:19",
+      "level": "INFO",
+      "message": "check_blogs 检测完成"
+    },
+    {
+      "time": "22:46:19",
+      "level": "INFO",
+      "message": "导出结果已生成"
+    }
+  ],
+  "stats": {
+    "processor": {
+      "output_file": "/app/storage/jobs/20260713-151743-4894bbc5/processor/processed_backlinks.xlsx",
+      "input_files": [
+        "doodleroad.com-backlinks.xlsx",
+        "driftbossgame.io-backlinks.xlsx",
+        "elgoog.im-backlinks.xlsx",
+        "spacewavesgame.io-backlinks.xlsx"
+      ],
+      "failed_files": [],
+      "rows_read": 81052,
+      "rows_output": 5955,
+      "duplicate_rows_removed": 75097,
+      "skipped_processed_files": 0
+    },
+    "check_blogs": {
+      "output_file": "/app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5.xlsx",
+      "output_csv": "/app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5.csv",
+      "checkpoint_file": "/app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5_checkpoint.json",
+      "input_file": "/app/storage/jobs/20260713-151743-4894bbc5/processor/processed_backlinks.xlsx",
+      "raw_rows": 5955,
+      "processed_rows": 5955,
+      "skipped_duplicate_domains": 0,
+      "empty_url_rows": 0,
+      "label_counts": {
+        "无评论功能": 2608,
+        "访问失败": 1638,
+        "游戏站": 334,
+        "博客网站": 336,
+        "评论网站": 975,
+        "访问超时": 54,
+        "博客网站 · 需登录": 6,
+        "博客网站 · 需注册": 2,
+        "博客网站 · 谷歌登录": 2
+      }
+    }
+  },
+  "error": null,
+  "download_path": "/app/storage/jobs/20260713-151743-4894bbc5/result/check_blogs_result_20260713-151743-4894bbc5.xlsx"
+}

@@ -1,0 +1,30 @@
+{
+  "job_id": "20260713-145852-3b254108",
+  "status": "queued",
+  "stage": "upload",
+  "progress": 5,
+  "created_at": "2026-07-13T14:58:52",
+  "updated_at": "2026-07-13T14:58:52",
+  "files": [
+    {
+      "name": "doodleroad.com-backlinks.xlsx",
+      "size": 390846
+    },
+    {
+      "name": "driftbossgame.io-backlinks.xlsx",
+      "size": 1584235
+    },
+    {
+      "name": "elgoog.im-backlinks.xlsx",
+      "size": 2411181
+    },
+    {
+      "name": "spacewavesgame.io-backlinks.xlsx",
+      "size": 2308953
+    }
+  ],
+  "logs": [],
+  "stats": {},
+  "error": null,
+  "download_path": null
+}

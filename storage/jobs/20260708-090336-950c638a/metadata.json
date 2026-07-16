@@ -1,0 +1,1560 @@
+{
+  "job_id": "20260708-090336-950c638a",
+  "status": "completed",
+  "stage": "done",
+  "progress": 100.0,
+  "created_at": "2026-07-08T09:03:36",
+  "updated_at": "2026-07-08T12:02:39",
+  "files": [
+    {
+      "name": "answersgame.com-backlinks.xlsx",
+      "size": 296216
+    },
+    {
+      "name": "levelsolve.com-backlinks.xlsx",
+      "size": 124239
+    },
+    {
+      "name": "meowdoku.org-backlinks.xlsx",
+      "size": 48782
+    }
+  ],
+  "logs": [
+    {
+      "time": "11:58:41",
+      "level": "INFO",
+      "message": "正在检测第 1262/1353 行"
+    },
+    {
+      "time": "11:58:41",
+      "level": "INFO",
+      "message": "[1262] 检测: https://link-legion-59.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:58:42",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:58:43",
+      "level": "INFO",
+      "message": "正在检测第 1263/1353 行"
+    },
+    {
+      "time": "11:58:43",
+      "level": "INFO",
+      "message": "[1263] 检测: https://link-legion-58.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:58:43",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-58.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-58.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:58:43",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:58:45",
+      "level": "INFO",
+      "message": "正在检测第 1264/1353 行"
+    },
+    {
+      "time": "11:58:45",
+      "level": "INFO",
+      "message": "[1264] 检测: https://link-legion-57.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:58:46",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:58:47",
+      "level": "INFO",
+      "message": "正在检测第 1265/1353 行"
+    },
+    {
+      "time": "11:58:47",
+      "level": "INFO",
+      "message": "[1265] 检测: https://link-legion-56.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:58:48",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:58:49",
+      "level": "INFO",
+      "message": "正在检测第 1266/1353 行"
+    },
+    {
+      "time": "11:58:49",
+      "level": "INFO",
+      "message": "[1266] 检测: https://link-legion-55.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:58:50",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:58:52",
+      "level": "INFO",
+      "message": "正在检测第 1267/1353 行"
+    },
+    {
+      "time": "11:58:52",
+      "level": "INFO",
+      "message": "[1267] 检测: https://link-legion-76.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:58:52",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-76.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-76.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:58:52",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:58:53",
+      "level": "INFO",
+      "message": "正在检测第 1268/1353 行"
+    },
+    {
+      "time": "11:58:53",
+      "level": "INFO",
+      "message": "[1268] 检测: https://link-legion-53.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:58:53",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-53.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-53.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:58:53",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:58:55",
+      "level": "INFO",
+      "message": "正在检测第 1269/1353 行"
+    },
+    {
+      "time": "11:58:55",
+      "level": "INFO",
+      "message": "[1269] 检测: https://link-legion-52.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:58:55",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:58:57",
+      "level": "INFO",
+      "message": "正在检测第 1270/1353 行"
+    },
+    {
+      "time": "11:58:57",
+      "level": "INFO",
+      "message": "[1270] 检测: https://link-legion-51.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:58:59",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:00",
+      "level": "INFO",
+      "message": "正在检测第 1271/1353 行"
+    },
+    {
+      "time": "11:59:00",
+      "level": "INFO",
+      "message": "[1271] 检测: https://link-legion-50.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:01",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:02",
+      "level": "INFO",
+      "message": "正在检测第 1272/1353 行"
+    },
+    {
+      "time": "11:59:02",
+      "level": "INFO",
+      "message": "[1272] 检测: https://link-legion-5.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:03",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:05",
+      "level": "INFO",
+      "message": "正在检测第 1273/1353 行"
+    },
+    {
+      "time": "11:59:05",
+      "level": "INFO",
+      "message": "[1273] 检测: https://link-legion-49.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:06",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:07",
+      "level": "INFO",
+      "message": "正在检测第 1274/1353 行"
+    },
+    {
+      "time": "11:59:07",
+      "level": "INFO",
+      "message": "[1274] 检测: https://link-legion-48.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:08",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:09",
+      "level": "INFO",
+      "message": "正在检测第 1275/1353 行"
+    },
+    {
+      "time": "11:59:09",
+      "level": "INFO",
+      "message": "[1275] 检测: https://link-legion-47.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:10",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:11",
+      "level": "INFO",
+      "message": "正在检测第 1276/1353 行"
+    },
+    {
+      "time": "11:59:11",
+      "level": "INFO",
+      "message": "[1276] 检测: https://link-legion-46.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:12",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:14",
+      "level": "INFO",
+      "message": "正在检测第 1277/1353 行"
+    },
+    {
+      "time": "11:59:14",
+      "level": "INFO",
+      "message": "[1277] 检测: https://link-legion-54.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:15",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:16",
+      "level": "INFO",
+      "message": "正在检测第 1278/1353 行"
+    },
+    {
+      "time": "11:59:16",
+      "level": "INFO",
+      "message": "[1278] 检测: https://link-legion-75.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:16",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-75.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-75.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:16",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:59:18",
+      "level": "INFO",
+      "message": "正在检测第 1279/1353 行"
+    },
+    {
+      "time": "11:59:18",
+      "level": "INFO",
+      "message": "[1279] 检测: https://link-legion-74.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:18",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-74.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-74.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:18",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:59:19",
+      "level": "INFO",
+      "message": "正在检测第 1280/1353 行"
+    },
+    {
+      "time": "11:59:19",
+      "level": "INFO",
+      "message": "[1280] 检测: https://link-legion-73.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:21",
+      "level": "INFO",
+      "message": "正在检测第 1281/1353 行"
+    },
+    {
+      "time": "11:59:21",
+      "level": "INFO",
+      "message": "[1281] 检测: https://link-legion-72.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:22",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:24",
+      "level": "INFO",
+      "message": "正在检测第 1282/1353 行"
+    },
+    {
+      "time": "11:59:24",
+      "level": "INFO",
+      "message": "[1282] 检测: https://link-legion-71.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:25",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:26",
+      "level": "INFO",
+      "message": "正在检测第 1283/1353 行"
+    },
+    {
+      "time": "11:59:26",
+      "level": "INFO",
+      "message": "[1283] 检测: https://link-legion-70.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:27",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:29",
+      "level": "INFO",
+      "message": "正在检测第 1284/1353 行"
+    },
+    {
+      "time": "11:59:29",
+      "level": "INFO",
+      "message": "[1284] 检测: https://link-legion-62.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:29",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:31",
+      "level": "INFO",
+      "message": "正在检测第 1285/1353 行"
+    },
+    {
+      "time": "11:59:31",
+      "level": "INFO",
+      "message": "[1285] 检测: https://link-legion-69.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:31",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:33",
+      "level": "INFO",
+      "message": "正在检测第 1286/1353 行"
+    },
+    {
+      "time": "11:59:33",
+      "level": "INFO",
+      "message": "[1286] 检测: https://link-legion-68.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:34",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:35",
+      "level": "INFO",
+      "message": "正在检测第 1287/1353 行"
+    },
+    {
+      "time": "11:59:35",
+      "level": "INFO",
+      "message": "[1287] 检测: https://link-legion-67.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:35",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-67.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-67.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:35",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:59:37",
+      "level": "INFO",
+      "message": "正在检测第 1288/1353 行"
+    },
+    {
+      "time": "11:59:37",
+      "level": "INFO",
+      "message": "[1288] 检测: https://link-legion-66.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:37",
+      "level": "INFO",
+      "message": "  [ERROR] https://link-legion-66.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/ -> 404 Client Error: Not Found for url: https://link-legion-66.xyz/bhutan-22-06-2026/link-legion-bhutan-1911-2/"
+    },
+    {
+      "time": "11:59:37",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "11:59:38",
+      "level": "INFO",
+      "message": "正在检测第 1289/1353 行"
+    },
+    {
+      "time": "11:59:38",
+      "level": "INFO",
+      "message": "[1289] 检测: https://link-legion-65.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:39",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:41",
+      "level": "INFO",
+      "message": "正在检测第 1290/1353 行"
+    },
+    {
+      "time": "11:59:41",
+      "level": "INFO",
+      "message": "[1290] 检测: https://link-legion-64.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:41",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:43",
+      "level": "INFO",
+      "message": "正在检测第 1291/1353 行"
+    },
+    {
+      "time": "11:59:43",
+      "level": "INFO",
+      "message": "[1291] 检测: https://link-legion-63.xyz/argentina-16-06-2026/link-legion-argentina-1857-18/"
+    },
+    {
+      "time": "11:59:43",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:45",
+      "level": "INFO",
+      "message": "正在检测第 1292/1353 行"
+    },
+    {
+      "time": "11:59:45",
+      "level": "INFO",
+      "message": "[1292] 检测: https://link-legion-7.xyz/switzerland-09-06-2026/link-legion-switzerland-1816-9/"
+    },
+    {
+      "time": "11:59:46",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "11:59:47",
+      "level": "INFO",
+      "message": "正在检测第 1293/1353 行"
+    },
+    {
+      "time": "11:59:47",
+      "level": "INFO",
+      "message": "[1293] 检测: https://morixon-studios.com/social/861781"
+    },
+    {
+      "time": "11:59:47",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:49",
+      "level": "INFO",
+      "message": "正在检测第 1294/1353 行"
+    },
+    {
+      "time": "11:59:49",
+      "level": "INFO",
+      "message": "[1294] 检测: https://mk.sahamdomino.org/social/861781"
+    },
+    {
+      "time": "11:59:49",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:51",
+      "level": "INFO",
+      "message": "正在检测第 1295/1353 行"
+    },
+    {
+      "time": "11:59:51",
+      "level": "INFO",
+      "message": "[1295] 检测: https://mk.cmfads.com/social/861781"
+    },
+    {
+      "time": "11:59:51",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:53",
+      "level": "INFO",
+      "message": "正在检测第 1296/1353 行"
+    },
+    {
+      "time": "11:59:53",
+      "level": "INFO",
+      "message": "[1296] 检测: https://mirmgate.com.au/a-calculator/a-button-on-a-calculator-other-than-numbers.html"
+    },
+    {
+      "time": "11:59:53",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:55",
+      "level": "INFO",
+      "message": "正在检测第 1297/1353 行"
+    },
+    {
+      "time": "11:59:55",
+      "level": "INFO",
+      "message": "[1297] 检测: https://miamods.com/social/861781"
+    },
+    {
+      "time": "11:59:55",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:56",
+      "level": "INFO",
+      "message": "正在检测第 1298/1353 行"
+    },
+    {
+      "time": "11:59:56",
+      "level": "INFO",
+      "message": "[1298] 检测: https://mi.fsafakfskane.net/social/861781"
+    },
+    {
+      "time": "11:59:57",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "11:59:58",
+      "level": "INFO",
+      "message": "正在检测第 1299/1353 行"
+    },
+    {
+      "time": "11:59:58",
+      "level": "INFO",
+      "message": "[1299] 检测: https://metamagic.top/stats/57497"
+    },
+    {
+      "time": "12:00:00",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "12:00:02",
+      "level": "INFO",
+      "message": "正在检测第 1300/1353 行"
+    },
+    {
+      "time": "12:00:02",
+      "level": "INFO",
+      "message": "[1300] 检测: https://mk.dasistnews.net/social/861781"
+    },
+    {
+      "time": "12:00:03",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:05",
+      "level": "INFO",
+      "message": "正在检测第 1301/1353 行"
+    },
+    {
+      "time": "12:00:05",
+      "level": "INFO",
+      "message": "[1301] 检测: https://mt.direct-booking-hotel.com/social/861781"
+    },
+    {
+      "time": "12:00:06",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:07",
+      "level": "INFO",
+      "message": "正在检测第 1302/1353 行"
+    },
+    {
+      "time": "12:00:07",
+      "level": "INFO",
+      "message": "[1302] 检测: https://mt.dezaula.com/social/861781"
+    },
+    {
+      "time": "12:00:08",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:09",
+      "level": "INFO",
+      "message": "正在检测第 1303/1353 行"
+    },
+    {
+      "time": "12:00:09",
+      "level": "INFO",
+      "message": "[1303] 检测: https://mt.cooogle.net/social/861781"
+    },
+    {
+      "time": "12:00:10",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:12",
+      "level": "INFO",
+      "message": "正在检测第 1304/1353 行"
+    },
+    {
+      "time": "12:00:12",
+      "level": "INFO",
+      "message": "[1304] 检测: https://msimasters.com/tg-links-dealer-black-hat-seo-services-mass-links-15-7/"
+    },
+    {
+      "time": "12:00:14",
+      "level": "INFO",
+      "message": "  [ERROR] https://msimasters.com/tg-links-dealer-black-hat-seo-services-mass-links-15-7/ -> 404 Client Error: Not Found for url: https://msimasters.com/tg-links-dealer-black-hat-seo-services-mass-links-15-7/"
+    },
+    {
+      "time": "12:00:14",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:00:16",
+      "level": "INFO",
+      "message": "正在检测第 1305/1353 行"
+    },
+    {
+      "time": "12:00:16",
+      "level": "INFO",
+      "message": "[1305] 检测: https://ms.up-kicks.com/social/861781"
+    },
+    {
+      "time": "12:00:18",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:19",
+      "level": "INFO",
+      "message": "正在检测第 1306/1353 行"
+    },
+    {
+      "time": "12:00:19",
+      "level": "INFO",
+      "message": "[1306] 检测: https://ms.takadumka.info/social/861781"
+    },
+    {
+      "time": "12:00:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:21",
+      "level": "INFO",
+      "message": "正在检测第 1307/1353 行"
+    },
+    {
+      "time": "12:00:21",
+      "level": "INFO",
+      "message": "[1307] 检测: https://ms.spartan-ntv.com/social/861781"
+    },
+    {
+      "time": "12:00:22",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:23",
+      "level": "INFO",
+      "message": "正在检测第 1308/1353 行"
+    },
+    {
+      "time": "12:00:23",
+      "level": "INFO",
+      "message": "[1308] 检测: https://ms.popkadesslcode.com/social/861781"
+    },
+    {
+      "time": "12:00:24",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:25",
+      "level": "INFO",
+      "message": "正在检测第 1309/1353 行"
+    },
+    {
+      "time": "12:00:25",
+      "level": "INFO",
+      "message": "[1309] 检测: https://ms.netflixinfotech.com/social/861781"
+    },
+    {
+      "time": "12:00:26",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:27",
+      "level": "INFO",
+      "message": "正在检测第 1310/1353 行"
+    },
+    {
+      "time": "12:00:27",
+      "level": "INFO",
+      "message": "[1310] 检测: https://ms.ggsaffiliates.com/social/861781"
+    },
+    {
+      "time": "12:00:27",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:29",
+      "level": "INFO",
+      "message": "正在检测第 1311/1353 行"
+    },
+    {
+      "time": "12:00:29",
+      "level": "INFO",
+      "message": "[1311] 检测: https://macgroup.es/2026/02/02/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:00:29",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:31",
+      "level": "INFO",
+      "message": "正在检测第 1312/1353 行"
+    },
+    {
+      "time": "12:00:31",
+      "level": "INFO",
+      "message": "[1312] 检测: https://lv.stornowaytv.com/social/861781"
+    },
+    {
+      "time": "12:00:31",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:33",
+      "level": "INFO",
+      "message": "正在检测第 1313/1353 行"
+    },
+    {
+      "time": "12:00:33",
+      "level": "INFO",
+      "message": "[1313] 检测: https://lv.obsrs.com/social/861781"
+    },
+    {
+      "time": "12:00:33",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:35",
+      "level": "INFO",
+      "message": "正在检测第 1314/1353 行"
+    },
+    {
+      "time": "12:00:35",
+      "level": "INFO",
+      "message": "[1314] 检测: https://lv.homehoststats.com/social/861781"
+    },
+    {
+      "time": "12:00:35",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:37",
+      "level": "INFO",
+      "message": "正在检测第 1315/1353 行"
+    },
+    {
+      "time": "12:00:37",
+      "level": "INFO",
+      "message": "[1315] 检测: https://mepirtedic.com/social/861781"
+    },
+    {
+      "time": "12:00:37",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:38",
+      "level": "INFO",
+      "message": "正在检测第 1316/1353 行"
+    },
+    {
+      "time": "12:00:38",
+      "level": "INFO",
+      "message": "[1316] 检测: https://lt.youdaody.info/social/861781"
+    },
+    {
+      "time": "12:00:39",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:40",
+      "level": "INFO",
+      "message": "正在检测第 1317/1353 行"
+    },
+    {
+      "time": "12:00:40",
+      "level": "INFO",
+      "message": "[1317] 检测: https://lt.searchpac.com/social/861781"
+    },
+    {
+      "time": "12:00:41",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:43",
+      "level": "INFO",
+      "message": "正在检测第 1318/1353 行"
+    },
+    {
+      "time": "12:00:43",
+      "level": "INFO",
+      "message": "[1318] 检测: https://lt.probnic.info/social/861781"
+    },
+    {
+      "time": "12:00:43",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:44",
+      "level": "INFO",
+      "message": "正在检测第 1319/1353 行"
+    },
+    {
+      "time": "12:00:44",
+      "level": "INFO",
+      "message": "[1319] 检测: https://lt.iklanblogger.com/social/861781"
+    },
+    {
+      "time": "12:00:45",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:46",
+      "level": "INFO",
+      "message": "正在检测第 1320/1353 行"
+    },
+    {
+      "time": "12:00:46",
+      "level": "INFO",
+      "message": "[1320] 检测: https://mendenarena.de/tg-links-dealer-black-hat-seo-services-mass-links-15-6/"
+    },
+    {
+      "time": "12:00:46",
+      "level": "INFO",
+      "message": "  [ERROR] https://mendenarena.de/tg-links-dealer-black-hat-seo-services-mass-links-15-6/ -> 403 Client Error: Forbidden for url: https://mendenarena.de/tg-links-dealer-black-hat-seo-services-mass-links-15-6/"
+    },
+    {
+      "time": "12:00:46",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:00:48",
+      "level": "INFO",
+      "message": "正在检测第 1321/1353 行"
+    },
+    {
+      "time": "12:00:48",
+      "level": "INFO",
+      "message": "[1321] 检测: https://marcioagalles.com.br/telegram-salesoven-access-to-hacked-sites-for-seo-14/"
+    },
+    {
+      "time": "12:00:51",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:52",
+      "level": "INFO",
+      "message": "正在检测第 1322/1353 行"
+    },
+    {
+      "time": "12:00:52",
+      "level": "INFO",
+      "message": "[1322] 检测: https://mainpg88.com/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:00:54",
+      "level": "INFO",
+      "message": "  [ERROR] https://mainpg88.com/tg-links-dealer-black-hat-seo-services-mass-links-2/ -> 404 Client Error: Not Found for url: https://mainpg88.com/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:00:54",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:00:56",
+      "level": "INFO",
+      "message": "正在检测第 1323/1353 行"
+    },
+    {
+      "time": "12:00:56",
+      "level": "INFO",
+      "message": "[1323] 检测: https://mail.simplewebdirectory.com/e5022e8b75d78e3569d790ea40956c12-l/"
+    },
+    {
+      "time": "12:00:58",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:00:59",
+      "level": "INFO",
+      "message": "正在检测第 1324/1353 行"
+    },
+    {
+      "time": "12:00:59",
+      "level": "INFO",
+      "message": "[1324] 检测: https://fastbot.de/search?q=Schl%C3%A4gersportarten%2BTop%2B7"
+    },
+    {
+      "time": "12:00:59",
+      "level": "INFO",
+      "message": "  [ERROR] https://fastbot.de/search?q=Schl%C3%A4gersportarten%2BTop%2B7 -> 403 Client Error: Forbidden for url: https://fastbot.de/search?q=Schl%C3%A4gersportarten%2BTop%2B7"
+    },
+    {
+      "time": "12:00:59",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:01:01",
+      "level": "INFO",
+      "message": "正在检测第 1325/1353 行"
+    },
+    {
+      "time": "12:01:01",
+      "level": "INFO",
+      "message": "[1325] 检测: https://fanyev5.com/archives/10823"
+    },
+    {
+      "time": "12:01:02",
+      "level": "INFO",
+      "message": "  [ERROR] https://fanyev5.com/archives/10823 -> 404 Client Error: Not Found for url: https://fanyev5.com/archives/10823"
+    },
+    {
+      "time": "12:01:02",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:01:03",
+      "level": "INFO",
+      "message": "正在检测第 1326/1353 行"
+    },
+    {
+      "time": "12:01:03",
+      "level": "INFO",
+      "message": "[1326] 检测: https://fa.ranking-analytics.com/social/861781"
+    },
+    {
+      "time": "12:01:04",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:05",
+      "level": "INFO",
+      "message": "正在检测第 1327/1353 行"
+    },
+    {
+      "time": "12:01:05",
+      "level": "INFO",
+      "message": "[1327] 检测: https://fa.maisfilmes.net/social/861781"
+    },
+    {
+      "time": "12:01:06",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:07",
+      "level": "INFO",
+      "message": "正在检测第 1328/1353 行"
+    },
+    {
+      "time": "12:01:07",
+      "level": "INFO",
+      "message": "[1328] 检测: https://fa.finetmx.net/social/861781"
+    },
+    {
+      "time": "12:01:08",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:09",
+      "level": "INFO",
+      "message": "正在检测第 1329/1353 行"
+    },
+    {
+      "time": "12:01:09",
+      "level": "INFO",
+      "message": "[1329] 检测: https://fi.kaokireinavi-tower.com/social/861781"
+    },
+    {
+      "time": "12:01:10",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:11",
+      "level": "INFO",
+      "message": "正在检测第 1330/1353 行"
+    },
+    {
+      "time": "12:01:11",
+      "level": "INFO",
+      "message": "[1330] 检测: https://fi.enscrollplugin.com/social/861781"
+    },
+    {
+      "time": "12:01:12",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:13",
+      "level": "INFO",
+      "message": "正在检测第 1331/1353 行"
+    },
+    {
+      "time": "12:01:13",
+      "level": "INFO",
+      "message": "[1331] 检测: https://fi.drizzlerules.com/social/861781"
+    },
+    {
+      "time": "12:01:14",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:15",
+      "level": "INFO",
+      "message": "正在检测第 1332/1353 行"
+    },
+    {
+      "time": "12:01:15",
+      "level": "INFO",
+      "message": "[1332] 检测: https://fi.darmowe-liczniki.info/social/861781"
+    },
+    {
+      "time": "12:01:16",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:17",
+      "level": "INFO",
+      "message": "正在检测第 1333/1353 行"
+    },
+    {
+      "time": "12:01:17",
+      "level": "INFO",
+      "message": "[1333] 检测: https://fi.amzlsh.com/social/861781"
+    },
+    {
+      "time": "12:01:17",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:19",
+      "level": "INFO",
+      "message": "正在检测第 1334/1353 行"
+    },
+    {
+      "time": "12:01:19",
+      "level": "INFO",
+      "message": "[1334] 检测: https://ferienwohnung-augsburgland.de/tg-bhs-links-black-seo-backlinks-telegram-https-t-14/"
+    },
+    {
+      "time": "12:01:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:22",
+      "level": "INFO",
+      "message": "正在检测第 1335/1353 行"
+    },
+    {
+      "time": "12:01:22",
+      "level": "INFO",
+      "message": "[1335] 检测: https://fatehsahodaya.org/2026/02/02/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:01:24",
+      "level": "INFO",
+      "message": "  [ERROR] https://fatehsahodaya.org/2026/02/02/tg-links-dealer-black-hat-seo-services-mass-links-2/ -> 404 Client Error: Not Found for url: https://fatehsahodaya.org/2026/02/02/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:01:24",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:01:26",
+      "level": "INFO",
+      "message": "正在检测第 1336/1353 行"
+    },
+    {
+      "time": "12:01:26",
+      "level": "INFO",
+      "message": "[1336] 检测: https://fr.rankvirus.com/social/861781"
+    },
+    {
+      "time": "12:01:27",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:28",
+      "level": "INFO",
+      "message": "正在检测第 1337/1353 行"
+    },
+    {
+      "time": "12:01:28",
+      "level": "INFO",
+      "message": "[1337] 检测: https://fr.mobecpm.com/social/861781"
+    },
+    {
+      "time": "12:01:28",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:30",
+      "level": "INFO",
+      "message": "正在检测第 1338/1353 行"
+    },
+    {
+      "time": "12:01:30",
+      "level": "INFO",
+      "message": "[1338] 检测: https://fr.centimetresnappeddock.com/social/861781"
+    },
+    {
+      "time": "12:01:30",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:32",
+      "level": "INFO",
+      "message": "正在检测第 1339/1353 行"
+    },
+    {
+      "time": "12:01:32",
+      "level": "INFO",
+      "message": "[1339] 检测: https://fr.byeej.com/social/861781"
+    },
+    {
+      "time": "12:01:32",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:34",
+      "level": "INFO",
+      "message": "正在检测第 1340/1353 行"
+    },
+    {
+      "time": "12:01:34",
+      "level": "INFO",
+      "message": "[1340] 检测: https://flaxit.dk/2025/04/23/tg-bhs-links-black-seo-backlinks-telegram-https-t-14/"
+    },
+    {
+      "time": "12:01:34",
+      "level": "INFO",
+      "message": "  [ERROR] https://flaxit.dk/2025/04/23/tg-bhs-links-black-seo-backlinks-telegram-https-t-14/ -> HTTPSConnectionPool(host='flaxit.dk', port=443): Max retries exceeded with url: /2025/04/23/tg-bhs-links-black-seo-backlinks-telegram-https-t-14/ (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'flaxit.dk'. (_ssl.c:1010)\")))"
+    },
+    {
+      "time": "12:01:34",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:01:35",
+      "level": "INFO",
+      "message": "正在检测第 1341/1353 行"
+    },
+    {
+      "time": "12:01:35",
+      "level": "INFO",
+      "message": "[1341] 检测: https://fi.sovetniku.net/social/861781"
+    },
+    {
+      "time": "12:01:35",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:01:37",
+      "level": "INFO",
+      "message": "正在检测第 1342/1353 行"
+    },
+    {
+      "time": "12:01:37",
+      "level": "INFO",
+      "message": "[1342] 检测: https://greattraveladvisor.com/dark-side-links-dark-white-hat-link-building-305/"
+    },
+    {
+      "time": "12:02:12",
+      "level": "INFO",
+      "message": "  [ERROR] https://greattraveladvisor.com/dark-side-links-dark-white-hat-link-building-305/ -> 503 Server Error: Service Unavailable for url: https://greattraveladvisor.com/dark-side-links-dark-white-hat-link-building-305/"
+    },
+    {
+      "time": "12:02:12",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:02:13",
+      "level": "INFO",
+      "message": "正在检测第 1343/1353 行"
+    },
+    {
+      "time": "12:02:13",
+      "level": "INFO",
+      "message": "[1343] 检测: https://globalrank1m.com/keyword/puzzle%20solutions?pageSize=20&sortDirection=asc&sortField=global_rank"
+    },
+    {
+      "time": "12:02:13",
+      "level": "INFO",
+      "message": "  [ERROR] https://globalrank1m.com/keyword/puzzle%20solutions?pageSize=20&sortDirection=asc&sortField=global_rank -> HTTPSConnectionPool(host='globalrank1m.com', port=443): Max retries exceeded with url: /keyword/puzzle%20solutions?pageSize=20&sortDirection=asc&sortField=global_rank (Caused by NameResolutionError(\"HTTPSConnection(host='globalrank1m.com', port=443): Failed to resolve 'globalrank1m.com' ([Errno -5] No address associated with hostname)\"))"
+    },
+    {
+      "time": "12:02:13",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:02:15",
+      "level": "INFO",
+      "message": "正在检测第 1344/1353 行"
+    },
+    {
+      "time": "12:02:15",
+      "level": "INFO",
+      "message": "[1344] 检测: https://ggjcswb4rln4.com/social/861781"
+    },
+    {
+      "time": "12:02:15",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:02:17",
+      "level": "INFO",
+      "message": "正在检测第 1345/1353 行"
+    },
+    {
+      "time": "12:02:17",
+      "level": "INFO",
+      "message": "[1345] 检测: https://genialtelecom.net/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:02:18",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:02:20",
+      "level": "INFO",
+      "message": "正在检测第 1346/1353 行"
+    },
+    {
+      "time": "12:02:20",
+      "level": "INFO",
+      "message": "[1346] 检测: https://genggobyos.com/seo-cartel-in-telegram-seo-backlinks-bulk-link-38/"
+    },
+    {
+      "time": "12:02:20",
+      "level": "INFO",
+      "message": "  [ERROR] https://genggobyos.com/seo-cartel-in-telegram-seo-backlinks-bulk-link-38/ -> HTTPSConnectionPool(host='genggobyos.com', port=443): Max retries exceeded with url: /seo-cartel-in-telegram-seo-backlinks-bulk-link-38/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
+    },
+    {
+      "time": "12:02:20",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:02:22",
+      "level": "INFO",
+      "message": "正在检测第 1347/1353 行"
+    },
+    {
+      "time": "12:02:22",
+      "level": "INFO",
+      "message": "[1347] 检测: https://gbis.irfc.pt/salesoven-argentina/telegram-salesoven-access-to-hacked-sites-for-seo-14/"
+    },
+    {
+      "time": "12:02:23",
+      "level": "INFO",
+      "message": "  [ERROR] https://gbis.irfc.pt/salesoven-argentina/telegram-salesoven-access-to-hacked-sites-for-seo-14/ -> 500 Server Error: Internal Server Error for url: https://gbis.irfc.pt/salesoven-argentina/telegram-salesoven-access-to-hacked-sites-for-seo-14/"
+    },
+    {
+      "time": "12:02:23",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "12:02:24",
+      "level": "INFO",
+      "message": "正在检测第 1348/1353 行"
+    },
+    {
+      "time": "12:02:24",
+      "level": "INFO",
+      "message": "[1348] 检测: https://gaamess.fr/images-1-mot-niveau-114/"
+    },
+    {
+      "time": "12:02:25",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "12:02:26",
+      "level": "INFO",
+      "message": "正在检测第 1349/1353 行"
+    },
+    {
+      "time": "12:02:27",
+      "level": "INFO",
+      "message": "[1349] 检测: https://ga.top-widgets.com/social/861781"
+    },
+    {
+      "time": "12:02:27",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:02:28",
+      "level": "INFO",
+      "message": "正在检测第 1350/1353 行"
+    },
+    {
+      "time": "12:02:28",
+      "level": "INFO",
+      "message": "[1350] 检测: https://ggpartnersconsortium.com/tg-links-dealer-black-hat-seo-services-mass-links-2/"
+    },
+    {
+      "time": "12:02:30",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "12:02:32",
+      "level": "INFO",
+      "message": "正在检测第 1351/1353 行"
+    },
+    {
+      "time": "12:02:32",
+      "level": "INFO",
+      "message": "[1351] 检测: https://ga.statcounter1.com/social/861781"
+    },
+    {
+      "time": "12:02:32",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:02:34",
+      "level": "INFO",
+      "message": "正在检测第 1352/1353 行"
+    },
+    {
+      "time": "12:02:34",
+      "level": "INFO",
+      "message": "[1352] 检测: https://ga.klikq.com/social/861781"
+    },
+    {
+      "time": "12:02:34",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:02:36",
+      "level": "INFO",
+      "message": "正在检测第 1353/1353 行"
+    },
+    {
+      "time": "12:02:36",
+      "level": "INFO",
+      "message": "[1353] 检测: https://ga.elaneman.com/social/861781"
+    },
+    {
+      "time": "12:02:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "12:02:38",
+      "level": "INFO",
+      "message": "正在生成带颜色标注的 Excel"
+    },
+    {
+      "time": "12:02:39",
+      "level": "INFO",
+      "message": "[XLSX] 带颜色标注的 Excel 已生成: /app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a.xlsx"
+    },
+    {
+      "time": "12:02:39",
+      "level": "INFO",
+      "message": "\n完成！CSV: /app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a.csv"
+    },
+    {
+      "time": "12:02:39",
+      "level": "INFO",
+      "message": "Excel（含颜色）: /app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a.xlsx"
+    },
+    {
+      "time": "12:02:39",
+      "level": "INFO",
+      "message": "check_blogs 检测完成"
+    },
+    {
+      "time": "12:02:39",
+      "level": "INFO",
+      "message": "导出结果已生成"
+    }
+  ],
+  "stats": {
+    "processor": {
+      "output_file": "/app/storage/jobs/20260708-090336-950c638a/processor/processed_backlinks.xlsx",
+      "input_files": [
+        "answersgame.com-backlinks.xlsx",
+        "levelsolve.com-backlinks.xlsx",
+        "meowdoku.org-backlinks.xlsx"
+      ],
+      "failed_files": [],
+      "rows_read": 5613,
+      "rows_output": 1353,
+      "duplicate_rows_removed": 4260,
+      "skipped_processed_files": 0
+    },
+    "check_blogs": {
+      "output_file": "/app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a.xlsx",
+      "output_csv": "/app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a.csv",
+      "checkpoint_file": "/app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a_checkpoint.json",
+      "input_file": "/app/storage/jobs/20260708-090336-950c638a/processor/processed_backlinks.xlsx",
+      "raw_rows": 1353,
+      "processed_rows": 1353,
+      "skipped_duplicate_domains": 0,
+      "empty_url_rows": 0,
+      "label_counts": {
+        "无评论功能": 738,
+        "游戏站": 25,
+        "评论网站": 160,
+        "访问失败": 373,
+        "博客网站": 41,
+        "博客网站 · 需注册": 3,
+        "访问超时": 13
+      }
+    }
+  },
+  "error": null,
+  "download_path": "/app/storage/jobs/20260708-090336-950c638a/result/check_blogs_result_20260708-090336-950c638a.xlsx"
+}

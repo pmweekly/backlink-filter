@@ -1,0 +1,1546 @@
+{
+  "job_id": "20260713-111947-37ebedf2",
+  "status": "running",
+  "stage": "check_blogs",
+  "progress": 68.6,
+  "created_at": "2026-07-13T11:19:47",
+  "updated_at": "2026-07-13T15:16:39",
+  "files": [
+    {
+      "name": "doodleroad.com-backlinks.xlsx",
+      "size": 390846
+    },
+    {
+      "name": "driftbossgame.io-backlinks.xlsx",
+      "size": 1584235
+    },
+    {
+      "name": "elgoog.im-backlinks.xlsx",
+      "size": 2411181
+    },
+    {
+      "name": "spacewavesgame.io-backlinks.xlsx",
+      "size": 2308953
+    }
+  ],
+  "logs": [
+    {
+      "time": "15:10:25",
+      "level": "INFO",
+      "message": "正在检测第 2882/5955 行"
+    },
+    {
+      "time": "15:10:25",
+      "level": "INFO",
+      "message": "[2882] 检测: https://www.themetalvoice.com/post/2020/02/04/sons-of-apollo-billy-sheehan-van-halen-asked-me-3-times-to-join-the-band-over-the-years"
+    },
+    {
+      "time": "15:10:28",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:10:29",
+      "level": "INFO",
+      "message": "正在检测第 2883/5955 行"
+    },
+    {
+      "time": "15:10:29",
+      "level": "INFO",
+      "message": "[2883] 检测: https://www.thefashionschool-uk.com/post/crochet-club"
+    },
+    {
+      "time": "15:10:32",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:10:34",
+      "level": "INFO",
+      "message": "正在检测第 2884/5955 行"
+    },
+    {
+      "time": "15:10:34",
+      "level": "INFO",
+      "message": "[2884] 检测: https://www.thechemistry.art/post/save-the-date-vernis%C3%A1%C5%BE-jesus-is-not-dead"
+    },
+    {
+      "time": "15:10:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:10:37",
+      "level": "INFO",
+      "message": "正在检测第 2885/5955 行"
+    },
+    {
+      "time": "15:10:37",
+      "level": "INFO",
+      "message": "[2885] 检测: https://www.thecakegirl.com/post/franchise-times-kristina-lavallee-the-cake-girl-national-franchise"
+    },
+    {
+      "time": "15:10:39",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:10:41",
+      "level": "INFO",
+      "message": "正在检测第 2886/5955 行"
+    },
+    {
+      "time": "15:10:41",
+      "level": "INFO",
+      "message": "[2886] 检测: https://www.tcsdcc.com/post/new-wow-diesel-kit-bachmann-f7a"
+    },
+    {
+      "time": "15:10:44",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:10:45",
+      "level": "INFO",
+      "message": "正在检测第 2887/5955 行"
+    },
+    {
+      "time": "15:10:45",
+      "level": "INFO",
+      "message": "[2887] 检测: https://www.swlexledger.com/single-post/irmo-firefighter-dies-in-line-of-duty-a-different-perspective-brings-tears-to-my-eyes-even-now"
+    },
+    {
+      "time": "15:10:48",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:10:50",
+      "level": "INFO",
+      "message": "正在检测第 2888/5955 行"
+    },
+    {
+      "time": "15:10:50",
+      "level": "INFO",
+      "message": "[2888] 检测: https://www.sustainabletimes.co.uk/post/concrete-returns-on-investment-in-green-construction"
+    },
+    {
+      "time": "15:10:51",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:10:52",
+      "level": "INFO",
+      "message": "正在检测第 2889/5955 行"
+    },
+    {
+      "time": "15:10:52",
+      "level": "INFO",
+      "message": "[2889] 检测: https://www.sunkenlandgame.com/post/big-update-news-steam-awards-nomination"
+    },
+    {
+      "time": "15:10:54",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:10:56",
+      "level": "INFO",
+      "message": "正在检测第 2890/5955 行"
+    },
+    {
+      "time": "15:10:56",
+      "level": "INFO",
+      "message": "[2890] 检测: https://www.vietnameseboatpeople.org/post/for-m%C3%A1-and-me"
+    },
+    {
+      "time": "15:11:00",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:01",
+      "level": "INFO",
+      "message": "正在检测第 2891/5955 行"
+    },
+    {
+      "time": "15:11:01",
+      "level": "INFO",
+      "message": "[2891] 检测: https://www.vegannigerian.com/2025/06/jollof-quinoa-recipe.html"
+    },
+    {
+      "time": "15:11:02",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:11:04",
+      "level": "INFO",
+      "message": "正在检测第 2892/5955 行"
+    },
+    {
+      "time": "15:11:04",
+      "level": "INFO",
+      "message": "[2892] 检测: https://www.vagabondhaven.com/post/simpler-rules-for-tiny-houses-in-norway"
+    },
+    {
+      "time": "15:11:05",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:06",
+      "level": "INFO",
+      "message": "正在检测第 2893/5955 行"
+    },
+    {
+      "time": "15:11:06",
+      "level": "INFO",
+      "message": "[2893] 检测: https://www.upholdings.net/post/resident-interview-7"
+    },
+    {
+      "time": "15:11:14",
+      "level": "INFO",
+      "message": "  [ERROR] https://www.upholdings.net/post/resident-interview-7 -> Response ended prematurely"
+    },
+    {
+      "time": "15:11:14",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:11:15",
+      "level": "INFO",
+      "message": "正在检测第 2894/5955 行"
+    },
+    {
+      "time": "15:11:15",
+      "level": "INFO",
+      "message": "[2894] 检测: https://www.ultimateairshows.com/forum/0ea4afd9/free-sharp-ar-5316-driver-32-bit-windows-7"
+    },
+    {
+      "time": "15:11:17",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:18",
+      "level": "INFO",
+      "message": "正在检测第 2895/5955 行"
+    },
+    {
+      "time": "15:11:18",
+      "level": "INFO",
+      "message": "[2895] 检测: https://www.uesugitakashi.com/post/%E3%81%BF%E3%82%93%E3%81%AA%E3%81%A7%E3%81%A4%E3%81%8F%E3%82%8B%E3%80%81%E4%B8%AD%E5%A4%AE%E5%8C%BA%E8%AD%B0-%E6%BF%80%E5%8A%B1%E8%A8%AA%E5%95%8F%E4%B8%AD%E3%81%A7%E3%81%99%E3%80%82-1"
+    },
+    {
+      "time": "15:11:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:22",
+      "level": "INFO",
+      "message": "正在检测第 2896/5955 行"
+    },
+    {
+      "time": "15:11:22",
+      "level": "INFO",
+      "message": "[2896] 检测: https://www.ttlxshipping.com/forum/topic/244436/no-more-holiday-homework-stress:-get-help-before-christmas-eve!"
+    },
+    {
+      "time": "15:11:23",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:25",
+      "level": "INFO",
+      "message": "正在检测第 2897/5955 行"
+    },
+    {
+      "time": "15:11:25",
+      "level": "INFO",
+      "message": "[2897] 检测: https://www.trinityaudio.ai/what-are-audio-skills-and-actions"
+    },
+    {
+      "time": "15:11:25",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:27",
+      "level": "INFO",
+      "message": "正在检测第 2898/5955 行"
+    },
+    {
+      "time": "15:11:27",
+      "level": "INFO",
+      "message": "[2898] 检测: https://www.totallyreliable.com/post/pc-mac-1-10471-hotfix"
+    },
+    {
+      "time": "15:11:30",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:31",
+      "level": "INFO",
+      "message": "正在检测第 2899/5955 行"
+    },
+    {
+      "time": "15:11:31",
+      "level": "INFO",
+      "message": "[2899] 检测: https://www.torianpro.com/post/2018-the-other-total"
+    },
+    {
+      "time": "15:11:33",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:35",
+      "level": "INFO",
+      "message": "正在检测第 2900/5955 行"
+    },
+    {
+      "time": "15:11:35",
+      "level": "INFO",
+      "message": "[2900] 检测: https://www.tn-elderlaw.com/post/the-daily-check-in-practice-essential-for-solo-agers"
+    },
+    {
+      "time": "15:11:37",
+      "level": "INFO",
+      "message": "  [ERROR] https://www.tn-elderlaw.com/post/the-daily-check-in-practice-essential-for-solo-agers -> 404 Client Error: Not Found for url: https://www.tn-elderlaw.com/post/the-daily-check-in-practice-essential-for-solo-agers"
+    },
+    {
+      "time": "15:11:37",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:11:38",
+      "level": "INFO",
+      "message": "正在检测第 2901/5955 行"
+    },
+    {
+      "time": "15:11:38",
+      "level": "INFO",
+      "message": "[2901] 检测: https://www.zitdazo.be/post/zonder-zenuwinzinking-5-weken-thuis-met-je-kind"
+    },
+    {
+      "time": "15:11:41",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:42",
+      "level": "INFO",
+      "message": "正在检测第 2902/5955 行"
+    },
+    {
+      "time": "15:11:43",
+      "level": "INFO",
+      "message": "[2902] 检测: https://www.yourjcmphotography.com/post/fall-wedding-at-the-parker-mill-b-g"
+    },
+    {
+      "time": "15:11:46",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:48",
+      "level": "INFO",
+      "message": "正在检测第 2903/5955 行"
+    },
+    {
+      "time": "15:11:48",
+      "level": "INFO",
+      "message": "[2903] 检测: https://www.yachtleycrew.com/post/ring-in-the-2023-new-year-with-y%C3%A4chtley-cr%C3%ABw"
+    },
+    {
+      "time": "15:11:48",
+      "level": "INFO",
+      "message": "  [ERROR] https://www.yachtleycrew.com/post/ring-in-the-2023-new-year-with-y%C3%A4chtley-cr%C3%ABw -> 404 Client Error: Not Found for url: https://www.yachtleycrew.com/post/ring-in-the-2023-new-year-with-y%C3%A4chtley-cr%C3%ABw"
+    },
+    {
+      "time": "15:11:48",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:11:50",
+      "level": "INFO",
+      "message": "正在检测第 2904/5955 行"
+    },
+    {
+      "time": "15:11:50",
+      "level": "INFO",
+      "message": "[2904] 检测: https://www.womenfoundersnetwork.org/post/advice-from-fast-pitch-finalists"
+    },
+    {
+      "time": "15:11:50",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:52",
+      "level": "INFO",
+      "message": "正在检测第 2905/5955 行"
+    },
+    {
+      "time": "15:11:52",
+      "level": "INFO",
+      "message": "[2905] 检测: https://www.whitefishlegacy.org/post/late-june-whitefish-trail-report"
+    },
+    {
+      "time": "15:11:56",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:11:57",
+      "level": "INFO",
+      "message": "正在检测第 2906/5955 行"
+    },
+    {
+      "time": "15:11:57",
+      "level": "INFO",
+      "message": "[2906] 检测: https://www.well.law/post/victim-speaks-out-after-navy-denies-fuel-contaminated-water-caused-injuries-affected-in-nearly-eve"
+    },
+    {
+      "time": "15:11:59",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:00",
+      "level": "INFO",
+      "message": "正在检测第 2907/5955 行"
+    },
+    {
+      "time": "15:12:01",
+      "level": "INFO",
+      "message": "[2907] 检测: https://www.wecancenter.org/post/celebrating-kat-pannill-cfre-certification"
+    },
+    {
+      "time": "15:12:05",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:06",
+      "level": "INFO",
+      "message": "正在检测第 2908/5955 行"
+    },
+    {
+      "time": "15:12:06",
+      "level": "INFO",
+      "message": "[2908] 检测: https://www.weathersfieldinn.com/post/where-to-get-massages-facials-body-work"
+    },
+    {
+      "time": "15:12:09",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:11",
+      "level": "INFO",
+      "message": "正在检测第 2909/5955 行"
+    },
+    {
+      "time": "15:12:11",
+      "level": "INFO",
+      "message": "[2909] 检测: https://www.volley.ae/post/beach-vs-indoor-volleyball-strategy-differences"
+    },
+    {
+      "time": "15:12:14",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:16",
+      "level": "INFO",
+      "message": "正在检测第 2910/5955 行"
+    },
+    {
+      "time": "15:12:16",
+      "level": "INFO",
+      "message": "[2910] 检测: https://www.visit.org/post/how-to-activate-your-corporate-volunteer-network"
+    },
+    {
+      "time": "15:12:17",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:19",
+      "level": "INFO",
+      "message": "正在检测第 2911/5955 行"
+    },
+    {
+      "time": "15:12:19",
+      "level": "INFO",
+      "message": "[2911] 检测: http://theasshole.awardspace.co.uk/foro/index.php?topic=174.0"
+    },
+    {
+      "time": "15:12:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:21",
+      "level": "INFO",
+      "message": "正在检测第 2912/5955 行"
+    },
+    {
+      "time": "15:12:21",
+      "level": "INFO",
+      "message": "[2912] 检测: http://mazlicci.bloger.cz/Psi/Jak-na-neplanovane-rande-nasich-domacich-mazlicku"
+    },
+    {
+      "time": "15:12:22",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:23",
+      "level": "INFO",
+      "message": "正在检测第 2913/5955 行"
+    },
+    {
+      "time": "15:12:23",
+      "level": "INFO",
+      "message": "[2913] 检测: https://www.worldkickboxingorganisation.org/post/rule-britannia-nick-morrish-fighter-coach-promoter"
+    },
+    {
+      "time": "15:12:23",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:25",
+      "level": "INFO",
+      "message": "正在检测第 2914/5955 行"
+    },
+    {
+      "time": "15:12:25",
+      "level": "INFO",
+      "message": "[2914] 检测: https://www.wuhub.id/post/tokopedia"
+    },
+    {
+      "time": "15:12:27",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:29",
+      "level": "INFO",
+      "message": "正在检测第 2915/5955 行"
+    },
+    {
+      "time": "15:12:29",
+      "level": "INFO",
+      "message": "[2915] 检测: https://www.yourkoalaa.com/post/think-soft-and-comfortable-means-fragile-think-again"
+    },
+    {
+      "time": "15:12:32",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:34",
+      "level": "INFO",
+      "message": "正在检测第 2916/5955 行"
+    },
+    {
+      "time": "15:12:34",
+      "level": "INFO",
+      "message": "[2916] 检测: https://www.thebeachcats.com/forums/print/topic/19244"
+    },
+    {
+      "time": "15:12:36",
+      "level": "INFO",
+      "message": "  [ERROR] https://www.thebeachcats.com/forums/print/topic/19244 -> 404 Client Error: Not Found for url: https://thebeachcats.com/forums/print/topic/19244/"
+    },
+    {
+      "time": "15:12:36",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:12:38",
+      "level": "INFO",
+      "message": "正在检测第 2917/5955 行"
+    },
+    {
+      "time": "15:12:38",
+      "level": "INFO",
+      "message": "[2917] 检测: https://www.windrushwasp.org/single-post/thames-water-ceo-meets-wasp"
+    },
+    {
+      "time": "15:12:41",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:12:43",
+      "level": "INFO",
+      "message": "正在检测第 2918/5955 行"
+    },
+    {
+      "time": "15:12:43",
+      "level": "INFO",
+      "message": "[2918] 检测: https://www.wilderness-adventure.com/post/a-guide-to-summer-events-and-festivals-at-virginia-s-wilderness-adventure"
+    },
+    {
+      "time": "15:12:45",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:47",
+      "level": "INFO",
+      "message": "正在检测第 2919/5955 行"
+    },
+    {
+      "time": "15:12:47",
+      "level": "INFO",
+      "message": "[2919] 检测: https://www.whisperwool.at/post/whisperwool-nat%C3%BCrlich-leise"
+    },
+    {
+      "time": "15:12:51",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:53",
+      "level": "INFO",
+      "message": "正在检测第 2920/5955 行"
+    },
+    {
+      "time": "15:12:53",
+      "level": "INFO",
+      "message": "[2920] 检测: https://www.sunflowerfamily.de/post/ciorba-de-perisoare-vegetarisch-mit-sunflowerhack"
+    },
+    {
+      "time": "15:12:53",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:55",
+      "level": "INFO",
+      "message": "正在检测第 2921/5955 行"
+    },
+    {
+      "time": "15:12:55",
+      "level": "INFO",
+      "message": "[2921] 检测: https://www.strawberrymansioncdc.org/post/great-news-concerning-the-john-coltrane-house-in-strawberry-mansion"
+    },
+    {
+      "time": "15:12:57",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:12:58",
+      "level": "INFO",
+      "message": "正在检测第 2922/5955 行"
+    },
+    {
+      "time": "15:12:58",
+      "level": "INFO",
+      "message": "[2922] 检测: https://www.strassederbesten.de/de/cgi-bin/onlinefriedhof/griefCandle.cgi?griefcandle_id=3076&operation=griefCandleDetails"
+    },
+    {
+      "time": "15:13:00",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:13:01",
+      "level": "INFO",
+      "message": "正在检测第 2923/5955 行"
+    },
+    {
+      "time": "15:13:01",
+      "level": "INFO",
+      "message": "[2923] 检测: https://www.storefrontsafety.org/post/rob-reiter-your-expert-in-perimeter-security-and-retail-and-pedestrian-safety"
+    },
+    {
+      "time": "15:13:04",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:13:05",
+      "level": "INFO",
+      "message": "正在检测第 2924/5955 行"
+    },
+    {
+      "time": "15:13:05",
+      "level": "INFO",
+      "message": "[2924] 检测: https://www.stoneycreekrvresort.com/single-post/giftcertificate"
+    },
+    {
+      "time": "15:13:08",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:13:10",
+      "level": "INFO",
+      "message": "正在检测第 2925/5955 行"
+    },
+    {
+      "time": "15:13:10",
+      "level": "INFO",
+      "message": "[2925] 检测: https://www.sr22savings.com/post/understanding-the-sr22-insurance-process-how-sr22-insurance-works-for-drivers"
+    },
+    {
+      "time": "15:13:12",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:13:14",
+      "level": "INFO",
+      "message": "正在检测第 2926/5955 行"
+    },
+    {
+      "time": "15:13:14",
+      "level": "INFO",
+      "message": "[2926] 检测: https://www.spectral.ro/Media/spectral-mobila-a-investit-110-000-de-euro-intr-un-nou-sistem-fotovoltaic-forbes-16-12-2022"
+    },
+    {
+      "time": "15:13:15",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:13:16",
+      "level": "INFO",
+      "message": "正在检测第 2927/5955 行"
+    },
+    {
+      "time": "15:13:16",
+      "level": "INFO",
+      "message": "[2927] 检测: https://www.speakfreelee.com/topbccanna?mode=night"
+    },
+    {
+      "time": "15:14:11",
+      "level": "INFO",
+      "message": "  [TIMEOUT] https://www.speakfreelee.com/topbccanna?mode=night 超过 55s 未响应"
+    },
+    {
+      "time": "15:14:11",
+      "level": "INFO",
+      "message": "  -> 访问超时（超过1分钟无响应）"
+    },
+    {
+      "time": "15:14:13",
+      "level": "INFO",
+      "message": "正在检测第 2928/5955 行"
+    },
+    {
+      "time": "15:14:13",
+      "level": "INFO",
+      "message": "[2928] 检测: https://blog.softsara.ir/%D8%B1%D8%A7%D8%B2%D9%87%D8%A7%DB%8C-%D8%AC%D8%A7%D9%84%D8%A8-%DA%AF%D9%88%DA%AF%D9%84/"
+    },
+    {
+      "time": "15:14:14",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "15:14:14",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: 2022-07-16 11:18"
+    },
+    {
+      "time": "15:14:16",
+      "level": "INFO",
+      "message": "正在检测第 2929/5955 行"
+    },
+    {
+      "time": "15:14:16",
+      "level": "INFO",
+      "message": "[2929] 检测: https://blog.shopthefinest.com/2025/09/08/tg-links-dealer-black-hat-seo-services-mass-links-24-2/"
+    },
+    {
+      "time": "15:14:16",
+      "level": "INFO",
+      "message": "  [ERROR] https://blog.shopthefinest.com/2025/09/08/tg-links-dealer-black-hat-seo-services-mass-links-24-2/ -> HTTPSConnectionPool(host='blog.shopthefinest.com', port=443): Max retries exceeded with url: /2025/09/08/tg-links-dealer-black-hat-seo-services-mass-links-24-2/ (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)')))"
+    },
+    {
+      "time": "15:14:16",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:14:18",
+      "level": "INFO",
+      "message": "正在检测第 2930/5955 行"
+    },
+    {
+      "time": "15:14:18",
+      "level": "INFO",
+      "message": "[2930] 检测: https://dokuwiki.nausch.org/doku.php/centos:kvm:wirt"
+    },
+    {
+      "time": "15:14:18",
+      "level": "INFO",
+      "message": "  [ERROR] https://dokuwiki.nausch.org/doku.php/centos:kvm:wirt -> 402 Client Error: Payment Required for url: https://dokuwiki.nausch.org/doku.php/centos:kvm:wirt"
+    },
+    {
+      "time": "15:14:18",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:14:20",
+      "level": "INFO",
+      "message": "正在检测第 2931/5955 行"
+    },
+    {
+      "time": "15:14:20",
+      "level": "INFO",
+      "message": "[2931] 检测: https://gkasteh.blogfa.com/"
+    },
+    {
+      "time": "15:14:20",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:14:22",
+      "level": "INFO",
+      "message": "正在检测第 2932/5955 行"
+    },
+    {
+      "time": "15:14:22",
+      "level": "INFO",
+      "message": "[2932] 检测: https://gamepang.com/?p=540"
+    },
+    {
+      "time": "15:14:23",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:14:24",
+      "level": "INFO",
+      "message": "正在检测第 2933/5955 行"
+    },
+    {
+      "time": "15:14:24",
+      "level": "INFO",
+      "message": "[2933] 检测: https://funissu.com/google-hidden-games-11/"
+    },
+    {
+      "time": "15:14:26",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:14:27",
+      "level": "INFO",
+      "message": "正在检测第 2934/5955 行"
+    },
+    {
+      "time": "15:14:27",
+      "level": "INFO",
+      "message": "[2934] 检测: https://freelancerway.com/blog_archive.php?Id=651"
+    },
+    {
+      "time": "15:14:28",
+      "level": "INFO",
+      "message": "  [ERROR] https://freelancerway.com/blog_archive.php?Id=651 -> 404 Client Error: Not Found for url: https://freelancerway.com/blog_archive.php?Id=651"
+    },
+    {
+      "time": "15:14:28",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:14:30",
+      "level": "INFO",
+      "message": "正在检测第 2935/5955 行"
+    },
+    {
+      "time": "15:14:30",
+      "level": "INFO",
+      "message": "[2935] 检测: https://forums.massivecraft.com/threads/stuff.36149/page-342"
+    },
+    {
+      "time": "15:14:30",
+      "level": "INFO",
+      "message": "  [ERROR] https://forums.massivecraft.com/threads/stuff.36149/page-342 -> 403 Client Error: Forbidden for url: https://forums.massivecraft.com/threads/stuff.36149/page-342"
+    },
+    {
+      "time": "15:14:30",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:14:32",
+      "level": "INFO",
+      "message": "正在检测第 2936/5955 行"
+    },
+    {
+      "time": "15:14:32",
+      "level": "INFO",
+      "message": "[2936] 检测: https://ilk.agency/insights/im-feeling-curious/"
+    },
+    {
+      "time": "15:14:33",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:14:35",
+      "level": "INFO",
+      "message": "正在检测第 2937/5955 行"
+    },
+    {
+      "time": "15:14:35",
+      "level": "INFO",
+      "message": "[2937] 检测: https://iii.gear.host/home.html"
+    },
+    {
+      "time": "15:14:40",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:14:41",
+      "level": "INFO",
+      "message": "正在检测第 2938/5955 行"
+    },
+    {
+      "time": "15:14:41",
+      "level": "INFO",
+      "message": "[2938] 检测: https://ict.mygymer.ch/anderesoftware/browser/recherche/"
+    },
+    {
+      "time": "15:14:42",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:14:43",
+      "level": "INFO",
+      "message": "正在检测第 2939/5955 行"
+    },
+    {
+      "time": "15:14:43",
+      "level": "INFO",
+      "message": "[2939] 检测: https://goodwebsites.nz/whats-good-websites-been-up-to-august-2015"
+    },
+    {
+      "time": "15:14:44",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:14:46",
+      "level": "INFO",
+      "message": "正在检测第 2940/5955 行"
+    },
+    {
+      "time": "15:14:46",
+      "level": "INFO",
+      "message": "[2940] 检测: https://minilua.net/page/149/?cat=0&random=1"
+    },
+    {
+      "time": "15:14:48",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:14:49",
+      "level": "INFO",
+      "message": "正在检测第 2941/5955 行"
+    },
+    {
+      "time": "15:14:49",
+      "level": "INFO",
+      "message": "[2941] 检测: https://methodshop.com/let-it-snow-google-search/"
+    },
+    {
+      "time": "15:14:50",
+      "level": "INFO",
+      "message": "  [ERROR] https://methodshop.com/let-it-snow-google-search/ -> 403 Client Error: Forbidden for url: https://methodshop.com/let-it-snow-google-search/"
+    },
+    {
+      "time": "15:14:50",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:14:51",
+      "level": "INFO",
+      "message": "正在检测第 2942/5955 行"
+    },
+    {
+      "time": "15:14:51",
+      "level": "INFO",
+      "message": "[2942] 检测: https://magaza.hazirsite.pro/op6/admin/index.php?route=common%2Fforgotten"
+    },
+    {
+      "time": "15:14:52",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:14:53",
+      "level": "INFO",
+      "message": "正在检测第 2943/5955 行"
+    },
+    {
+      "time": "15:14:53",
+      "level": "INFO",
+      "message": "[2943] 检测: https://forum.gameznetwork.com/members/barokajin.4001/"
+    },
+    {
+      "time": "15:14:54",
+      "level": "INFO",
+      "message": "  [ERROR] https://forum.gameznetwork.com/members/barokajin.4001/ -> 403 Client Error: Forbidden for url: https://forum.gameznetwork.com/members/barokajin.4001/"
+    },
+    {
+      "time": "15:14:54",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:14:55",
+      "level": "INFO",
+      "message": "正在检测第 2944/5955 行"
+    },
+    {
+      "time": "15:14:55",
+      "level": "INFO",
+      "message": "[2944] 检测: https://learn.patoghu.com/google-hidden-games/"
+    },
+    {
+      "time": "15:14:56",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:14:58",
+      "level": "INFO",
+      "message": "正在检测第 2945/5955 行"
+    },
+    {
+      "time": "15:14:58",
+      "level": "INFO",
+      "message": "[2945] 检测: https://lakefrontmarine.ca/telegram-https-t-me-seo-linkk-black-seo-links-6/"
+    },
+    {
+      "time": "15:15:03",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:05",
+      "level": "INFO",
+      "message": "正在检测第 2946/5955 行"
+    },
+    {
+      "time": "15:15:05",
+      "level": "INFO",
+      "message": "[2946] 检测: https://jornalbits.com.br/entretenimento/thanos-easter-eggs-recentes/"
+    },
+    {
+      "time": "15:15:05",
+      "level": "INFO",
+      "message": "  [ERROR] https://jornalbits.com.br/entretenimento/thanos-easter-eggs-recentes/ -> 520 Server Error: <none> for url: https://jornalbits.com.br/entretenimento/thanos-easter-eggs-recentes/"
+    },
+    {
+      "time": "15:15:05",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:15:07",
+      "level": "INFO",
+      "message": "正在检测第 2947/5955 行"
+    },
+    {
+      "time": "15:15:07",
+      "level": "INFO",
+      "message": "[2947] 检测: https://retroonly.com/does-atari-breakout-work-on-iphone-and-ipad/"
+    },
+    {
+      "time": "15:15:07",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:15:09",
+      "level": "INFO",
+      "message": "正在检测第 2948/5955 行"
+    },
+    {
+      "time": "15:15:09",
+      "level": "INFO",
+      "message": "[2948] 检测: https://readmedium.com/progress-as-a-resource-planning-your-game-as-a-gathering-a676faa01a54"
+    },
+    {
+      "time": "15:15:11",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:15:13",
+      "level": "INFO",
+      "message": "正在检测第 2949/5955 行"
+    },
+    {
+      "time": "15:15:13",
+      "level": "INFO",
+      "message": "[2949] 检测: https://quebrandocontrole.com.br/site/momento-retro-star-fox-64-revisitado/"
+    },
+    {
+      "time": "15:15:15",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:15:17",
+      "level": "INFO",
+      "message": "正在检测第 2950/5955 行"
+    },
+    {
+      "time": "15:15:17",
+      "level": "INFO",
+      "message": "[2950] 检测: https://pr-new.domaineye.com/07e55954586af9b52aab0f79461b828e583e9906/9a74c3d59e67877356d2495e0691f6c2e5c59079"
+    },
+    {
+      "time": "15:15:17",
+      "level": "INFO",
+      "message": "  [ERROR] https://pr-new.domaineye.com/07e55954586af9b52aab0f79461b828e583e9906/9a74c3d59e67877356d2495e0691f6c2e5c59079 -> HTTPSConnectionPool(host='pr-new.domaineye.com', port=443): Max retries exceeded with url: /07e55954586af9b52aab0f79461b828e583e9906/9a74c3d59e67877356d2495e0691f6c2e5c59079 (Caused by SSLError(SSLCertVerificationError(1, \"[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: Hostname mismatch, certificate is not valid for 'pr-new.domaineye.com'. (_ssl.c:1010)\")))"
+    },
+    {
+      "time": "15:15:17",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:15:19",
+      "level": "INFO",
+      "message": "正在检测第 2951/5955 行"
+    },
+    {
+      "time": "15:15:19",
+      "level": "INFO",
+      "message": "[2951] 检测: https://planetared.com/2016/09/10-trucos-de-google-que-te-sorprenderan/"
+    },
+    {
+      "time": "15:15:21",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:15:22",
+      "level": "INFO",
+      "message": "正在检测第 2952/5955 行"
+    },
+    {
+      "time": "15:15:22",
+      "level": "INFO",
+      "message": "[2952] 检测: https://orbyzon.com/es/videojuegos/google/google-gravity/"
+    },
+    {
+      "time": "15:15:23",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:25",
+      "level": "INFO",
+      "message": "正在检测第 2953/5955 行"
+    },
+    {
+      "time": "15:15:25",
+      "level": "INFO",
+      "message": "[2953] 检测: https://icecct.com/list785/"
+    },
+    {
+      "time": "15:15:26",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:28",
+      "level": "INFO",
+      "message": "正在检测第 2954/5955 行"
+    },
+    {
+      "time": "15:15:28",
+      "level": "INFO",
+      "message": "[2954] 检测: https://nexusconsultancy.co.uk/blog/10-secret-google-hacks-and-hidden-features/"
+    },
+    {
+      "time": "15:15:29",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "15:15:29",
+      "level": "INFO",
+      "message": "  -> 未找到评论时间"
+    },
+    {
+      "time": "15:15:30",
+      "level": "INFO",
+      "message": "正在检测第 2955/5955 行"
+    },
+    {
+      "time": "15:15:30",
+      "level": "INFO",
+      "message": "[2955] 检测: https://newstargeted.com/news/3015/212/google-has-a-hidden-collection-of-highly-addictive-retro-games"
+    },
+    {
+      "time": "15:15:31",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:15:33",
+      "level": "INFO",
+      "message": "正在检测第 2956/5955 行"
+    },
+    {
+      "time": "15:15:33",
+      "level": "INFO",
+      "message": "[2956] 检测: https://murahkitchen.my/2024/10/30/best-white-dark-hat-linkbuilding-for-your-website-1535/"
+    },
+    {
+      "time": "15:15:34",
+      "level": "INFO",
+      "message": "  [ERROR] https://murahkitchen.my/2024/10/30/best-white-dark-hat-linkbuilding-for-your-website-1535/ -> 404 Client Error: Not Found for url: https://murahkitchen.my/2024/10/30/best-white-dark-hat-linkbuilding-for-your-website-1535/"
+    },
+    {
+      "time": "15:15:34",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:15:36",
+      "level": "INFO",
+      "message": "正在检测第 2957/5955 行"
+    },
+    {
+      "time": "15:15:36",
+      "level": "INFO",
+      "message": "[2957] 检测: https://mrugalski.pl/nl/wu/uv3CJ04p8nov6vWEL7Hu0A"
+    },
+    {
+      "time": "15:15:36",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:38",
+      "level": "INFO",
+      "message": "正在检测第 2958/5955 行"
+    },
+    {
+      "time": "15:15:38",
+      "level": "INFO",
+      "message": "[2958] 检测: https://mrpipeline.com/marketing-strategy/digital-marketing-wrap-up/"
+    },
+    {
+      "time": "15:15:40",
+      "level": "INFO",
+      "message": "  -> 博客网站（完整评论表单）"
+    },
+    {
+      "time": "15:15:40",
+      "level": "INFO",
+      "message": "  -> 最新评论时间: December 10, 2019- 4:52 pm"
+    },
+    {
+      "time": "15:15:41",
+      "level": "INFO",
+      "message": "正在检测第 2959/5955 行"
+    },
+    {
+      "time": "15:15:42",
+      "level": "INFO",
+      "message": "[2959] 检测: https://social.org.ua/17932-15-sekretnikh-funktsiy-google-pro-yakikh-znaie-lishe-10-koristuvachiv.html"
+    },
+    {
+      "time": "15:15:42",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:44",
+      "level": "INFO",
+      "message": "正在检测第 2960/5955 行"
+    },
+    {
+      "time": "15:15:44",
+      "level": "INFO",
+      "message": "[2960] 检测: https://snapzu.com/t/google/trending/76"
+    },
+    {
+      "time": "15:15:44",
+      "level": "INFO",
+      "message": "  [ERROR] https://snapzu.com/t/google/trending/76 -> 500 Server Error: Internal Server Error for url: https://snapzu.com/t/google/trending/76"
+    },
+    {
+      "time": "15:15:44",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:15:46",
+      "level": "INFO",
+      "message": "正在检测第 2961/5955 行"
+    },
+    {
+      "time": "15:15:46",
+      "level": "INFO",
+      "message": "[2961] 检测: https://seoeshop.com/blog/29/amazing-hidden-secrets-of-google-search-engine"
+    },
+    {
+      "time": "15:15:47",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:15:48",
+      "level": "INFO",
+      "message": "正在检测第 2962/5955 行"
+    },
+    {
+      "time": "15:15:48",
+      "level": "INFO",
+      "message": "[2962] 检测: https://saznajlako.com/2013/02/12/zanimljivi-trikovi-na-guglu/"
+    },
+    {
+      "time": "15:15:50",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:52",
+      "level": "INFO",
+      "message": "正在检测第 2963/5955 行"
+    },
+    {
+      "time": "15:15:52",
+      "level": "INFO",
+      "message": "[2963] 检测: https://savedelete.com/article/bored/"
+    },
+    {
+      "time": "15:15:52",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:53",
+      "level": "INFO",
+      "message": "正在检测第 2964/5955 行"
+    },
+    {
+      "time": "15:15:53",
+      "level": "INFO",
+      "message": "[2964] 检测: https://notresponding.net/the-wizard-of-oz-google-easter-egg-how-to-find-those-famous-ruby-slippers-z4a"
+    },
+    {
+      "time": "15:15:54",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:15:56",
+      "level": "INFO",
+      "message": "正在检测第 2965/5955 行"
+    },
+    {
+      "time": "15:15:56",
+      "level": "INFO",
+      "message": "[2965] 检测: https://techorhow.com/best-prank-websites/"
+    },
+    {
+      "time": "15:15:57",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:15:59",
+      "level": "INFO",
+      "message": "正在检测第 2966/5955 行"
+    },
+    {
+      "time": "15:15:59",
+      "level": "INFO",
+      "message": "[2966] 检测: https://vidabytes.com/12-trucos-divertidos-de-google-que/"
+    },
+    {
+      "time": "15:15:59",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:16:01",
+      "level": "INFO",
+      "message": "正在检测第 2967/5955 行"
+    },
+    {
+      "time": "15:16:01",
+      "level": "INFO",
+      "message": "[2967] 检测: https://ua.prostomob.com/112464-kakie-igry-skryvaet-brauzer-v-smartfonah-xiaomi"
+    },
+    {
+      "time": "15:16:01",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:16:03",
+      "level": "INFO",
+      "message": "正在检测第 2968/5955 行"
+    },
+    {
+      "time": "15:16:03",
+      "level": "INFO",
+      "message": "[2968] 检测: https://sillysoft.net/forums/viewtopic.php?t=25354"
+    },
+    {
+      "time": "15:16:03",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:16:05",
+      "level": "INFO",
+      "message": "正在检测第 2969/5955 行"
+    },
+    {
+      "time": "15:16:05",
+      "level": "INFO",
+      "message": "[2969] 检测: https://si.secda.info/tlsm20220139x/?p=91651"
+    },
+    {
+      "time": "15:16:06",
+      "level": "INFO",
+      "message": "  [ERROR] https://si.secda.info/tlsm20220139x/?p=91651 -> 500 Server Error: Internal Server Error for url: https://si.secda.info/tlsm20220139x/?p=91651"
+    },
+    {
+      "time": "15:16:06",
+      "level": "INFO",
+      "message": "  -> 访问失败（无法连接）"
+    },
+    {
+      "time": "15:16:07",
+      "level": "INFO",
+      "message": "正在检测第 2970/5955 行"
+    },
+    {
+      "time": "15:16:07",
+      "level": "INFO",
+      "message": "[2970] 检测: https://www.chenweiliang.com/zh-TW/cwl-2077.html"
+    },
+    {
+      "time": "15:16:11",
+      "level": "INFO",
+      "message": "  -> 评论网站（不完整评论区）"
+    },
+    {
+      "time": "15:16:12",
+      "level": "INFO",
+      "message": "正在检测第 2971/5955 行"
+    },
+    {
+      "time": "15:16:12",
+      "level": "INFO",
+      "message": "[2971] 检测: https://www.bospedia.com/2013/10/ngeri-ada-yang-aneh-dari-google.html"
+    },
+    {
+      "time": "15:16:30",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:16:32",
+      "level": "INFO",
+      "message": "正在检测第 2972/5955 行"
+    },
+    {
+      "time": "15:16:32",
+      "level": "INFO",
+      "message": "[2972] 检测: https://www.aspergerforum.se/easter-eggs-fran-filmer-och-spel-t44624-24.html"
+    },
+    {
+      "time": "15:16:33",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:16:34",
+      "level": "INFO",
+      "message": "正在检测第 2973/5955 行"
+    },
+    {
+      "time": "15:16:34",
+      "level": "INFO",
+      "message": "[2973] 检测: https://www.aprayayincilik.com/"
+    },
+    {
+      "time": "15:16:35",
+      "level": "INFO",
+      "message": "  -> 无评论功能"
+    },
+    {
+      "time": "15:16:36",
+      "level": "INFO",
+      "message": "正在检测第 2974/5955 行"
+    },
+    {
+      "time": "15:16:36",
+      "level": "INFO",
+      "message": "[2974] 检测: https://www.alltop9.com/best-google-gravity-tricks/"
+    },
+    {
+      "time": "15:16:37",
+      "level": "INFO",
+      "message": "  -> 游戏站"
+    },
+    {
+      "time": "15:16:39",
+      "level": "INFO",
+      "message": "正在检测第 2975/5955 行"
+    },
+    {
+      "time": "15:16:39",
+      "level": "INFO",
+      "message": "[2975] 检测: https://www.4beards.it/2020/01/23/gli-easter-egg-di-google/"
+    }
+  ],
+  "stats": {
+    "processor": {
+      "output_file": "/app/storage/jobs/20260713-111947-37ebedf2/processor/processed_backlinks.xlsx",
+      "input_files": [
+        "doodleroad.com-backlinks.xlsx",
+        "driftbossgame.io-backlinks.xlsx",
+        "elgoog.im-backlinks.xlsx",
+        "spacewavesgame.io-backlinks.xlsx"
+      ],
+      "failed_files": [],
+      "rows_read": 81052,
+      "rows_output": 5955,
+      "duplicate_rows_removed": 75097,
+      "skipped_processed_files": 0
+    }
+  },
+  "error": null,
+  "download_path": null
+}

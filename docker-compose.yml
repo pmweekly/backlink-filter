@@ -1,0 +1,19 @@
+services:
+  backlink-filter:
+    build: .
+    container_name: backlink-filter
+    restart: unless-stopped
+    expose:
+      - "8000"
+    environment:
+      BACKLINK_STORAGE_DIR: /app/storage
+      BACKLINK_MAX_UPLOAD_MB: "100"
+      BACKLINK_WORKERS: "4"
+      CHECK_BLOGS_DELAY_SECONDS: "1.5"
+    volumes:
+      - ./storage/jobs:/app/storage/jobs
+
+networks:
+  default:
+    external: true
+    name: grafana-watch-net
