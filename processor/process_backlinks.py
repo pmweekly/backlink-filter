@@ -15,10 +15,13 @@ import argparse
 import glob
 import json
 import os
+import re
+import unicodedata
 from dataclasses import dataclass, asdict
 from datetime import date
 from pathlib import Path
 from typing import Any, Callable
+from urllib.parse import urlparse
 
 import pandas as pd
 import tldextract
@@ -32,6 +35,36 @@ OUTPUT_FILE = OUTPUT_DIR / f"{TODAY}.xlsx"
 PROCESSED_LOG = BASE_DIR / "processed_files.json"
 SUPPORTED_SUFFIXES = {".csv", ".xlsx"}
 EXTRACTOR = tldextract.TLDExtract(suffix_list_urls=(), cache_dir=None)
+UNICODE_DASHES = str.maketrans(
+    {
+        "_": "-",
+        "‐": "-",
+        "‑": "-",
+        "‒": "-",
+        "–": "-",
+        "—": "-",
+        "―": "-",
+        "−": "-",
+    }
+)
+SEO_CARTEL_PATTERN = re.compile(r"\bseo[\s-]*cartel\b")
+TELEGRAM_MARKER_PATTERN = re.compile(
+    r"(?:\btelegram\b|\btg\s*@|(?:https?://)?(?:www\.)?t\.me/)"
+)
+SEO_SPAM_SIGNAL_PATTERN = re.compile(
+    r"(?:"
+    r"\bseo\b|"
+    r"back[\s-]?links?|"
+    r"black[\s-]?(?:hat|links?)|"
+    r"bulk\s+link\s+posting|"
+    r"mass\s+back[\s-]?link(?:ing)?|"
+    r"link\s+indexing|"
+    r"hacked\s+sites?|"
+    r"homepage\s+links?|"
+    r"cross[\s-]?links?|"
+    r"traffic\s+boost"
+    r")"
+)
 
 LogCallback = Callable[[str], None]
 ProgressCallback = Callable[[float, str], None]
@@ -45,6 +78,9 @@ class ProcessorResult:
     rows_read: int
     rows_output: int
     duplicate_rows_removed: int
+    filtered_rows: int
+    filtered_search_yahoo_rows: int
+    filtered_telegram_seo_spam_rows: int
     skipped_processed_files: int
 
     def to_dict(self) -> dict[str, Any]:
@@ -108,6 +144,64 @@ def get_registered_domain(url: Any) -> str:
         return url.lower()
 
 
+def normalize_filter_text(value: Any) -> str:
+    """Normalize user-controlled export text for stable spam matching."""
+    if value is None:
+        return ""
+    try:
+        if pd.isna(value):
+            return ""
+    except (TypeError, ValueError):
+        pass
+    text = unicodedata.normalize("NFKC", str(value)).casefold()
+    text = text.translate(UNICODE_DASHES)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def get_url_hostname(url: Any) -> str:
+    """Return a normalized hostname for absolute or scheme-less URLs."""
+    text = str(url).strip() if url is not None else ""
+    if not text:
+        return ""
+    candidate = text if "://" in text else f"//{text}"
+    try:
+        return (urlparse(candidate).hostname or "").casefold().rstrip(".")
+    except ValueError:
+        return ""
+
+
+def is_yahoo_search_url(url: Any) -> bool:
+    """Match Yahoo search hosts without blocking unrelated yahoo.com pages."""
+    hostname = get_url_hostname(url)
+    return hostname == "search.yahoo.com" or hostname.endswith(".search.yahoo.com")
+
+
+def is_telegram_seo_spam(*values: Any) -> bool:
+    """Detect SEO_CARTEL and other high-confidence Telegram SEO promotions."""
+    text = " ".join(normalize_filter_text(value) for value in values)
+    if not text:
+        return False
+    if SEO_CARTEL_PATTERN.search(text):
+        return True
+    return bool(
+        TELEGRAM_MARKER_PATTERN.search(text)
+        and SEO_SPAM_SIGNAL_PATTERN.search(text)
+    )
+
+
+def classify_prefilter_reason(
+    source_url: Any,
+    source_title: Any = "",
+    anchor: Any = "",
+) -> str | None:
+    """Return the exclusive reason a row should be removed before URL checks."""
+    if is_yahoo_search_url(source_url):
+        return "search_yahoo"
+    if is_telegram_seo_spam(source_title, anchor, source_url):
+        return "telegram_seo_spam"
+    return None
+
+
 def read_file(filepath: str | Path) -> pd.DataFrame:
     """根据文件扩展名读取 Excel 或 CSV 文件，返回 DataFrame。"""
     path = Path(filepath)
@@ -168,6 +262,9 @@ def process_backlink_files(
             rows_read=0,
             rows_output=0,
             duplicate_rows_removed=0,
+            filtered_rows=0,
+            filtered_search_yahoo_rows=0,
+            filtered_telegram_seo_spam_rows=0,
             skipped_processed_files=len(valid_files),
         )
 
@@ -213,6 +310,9 @@ def process_backlink_files(
             rows_read=rows_read,
             rows_output=0,
             duplicate_rows_removed=0,
+            filtered_rows=0,
+            filtered_search_yahoo_rows=0,
+            filtered_telegram_seo_spam_rows=0,
             skipped_processed_files=len(valid_files) - len(new_files),
         )
 
@@ -235,7 +335,37 @@ def process_backlink_files(
         emit_progress(progress_callback, 100, "processor 缺少 Source url 列")
         raise ValueError("找不到 'Source url' 列")
 
-    emit_progress(progress_callback, 74, "正在按注册域名去重")
+    columns_by_name = {
+        str(column).strip().casefold(): column
+        for column in combined.columns
+    }
+    source_title_column = columns_by_name.get("source title")
+    anchor_column = columns_by_name.get("anchor")
+
+    emit_progress(progress_callback, 70, "正在预过滤垃圾外链")
+    filter_reasons = combined.apply(
+        lambda row: classify_prefilter_reason(
+            row.get("Source url", ""),
+            row.get(source_title_column, "") if source_title_column is not None else "",
+            row.get(anchor_column, "") if anchor_column is not None else "",
+        ),
+        axis=1,
+    )
+    filtered_search_yahoo_rows = int((filter_reasons == "search_yahoo").sum())
+    filtered_telegram_seo_spam_rows = int((filter_reasons == "telegram_seo_spam").sum())
+    filtered_rows = filtered_search_yahoo_rows + filtered_telegram_seo_spam_rows
+    if filtered_rows:
+        combined = combined.loc[filter_reasons.isna()].copy()
+    emit_log(
+        logger,
+        "预过滤完成："
+        f"共过滤 {filtered_rows} 行"
+        f"（Yahoo 搜索页 {filtered_search_yahoo_rows} 行，"
+        f"Telegram SEO 垃圾 {filtered_telegram_seo_spam_rows} 行）",
+    )
+    emit_log(logger, f"预过滤后待去重行数：{len(combined)}")
+
+    emit_progress(progress_callback, 78, "正在按注册域名去重")
     combined["_reg_domain"] = combined["Source url"].apply(get_registered_domain)
 
     if "Page ascore" in combined.columns:
@@ -266,6 +396,9 @@ def process_backlink_files(
         rows_read=rows_read,
         rows_output=len(deduped),
         duplicate_rows_removed=duplicate_rows_removed,
+        filtered_rows=filtered_rows,
+        filtered_search_yahoo_rows=filtered_search_yahoo_rows,
+        filtered_telegram_seo_spam_rows=filtered_telegram_seo_spam_rows,
         skipped_processed_files=len(valid_files) - len(new_files),
     )
 

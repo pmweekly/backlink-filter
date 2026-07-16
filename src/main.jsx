@@ -150,6 +150,7 @@ function App() {
 
   const latestCompletedJobs = jobs.filter((item) => item.status === 'completed').slice(0, 5);
   const currentStats = job?.stats?.check_blogs || {};
+  const processorStats = job?.stats?.processor || {};
   const progress = job ? Math.round(job.progress || 0) : 0;
 
   return (
@@ -297,9 +298,9 @@ function App() {
             </div>
 
             <div className="metric-grid">
-              <div><span>原始行数</span><strong>{formatNumber(currentStats.raw_rows)}</strong></div>
+              <div><span>原始行数</span><strong>{formatNumber(processorStats.rows_read ?? currentStats.raw_rows)}</strong></div>
+              <div><span>预过滤垃圾</span><strong>{formatNumber(processorStats.filtered_rows)}</strong></div>
               <div><span>已检测行数</span><strong>{formatNumber(currentStats.processed_rows)}</strong></div>
-              <div><span>重复域名跳过</span><strong>{formatNumber(currentStats.skipped_duplicate_domains)}</strong></div>
               <div><span>博客网站</span><strong>{formatNumber(currentStats.label_counts?.['博客网站'])}</strong></div>
             </div>
 
