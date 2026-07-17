@@ -1,0 +1,8 @@
+.DS_Store
+.test-venv/
+node_modules/
+web/static/
+__pycache__/
+*.py[cod]
+storage/cache/
+storage/jobs/

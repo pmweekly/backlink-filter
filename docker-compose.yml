@@ -9,9 +9,16 @@ services:
       BACKLINK_STORAGE_DIR: /app/storage
       BACKLINK_MAX_UPLOAD_MB: "100"
       BACKLINK_WORKERS: "4"
-      CHECK_BLOGS_DELAY_SECONDS: "1.5"
+      CHECK_BLOGS_CONCURRENCY: "16"
+      CHECK_BLOGS_CONNECT_TIMEOUT_SECONDS: "5"
+      CHECK_BLOGS_READ_TIMEOUT_SECONDS: "20"
+      CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS: "1.5"
+      CHECK_BLOGS_CHECKPOINT_BATCH_SIZE: "25"
+      CHECK_BLOGS_CACHE_SUCCESS_TTL_SECONDS: "604800"
+      CHECK_BLOGS_CACHE_FAILURE_TTL_SECONDS: "21600"
     volumes:
       - ./storage/jobs:/app/storage/jobs
+      - ./storage/cache:/app/storage/cache
 
 networks:
   default:

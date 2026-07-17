@@ -19,7 +19,10 @@ import time
 import argparse
 import os
 import re
+import sqlite3
+import threading
 from dataclasses import asdict, dataclass
+from concurrent.futures import Future, ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple, List, Set
 import csv, json, tempfile
@@ -32,6 +35,7 @@ from bs4 import BeautifulSoup
 
 LogCallback = Callable[[str], None]
 ProgressCallback = Callable[[float, str], None]
+StatsCallback = Callable[[dict[str, Any]], None]
 
 
 @dataclass
@@ -45,6 +49,10 @@ class CheckBlogsResult:
     skipped_duplicate_domains: int
     empty_url_rows: int
     label_counts: dict[str, int]
+    network_checked_rows: int = 0
+    cache_hit_rows: int = 0
+    resumed_rows: int = 0
+    google_login_rows: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -87,6 +95,8 @@ import openpyxl
 import xlrd
 from openpyxl.styles import PatternFill
 
+DOMAIN_EXTRACTOR = tldextract.TLDExtract(suffix_list_urls=(), cache_dir=None)
+
 # ── 请求配置 ────────────────────────────────────────────────────────────────
 HEADERS = {
     "User-Agent": (
@@ -96,12 +106,146 @@ HEADERS = {
     ),
     "Accept-Language": "en-US,en;q=0.9",
 }
-REQUEST_TIMEOUT = 55   # 秒，单次请求上限（接近1分钟）
+CONNECT_TIMEOUT = float(os.getenv("CHECK_BLOGS_CONNECT_TIMEOUT_SECONDS", "5"))
+READ_TIMEOUT = float(os.getenv("CHECK_BLOGS_READ_TIMEOUT_SECONDS", "20"))
 RETRY_COUNT     = 1    # 超时/失败不重试，快速失败避免浪费时间
+DEFAULT_CONCURRENCY = max(1, int(os.getenv("CHECK_BLOGS_CONCURRENCY", "16")))
+DOMAIN_INTERVAL_SECONDS = float(os.getenv("CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS", "1.5"))
+CHECKPOINT_BATCH_SIZE = max(1, int(os.getenv("CHECK_BLOGS_CHECKPOINT_BATCH_SIZE", "25")))
+CACHE_SUCCESS_TTL_SECONDS = int(os.getenv("CHECK_BLOGS_CACHE_SUCCESS_TTL_SECONDS", "604800"))
+CACHE_FAILURE_TTL_SECONDS = int(os.getenv("CHECK_BLOGS_CACHE_FAILURE_TTL_SECONDS", "21600"))
+CACHE_RULE_VERSION = "2026-07-google-comment-v1"
+
+_thread_local = threading.local()
+_executor_lock = threading.Lock()
+_shared_executor: ThreadPoolExecutor | None = None
+_shared_executor_size = 0
+_domain_locks_guard = threading.Lock()
+_domain_locks: dict[str, threading.Lock] = {}
+_domain_last_started: dict[str, float] = {}
+
+
+def _get_session() -> requests.Session:
+    session = getattr(_thread_local, "session", None)
+    if session is None:
+        session = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(
+            pool_connections=DEFAULT_CONCURRENCY,
+            pool_maxsize=DEFAULT_CONCURRENCY,
+        )
+        session.mount("http://", adapter)
+        session.mount("https://", adapter)
+        _thread_local.session = session
+    return session
+
+
+def get_shared_executor(max_workers: int = DEFAULT_CONCURRENCY) -> ThreadPoolExecutor:
+    global _shared_executor, _shared_executor_size
+    max_workers = max(1, int(max_workers))
+    with _executor_lock:
+        if _shared_executor is None:
+            _shared_executor = ThreadPoolExecutor(
+                max_workers=max_workers,
+                thread_name_prefix="check-blogs",
+            )
+            _shared_executor_size = max_workers
+        return _shared_executor
+
+
+def _get_domain_lock(domain: str) -> threading.Lock:
+    with _domain_locks_guard:
+        return _domain_locks.setdefault(domain, threading.Lock())
+
+
+@dataclass
+class DetectionResult:
+    domain: str
+    label: str
+    flags: str
+    comment_time: str
+    final_url: str
+    outcome: str
+    cache_hit: bool = False
+
+
+class DomainResultCache:
+    def __init__(self, path: str | None):
+        self.path = Path(path) if path else None
+        if self.path:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self._initialize()
+
+    def _connect(self):
+        assert self.path is not None
+        connection = sqlite3.connect(self.path, timeout=30)
+        connection.row_factory = sqlite3.Row
+        return connection
+
+    def _initialize(self) -> None:
+        with self._connect() as connection:
+            connection.execute("PRAGMA journal_mode=WAL")
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS domain_results (
+                    domain TEXT PRIMARY KEY,
+                    label TEXT NOT NULL,
+                    flags TEXT NOT NULL,
+                    comment_time TEXT NOT NULL,
+                    final_url TEXT NOT NULL,
+                    outcome TEXT NOT NULL,
+                    checked_at REAL NOT NULL,
+                    rule_version TEXT NOT NULL
+                )
+                """
+            )
+
+    def get(self, domain: str) -> DetectionResult | None:
+        if not self.path:
+            return None
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT * FROM domain_results WHERE domain = ? AND rule_version = ?",
+                (domain, CACHE_RULE_VERSION),
+            ).fetchone()
+        if not row:
+            return None
+        ttl = CACHE_FAILURE_TTL_SECONDS if row["outcome"] in {"timeout", "error"} else CACHE_SUCCESS_TTL_SECONDS
+        if time.time() - float(row["checked_at"]) > ttl:
+            return None
+        return DetectionResult(
+            domain=domain,
+            label=row["label"],
+            flags=row["flags"],
+            comment_time=row["comment_time"],
+            final_url=row["final_url"],
+            outcome=row["outcome"],
+            cache_hit=True,
+        )
+
+    def put(self, result: DetectionResult) -> None:
+        if not self.path:
+            return
+        with self._connect() as connection:
+            connection.execute(
+                """
+                INSERT INTO domain_results
+                    (domain, label, flags, comment_time, final_url, outcome, checked_at, rule_version)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(domain) DO UPDATE SET
+                    label=excluded.label, flags=excluded.flags,
+                    comment_time=excluded.comment_time, final_url=excluded.final_url,
+                    outcome=excluded.outcome, checked_at=excluded.checked_at,
+                    rule_version=excluded.rule_version
+                """,
+                (
+                    result.domain, result.label, result.flags, result.comment_time,
+                    result.final_url, result.outcome, time.time(), CACHE_RULE_VERSION,
+                ),
+            )
 
 
 def load_checkpoint(checkpoint_path: str, out_csv_path: str, logger: LogCallback | None = print) -> Set[str]:
-    """优先从 checkpoint JSON 加载已处理域名集合；否则尝试从已有 CSV 重建。"""
+    """合并 checkpoint 和 CSV 中的已处理域名，容忍两次原子写之间中断。"""
     processed = set()
     if os.path.exists(checkpoint_path):
         try:
@@ -111,7 +255,6 @@ def load_checkpoint(checkpoint_path: str, out_csv_path: str, logger: LogCallback
                 if d:
                     processed.add(str(d).strip().lower())
             emit_log(logger, f"[续跑] 从检查点加载 {len(processed)} 个域名")
-            return processed
         except Exception as e:
             emit_log(logger, f"[WARN] 无法加载 checkpoint {checkpoint_path}: {e}")
 
@@ -133,8 +276,7 @@ def load_checkpoint(checkpoint_path: str, out_csv_path: str, logger: LogCallback
                         for row in reader:
                             if len(row) > idx and row[idx]:
                                 processed.add(row[idx].strip().lower())
-                        emit_log(logger, f"[续跑] 从现有 CSV 重建了 {len(processed)} 个域名")
-                        return processed
+                        emit_log(logger, f"[续跑] 合并 CSV 后共 {len(processed)} 个域名")
         except Exception as e:
             emit_log(logger, f"[WARN] 无法从 CSV 重建 checkpoint: {e}")
 
@@ -154,8 +296,7 @@ def load_checkpoint(checkpoint_path: str, out_csv_path: str, logger: LogCallback
                 for row in ws.iter_rows(min_row=2, values_only=True):
                     if row and len(row) > idx and row[idx]:
                         processed.add(str(row[idx]).strip().lower())
-                emit_log(logger, f"[续跑] 从现有 XLSX 重建了 {len(processed)} 个域名")
-                return processed
+                emit_log(logger, f"[续跑] 合并 XLSX 后共 {len(processed)} 个域名")
     except Exception as e:
         emit_log(logger, f"[WARN] 无法从 XLSX 重建 checkpoint: {e}")
 
@@ -228,7 +369,7 @@ def save_checkpoint_atomic(checkpoint_path: str, processed_domains: Set[str]):
                 os.remove(tmp)
             except Exception:
                 pass
-DELAY_BETWEEN   = 1.5  # 每个 URL 请求间隔（秒），避免被封
+DELAY_BETWEEN   = 0.0  # 保留 CLI 兼容参数；限速现由同域名调度器控制
 
 
 # ── 评论表单检测结果颜色映射 ────────────────────────────────────────────────
@@ -239,6 +380,7 @@ LABEL_COLORS = {
     '博客网站 · 需注册':   'FFEB9C',  # 黄色  — 需注册账号
     '博客网站 · 需登录':   'FFEB9C',  # 黄色  — 需登录
     '评论网站':           'BDD7EE',  # 蓝色  — 评论区不完整
+    '评论网站 · 谷歌登录': 'FFEB9C',  # 黄色  — 评论区需 Google 登录
     '无评论功能':          'D9D9D9',  # 灰色  — 无评论区
     '游戏站':             'FCE4D6',  # 橙色  — 游戏类站点
     '访问超时':           'FFCCCC',  # 浅红  — 响应超时
@@ -312,7 +454,7 @@ GOOGLE_SIGNALS = [
 
 def get_top_domain(url: str) -> str:
     """返回 URL 的一级注册域名，如 example.com"""
-    ext = tldextract.extract(url)
+    ext = DOMAIN_EXTRACTOR(url)
     if ext.domain and ext.suffix:
         return f"{ext.domain}.{ext.suffix}"
     # 回退：直接用 hostname
@@ -330,16 +472,16 @@ def fetch_page(url: str, logger: LogCallback | None = print) -> Tuple[Optional[s
     """
     for attempt in range(RETRY_COUNT):
         try:
-            resp = requests.get(
+            resp = _get_session().get(
                 url,
                 headers=HEADERS,
-                timeout=REQUEST_TIMEOUT,
+                timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
                 allow_redirects=True,
             )
             resp.raise_for_status()
             return resp.text, resp.url, ""
         except requests.Timeout:
-            emit_log(logger, f"  [TIMEOUT] {url} 超过 {REQUEST_TIMEOUT}s 未响应")
+            emit_log(logger, f"  [TIMEOUT] {url} 连接超时 {CONNECT_TIMEOUT}s / 读取超时 {READ_TIMEOUT}s")
             return None, url, "timeout"
         except requests.RequestException as e:
             if attempt < RETRY_COUNT - 1:
@@ -348,6 +490,78 @@ def fetch_page(url: str, logger: LogCallback | None = print) -> Tuple[Optional[s
                 emit_log(logger, f"  [ERROR] {url} -> {e}")
                 return None, url, "error"
     return None, url, "error"
+
+
+def detect_url(
+    url: str,
+    domain: str,
+    cache: DomainResultCache,
+    logger: LogCallback | None = print,
+    domain_interval: float = DOMAIN_INTERVAL_SECONDS,
+) -> DetectionResult:
+    cached = cache.get(domain)
+    if cached:
+        return cached
+
+    domain_lock = _get_domain_lock(domain)
+    with domain_lock:
+        cached = cache.get(domain)
+        if cached:
+            return cached
+
+        with _domain_locks_guard:
+            wait_for = max(0.0, domain_interval - (time.monotonic() - _domain_last_started.get(domain, 0.0)))
+        if wait_for:
+            time.sleep(wait_for)
+        with _domain_locks_guard:
+            _domain_last_started[domain] = time.monotonic()
+
+        html, final_url, err_type = fetch_page(url, logger=logger)
+        flags: list[str] = []
+        comment_time = ""
+        if html is None:
+            label = '访问超时' if err_type == "timeout" else '访问失败'
+            outcome = err_type or "error"
+        elif detect_game_site(html, url):
+            label = '游戏站'
+            flags.append('游戏网站')
+            outcome = "success"
+        else:
+            form_result = detect_comment_form(html)
+            login_type = detect_comment_login(html) if form_result in {"blog", "comment"} else "open"
+            if form_result == "blog":
+                if login_type == "google":
+                    label = '博客网站 · 谷歌登录'
+                    flags.append('需登录（谷歌登录）')
+                elif login_type == "register":
+                    label = '博客网站 · 需注册'
+                    flags.append('需登录')
+                elif login_type == "login":
+                    label = '博客网站 · 需登录'
+                    flags.append('需登录')
+                else:
+                    label = '博客网站'
+                comment_time = get_latest_comment_time(html) or ""
+            elif form_result == "comment":
+                if login_type == "google":
+                    label = '评论网站 · 谷歌登录'
+                    flags.append('需登录（谷歌登录）')
+                else:
+                    label = '评论网站'
+            else:
+                label = '无评论功能'
+            outcome = "success"
+
+        result = DetectionResult(
+            domain=domain,
+            label=label,
+            flags='；'.join(flags),
+            comment_time=comment_time,
+            final_url=final_url,
+            outcome=outcome,
+        )
+        cache.put(result)
+        return result
 
 
 def _text_contains_any(text: str, keywords) -> bool:
@@ -691,8 +905,13 @@ def process_excel(
     logger: LogCallback | None = print,
     progress_callback: ProgressCallback | None = None,
     delay_between: float = DELAY_BETWEEN,
+    max_workers: int = DEFAULT_CONCURRENCY,
+    checkpoint_batch_size: int = CHECKPOINT_BATCH_SIZE,
+    cache_path: str | None = None,
+    domain_interval: float = DOMAIN_INTERVAL_SECONDS,
+    stats_callback: StatsCallback | None = None,
 ) -> CheckBlogsResult:
-    """逐条处理输入并将结果写入 CSV/XLSX，同时可维护 checkpoint 以支持断点续跑。"""
+    """并发检测 URL，按输入顺序批量写入 CSV/XLSX，并支持断点续跑。"""
     out_csv, out_xlsx, checkpoint = resolve_output_paths(
         input_path,
         output_path=output_path,
@@ -743,10 +962,59 @@ def process_excel(
     mode = 'a' if csv_exists else 'w'
     processed_domains = load_checkpoint(checkpoint, out_csv, logger=logger) if resume else set()
     seen_in_run: Set[str] = set()
+    resumed_rows = 0
     processed_now = 0
     skipped_duplicate_domains = 0
     empty_url_rows = 0
     label_counts: dict[str, int] = {}
+    network_checked_rows = 0
+    cache_hit_rows = 0
+    google_login_rows = 0
+    resumed_empty_rows = 0
+
+    if csv_exists:
+        try:
+            with open(out_csv, newline='', encoding='utf-8-sig') as existing_file:
+                existing_reader = csv.reader(existing_file)
+                existing_header = next(existing_reader, [])
+                label_idx = next((i for i, value in enumerate(existing_header) if '评论表单检测' in (value or '')), -1)
+                domain_idx = next((i for i, value in enumerate(existing_header) if '顶级域名' in (value or '')), -1)
+                for existing_row in existing_reader:
+                    resumed_rows += 1
+                    if label_idx >= 0 and len(existing_row) > label_idx:
+                        existing_label = existing_row[label_idx]
+                        label_counts[existing_label] = label_counts.get(existing_label, 0) + 1
+                        if '谷歌登录' in existing_label:
+                            google_login_rows += 1
+                    if domain_idx >= 0 and (len(existing_row) <= domain_idx or not existing_row[domain_idx]):
+                        resumed_empty_rows += 1
+        except Exception as exc:
+            emit_log(logger, f"[WARN] 无法重建续跑统计: {exc}")
+
+    cache = DomainResultCache(cache_path or os.getenv("CHECK_BLOGS_CACHE_PATH"))
+    executor = get_shared_executor(max_workers)
+    work_items: list[tuple[int, list[Any], str, Future[DetectionResult] | None]] = []
+
+    for row_idx, row_values in enumerate(rows, 1):
+        row_values = list(row_values) if row_values is not None else []
+        raw_url = row_values[source_url_col_idx] if source_url_col_idx < len(row_values) else ""
+        url = str(raw_url).strip() if raw_url else ""
+        if not url:
+            if resumed_empty_rows > 0:
+                resumed_empty_rows -= 1
+                continue
+            work_items.append((row_idx, row_values, "", None))
+            continue
+        domain = get_top_domain(url).strip().lower() or urlparse(url).netloc.lower()
+        if domain in processed_domains or domain in seen_in_run:
+            skipped_duplicate_domains += 1
+            continue
+        seen_in_run.add(domain)
+        future = executor.submit(detect_url, url, domain, cache, logger, domain_interval)
+        work_items.append((row_idx, row_values, domain, future))
+
+    pending_batch = 0
+    processed_now = resumed_rows
     with open(out_csv, mode, newline='', encoding='utf-8-sig') as csvfile:
         writer = csv.writer(csvfile)
         if not csv_exists:
@@ -756,105 +1024,62 @@ def process_excel(
             csvfile.flush()
             os.fsync(csvfile.fileno())
 
+        def flush_batch() -> None:
+            nonlocal pending_batch
+            if pending_batch <= 0:
+                return
+            csvfile.flush()
+            os.fsync(csvfile.fileno())
+            save_checkpoint_atomic(checkpoint, processed_domains)
+            if stats_callback:
+                stats_callback({
+                    "raw_rows": total_rows,
+                    "processed_rows": processed_now,
+                    "network_checked_rows": network_checked_rows,
+                    "cache_hit_rows": cache_hit_rows,
+                    "resumed_rows": resumed_rows,
+                    "google_login_rows": google_login_rows,
+                    "label_counts": dict(label_counts),
+                })
+            emit_progress(
+                progress_callback,
+                5 + (processed_now / max(total_rows, 1)) * 88,
+                f"已完成 {processed_now}/{total_rows or '?'} 行（网络 {network_checked_rows}，缓存 {cache_hit_rows}）",
+            )
+            pending_batch = 0
+
         try:
-            for row_idx, row_values in enumerate(rows, 1):
-                row_values = list(row_values) if row_values is not None else []
-                emit_progress(
-                    progress_callback,
-                    5 + (row_idx / max(total_rows, 1)) * 88,
-                    f"正在检测第 {row_idx}/{total_rows or '?'} 行",
-                )
-
-                raw_url = row_values[source_url_col_idx] if source_url_col_idx < len(row_values) else ""
-                url = str(raw_url).strip() if raw_url else ""
-
-                if not url:
+            for completed_index, (row_idx, row_values, domain, future) in enumerate(work_items, 1):
+                if future is None:
                     out_row = [str(v) if v is not None else '' for v in row_values]
                     out_row.extend(['', '', '', ''])
                     writer.writerow(out_row)
-                    csvfile.flush()
-                    os.fsync(csvfile.fileno())
                     processed_now += 1
                     empty_url_rows += 1
+                    pending_batch += 1
+                    if pending_batch >= checkpoint_batch_size:
+                        flush_batch()
                     continue
-
-                domain = get_top_domain(url).strip().lower()
-                if not domain:
-                    domain = urlparse(url).netloc.lower()
-
-                if domain in processed_domains or domain in seen_in_run:
-                    # 跳过重复顶级域名
-                    skipped_duplicate_domains += 1
-                    continue
-
-                emit_log(logger, f"[{row_idx}] 检测: {url}")
-                html, final_url, err_type = fetch_page(url, logger=logger)
-
-                flags = []
-                comment_time = None
-                if html is None:
-                    if err_type == 'timeout':
-                        label = '访问超时'
-                        emit_log(logger, '  -> 访问超时（超过1分钟无响应）')
-                    else:
-                        label = '访问失败'
-                        emit_log(logger, '  -> 访问失败（无法连接）')
+                result = future.result()
+                if result.cache_hit:
+                    cache_hit_rows += 1
                 else:
-                    # 游戏站优先
-                    if detect_game_site(html, url):
-                        label = '游戏站'
-                        flags.append('游戏网站')
-                        emit_log(logger, '  -> 游戏站')
-                    else:
-                        result = detect_comment_form(html)
-                        if result == 'blog':
-                            login_type = detect_comment_login(html)
-                            if login_type == 'google':
-                                label = '博客网站 · 谷歌登录'
-                                flags.append('需登录（谷歌登录）')
-                                emit_log(logger, '  -> 博客网站（完整评论表单 · 需谷歌登录）')
-                            elif login_type == 'register':
-                                label = '博客网站 · 需注册'
-                                flags.append('需登录')
-                                emit_log(logger, '  -> 博客网站（完整评论表单 · 需注册）')
-                            elif login_type == 'login':
-                                label = '博客网站 · 需登录'
-                                flags.append('需登录')
-                                emit_log(logger, '  -> 博客网站（完整评论表单 · 需登录）')
-                            else:
-                                label = '博客网站'
-                                emit_log(logger, '  -> 博客网站（完整评论表单）')
-                            comment_time = get_latest_comment_time(html)
-                            if comment_time:
-                                emit_log(logger, f'  -> 最新评论时间: {comment_time}')
-                            else:
-                                emit_log(logger, '  -> 未找到评论时间')
-                        elif result == 'comment':
-                            label = '评论网站'
-                            emit_log(logger, '  -> 评论网站（不完整评论区）')
-                        else:
-                            label = '无评论功能'
-                            emit_log(logger, '  -> 无评论功能')
-
-                flags_str = '；'.join(flags)
+                    network_checked_rows += 1
                 out_row = [str(v) if v is not None else '' for v in row_values]
-                out_row.extend([domain, label, flags_str, comment_time or ''])
-
+                out_row.extend([domain, result.label, result.flags, result.comment_time])
                 writer.writerow(out_row)
-                csvfile.flush()
-                os.fsync(csvfile.fileno())
-
                 processed_domains.add(domain)
-                save_checkpoint_atomic(checkpoint, processed_domains)
-
-                seen_in_run.add(domain)
                 processed_now += 1
-                label_counts[label] = label_counts.get(label, 0) + 1
-
-                if delay_between > 0:
-                    time.sleep(delay_between)
+                label_counts[result.label] = label_counts.get(result.label, 0) + 1
+                if '谷歌登录' in result.label:
+                    google_login_rows += 1
+                pending_batch += 1
+                if pending_batch >= checkpoint_batch_size:
+                    flush_batch()
+            flush_batch()
 
         except KeyboardInterrupt:
+            flush_batch()
             emit_log(logger, '\n[中断] 已保存当前进度，退出')
             write_colored_xlsx(out_csv, out_xlsx, logger=logger)
             return CheckBlogsResult(
@@ -867,6 +1092,10 @@ def process_excel(
                 skipped_duplicate_domains=skipped_duplicate_domains,
                 empty_url_rows=empty_url_rows,
                 label_counts=label_counts,
+                network_checked_rows=network_checked_rows,
+                cache_hit_rows=cache_hit_rows,
+                resumed_rows=resumed_rows,
+                google_login_rows=google_login_rows,
             )
 
     emit_progress(progress_callback, 95, "正在生成带颜色标注的 Excel")
@@ -884,6 +1113,10 @@ def process_excel(
         skipped_duplicate_domains=skipped_duplicate_domains,
         empty_url_rows=empty_url_rows,
         label_counts=label_counts,
+        network_checked_rows=network_checked_rows,
+        cache_hit_rows=cache_hit_rows,
+        resumed_rows=resumed_rows,
+        google_login_rows=google_login_rows,
     )
 
 

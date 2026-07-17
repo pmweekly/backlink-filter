@@ -301,6 +301,10 @@ function App() {
               <div><span>原始行数</span><strong>{formatNumber(processorStats.rows_read ?? currentStats.raw_rows)}</strong></div>
               <div><span>预过滤垃圾</span><strong>{formatNumber(processorStats.filtered_rows)}</strong></div>
               <div><span>已检测行数</span><strong>{formatNumber(currentStats.processed_rows)}</strong></div>
+              <div><span>网络检测</span><strong>{formatNumber(currentStats.network_checked_rows)}</strong></div>
+              <div><span>缓存命中</span><strong>{formatNumber(currentStats.cache_hit_rows)}</strong></div>
+              <div><span>断点恢复</span><strong>{formatNumber(currentStats.resumed_rows)}</strong></div>
+              <div><span>Google 登录</span><strong>{formatNumber(currentStats.google_login_rows)}</strong></div>
               <div><span>博客网站</span><strong>{formatNumber(currentStats.label_counts?.['博客网站'])}</strong></div>
             </div>
 

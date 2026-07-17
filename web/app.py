@@ -36,11 +36,17 @@ class AppConfig:
         default_factory=lambda: int(os.getenv("BACKLINK_MAX_UPLOAD_MB", "100")) * 1024 * 1024
     )
     worker_count: int = field(default_factory=lambda: max(1, int(os.getenv("BACKLINK_WORKERS", "1"))))
-    check_blogs_delay: float = field(default_factory=lambda: float(os.getenv("CHECK_BLOGS_DELAY_SECONDS", "1.5")))
+    check_blogs_concurrency: int = field(default_factory=lambda: max(1, int(os.getenv("CHECK_BLOGS_CONCURRENCY", "16"))))
+    check_blogs_domain_interval: float = field(default_factory=lambda: float(os.getenv("CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS", "1.5")))
+    checkpoint_batch_size: int = field(default_factory=lambda: max(1, int(os.getenv("CHECK_BLOGS_CHECKPOINT_BATCH_SIZE", "25"))))
 
     @property
     def jobs_dir(self) -> Path:
         return self.storage_root / "jobs"
+
+    @property
+    def cache_path(self) -> Path:
+        return self.storage_root / "cache" / "domain_results.sqlite3"
 
 
 @dataclass
@@ -71,6 +77,8 @@ class JobManager:
         self.event_queues: dict[str, queue.Queue[dict[str, Any]]] = {}
         self.lock = threading.RLock()
         self.executor = ThreadPoolExecutor(max_workers=config.worker_count)
+        self.recoverable_job_ids: list[str] = []
+        self.restart_updated_job_ids: list[str] = []
         self.config.jobs_dir.mkdir(parents=True, exist_ok=True)
         self._load_existing_jobs()
 
@@ -86,8 +94,23 @@ class JobManager:
                 payload = json.loads(metadata_path.read_text(encoding="utf-8"))
                 record = JobRecord(**payload)
                 if record.status not in TERMINAL_STATUSES:
-                    record.status = "failed"
-                    record.error = record.error or "服务重启后任务未完成，请重新上传。"
+                    job_dir = metadata_path.parent
+                    has_uploads = any((job_dir / "uploads").glob("*.xlsx"))
+                    has_processor_output = (job_dir / "processor" / "processed_backlinks.xlsx").exists()
+                    if has_uploads or has_processor_output:
+                        record.status = "queued"
+                        record.error = None
+                        record.logs.append({
+                            "time": datetime.now().strftime("%H:%M:%S"),
+                            "level": "INFO",
+                            "message": "服务重启，任务已加入断点续跑队列。",
+                        })
+                        self.recoverable_job_ids.append(record.job_id)
+                    else:
+                        record.status = "failed"
+                        record.error = "服务重启后缺少上传文件和中间结果，无法续跑。"
+                    record.updated_at = datetime.now().isoformat(timespec="seconds")
+                    self.restart_updated_job_ids.append(record.job_id)
                 self.jobs[record.job_id] = record
             except Exception:
                 continue
@@ -193,24 +216,31 @@ class JobManager:
         final_output = result_dir / f"check_blogs_result_{job_id}.xlsx"
 
         try:
-            self.update_job(job_id, status="running", stage="processor", progress=10)
-            self.add_log(job_id, "开始 processor 清洗")
+            record = self.get_job(job_id)
+            if processor_output.exists():
+                self.update_job(job_id, status="running", stage="check_blogs", progress=max(record.progress, 48))
+                self.add_log(job_id, "检测到 processor 中间结果，跳过重复清洗")
+            else:
+                if not upload_dir.exists() or not any(upload_dir.glob("*.xlsx")):
+                    raise RuntimeError("缺少上传文件，无法继续任务")
+                self.update_job(job_id, status="running", stage="processor", progress=10)
+                self.add_log(job_id, "开始 processor 清洗")
 
-            def processor_progress(percent: float, message: str) -> None:
-                self.update_job(job_id, stage="processor", progress=10 + percent * 0.35)
-                if message:
-                    self.add_log(job_id, message)
+                def processor_progress(percent: float, message: str) -> None:
+                    self.update_job(job_id, stage="processor", progress=10 + percent * 0.35)
+                    if message:
+                        self.add_log(job_id, message)
 
-            processor_result = process_backlink_files(
-                source_dir=upload_dir,
-                output_file=processor_output,
-                use_processed_log=False,
-                logger=lambda message: self.add_log(job_id, message),
-                progress_callback=processor_progress,
-            )
+                processor_result = process_backlink_files(
+                    source_dir=upload_dir,
+                    output_file=processor_output,
+                    use_processed_log=False,
+                    logger=lambda message: self.add_log(job_id, message),
+                    progress_callback=processor_progress,
+                )
+                self.update_job(job_id, stats={"processor": processor_result.to_dict()})
             if not processor_output.exists():
                 raise RuntimeError("processor 未生成清洗后的 Excel 文件")
-            self.update_job(job_id, stats={"processor": processor_result.to_dict()})
 
             self.update_job(job_id, stage="check_blogs", progress=48)
             self.add_log(job_id, "开始博客评论检测")
@@ -220,13 +250,20 @@ class JobManager:
                 if message:
                     self.add_log(job_id, message)
 
+            def check_blogs_stats(stats: dict[str, Any]) -> None:
+                self.update_job(job_id, stats={"check_blogs": stats})
+
             check_blogs_result = process_excel(
                 str(processor_output),
                 output_path=str(final_output),
-                resume=False,
+                resume=True,
                 logger=lambda message: self.add_log(job_id, message),
                 progress_callback=check_blogs_progress,
-                delay_between=self.config.check_blogs_delay,
+                max_workers=self.config.check_blogs_concurrency,
+                checkpoint_batch_size=self.config.checkpoint_batch_size,
+                cache_path=str(self.config.cache_path),
+                domain_interval=self.config.check_blogs_domain_interval,
+                stats_callback=check_blogs_stats,
             )
 
             if not final_output.exists():
@@ -312,6 +349,13 @@ def create_app(config: AppConfig | None = None) -> FastAPI:
     )
     manager = JobManager(active_config)
     app.state.job_manager = manager
+
+    @app.on_event("startup")
+    def resume_interrupted_jobs() -> None:
+        for updated_job_id in manager.restart_updated_job_ids:
+            manager._persist(manager.get_job(updated_job_id))
+        for recoverable_job_id in manager.recoverable_job_ids:
+            manager.enqueue(recoverable_job_id)
 
     @app.get("/api/health")
     def health() -> dict[str, Any]:
