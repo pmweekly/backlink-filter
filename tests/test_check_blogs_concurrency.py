@@ -39,6 +39,8 @@ class NetworkConfigurationTests(unittest.TestCase):
         response = MagicMock()
         response.text = ORDINARY_HTML
         response.url = "https://example.com/final"
+        response.encoding = "utf-8"
+        response.iter_content.return_value = [ORDINARY_HTML.encode()]
         session = MagicMock()
         session.get.return_value = response
         with patch("check_blogs.check_blogs._get_session", return_value=session):
@@ -75,6 +77,32 @@ class NetworkConfigurationTests(unittest.TestCase):
 
 
 class ConcurrentPipelineTests(unittest.TestCase):
+    def test_slow_first_input_does_not_block_completed_batch_progress(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            input_path = root / "input.xlsx"
+            output_path = root / "result.xlsx"
+            write_input(input_path, 26)
+            updates: list[tuple[float, int]] = []
+            started = time.monotonic()
+
+            def fake_fetch(url: str, logger=None):
+                time.sleep(0.45 if "domain-0.com" in url else 0.01)
+                return ORDINARY_HTML, url, ""
+
+            with patch("check_blogs.check_blogs.fetch_page", side_effect=fake_fetch):
+                process_excel(
+                    str(input_path), output_path=str(output_path), resume=False,
+                    logger=None, max_workers=16, checkpoint_batch_size=25,
+                    domain_interval=0,
+                    stats_callback=lambda stats: updates.append(
+                        (time.monotonic() - started, stats["processed_rows"])
+                    ),
+                )
+            self.assertTrue(updates)
+            self.assertEqual(updates[0][1], 25)
+            self.assertLess(updates[0][0], 0.35)
+
     def test_cache_ttl_and_rule_version_are_enforced(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             cache = DomainResultCache(str(Path(temp_dir) / "cache.sqlite3"))

@@ -22,7 +22,7 @@ import re
 import sqlite3
 import threading
 from dataclasses import asdict, dataclass
-from concurrent.futures import Future, ThreadPoolExecutor
+from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple, List, Set
 import csv, json, tempfile
@@ -108,6 +108,8 @@ HEADERS = {
 }
 CONNECT_TIMEOUT = float(os.getenv("CHECK_BLOGS_CONNECT_TIMEOUT_SECONDS", "5"))
 READ_TIMEOUT = float(os.getenv("CHECK_BLOGS_READ_TIMEOUT_SECONDS", "20"))
+TOTAL_TIMEOUT = float(os.getenv("CHECK_BLOGS_TOTAL_TIMEOUT_SECONDS", "30"))
+MAX_RESPONSE_BYTES = int(os.getenv("CHECK_BLOGS_MAX_RESPONSE_MB", "5")) * 1024 * 1024
 RETRY_COUNT     = 1    # 超时/失败不重试，快速失败避免浪费时间
 DEFAULT_CONCURRENCY = max(1, int(os.getenv("CHECK_BLOGS_CONCURRENCY", "16")))
 DOMAIN_INTERVAL_SECONDS = float(os.getenv("CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS", "1.5"))
@@ -166,6 +168,10 @@ class DetectionResult:
     final_url: str
     outcome: str
     cache_hit: bool = False
+
+
+class ProcessingPaused(Exception):
+    """Raised after durable progress is flushed for a user-requested pause."""
 
 
 class DomainResultCache:
@@ -472,14 +478,27 @@ def fetch_page(url: str, logger: LogCallback | None = print) -> Tuple[Optional[s
     """
     for attempt in range(RETRY_COUNT):
         try:
+            started = time.monotonic()
             resp = _get_session().get(
                 url,
                 headers=HEADERS,
                 timeout=(CONNECT_TIMEOUT, READ_TIMEOUT),
                 allow_redirects=True,
+                stream=True,
             )
             resp.raise_for_status()
-            return resp.text, resp.url, ""
+            body = bytearray()
+            for chunk in resp.iter_content(chunk_size=64 * 1024):
+                if time.monotonic() - started > TOTAL_TIMEOUT:
+                    raise requests.Timeout(f"整体请求超过 {TOTAL_TIMEOUT}s")
+                if not chunk:
+                    continue
+                body.extend(chunk)
+                if len(body) > MAX_RESPONSE_BYTES:
+                    emit_log(logger, f"  [LIMIT] {url} 响应体超过 {MAX_RESPONSE_BYTES // 1024 // 1024}MB，已截断")
+                    break
+            encoding = resp.encoding or "utf-8"
+            return bytes(body).decode(encoding, errors="replace"), resp.url, ""
         except requests.Timeout:
             emit_log(logger, f"  [TIMEOUT] {url} 连接超时 {CONNECT_TIMEOUT}s / 读取超时 {READ_TIMEOUT}s")
             return None, url, "timeout"
@@ -894,6 +913,51 @@ def count_data_rows(input_path: str) -> int:
     return max((ws.max_row or 1) - 1, 0)
 
 
+def sort_csv_by_input_order(input_path: str, csv_path: str) -> None:
+    """并发期间允许完成结果即时落盘，最终导出前按原始输入顺序重排。"""
+    order: dict[str, int] = {}
+    input_rows = _iter_rows(input_path)
+    try:
+        input_header = [str(value or "").strip().lower() for value in next(input_rows)]
+    except StopIteration:
+        return
+    source_idx = next((i for i, value in enumerate(input_header) if value == "source url"), 2)
+    for index, row in enumerate(input_rows):
+        raw_url = row[source_idx] if source_idx < len(row) else ""
+        url = str(raw_url).strip() if raw_url else ""
+        if not url:
+            continue
+        domain = get_top_domain(url).strip().lower() or urlparse(url).netloc.lower()
+        order.setdefault(domain, index)
+
+    with open(csv_path, newline="", encoding="utf-8-sig") as source:
+        reader = csv.reader(source)
+        header = next(reader, [])
+        rows = list(reader)
+    domain_idx = next((i for i, value in enumerate(header) if "顶级域名" in (value or "")), -1)
+    if domain_idx < 0:
+        return
+    rows.sort(
+        key=lambda row: order.get(
+            row[domain_idx].strip().lower() if len(row) > domain_idx else "",
+            len(order) + 1,
+        )
+    )
+    directory = os.path.dirname(csv_path) or "."
+    fd, temp_path = tempfile.mkstemp(dir=directory, prefix=".sorted", text=True)
+    try:
+        with os.fdopen(fd, "w", newline="", encoding="utf-8-sig") as destination:
+            writer = csv.writer(destination)
+            writer.writerow(header)
+            writer.writerows(rows)
+            destination.flush()
+            os.fsync(destination.fileno())
+        os.replace(temp_path, csv_path)
+    finally:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+
 def process_excel(
     input_path: str,
     output_path: str | None = None,
@@ -910,6 +974,7 @@ def process_excel(
     cache_path: str | None = None,
     domain_interval: float = DOMAIN_INTERVAL_SECONDS,
     stats_callback: StatsCallback | None = None,
+    should_pause: Callable[[], bool] | None = None,
 ) -> CheckBlogsResult:
     """并发检测 URL，按输入顺序批量写入 CSV/XLSX，并支持断点续跑。"""
     out_csv, out_xlsx, checkpoint = resolve_output_paths(
@@ -1049,7 +1114,8 @@ def process_excel(
             pending_batch = 0
 
         try:
-            for completed_index, (row_idx, row_values, domain, future) in enumerate(work_items, 1):
+            future_items: dict[Future[DetectionResult], tuple[int, list[Any], str]] = {}
+            for row_idx, row_values, domain, future in work_items:
                 if future is None:
                     out_row = [str(v) if v is not None else '' for v in row_values]
                     out_row.extend(['', '', '', ''])
@@ -1059,7 +1125,16 @@ def process_excel(
                     pending_batch += 1
                     if pending_batch >= checkpoint_batch_size:
                         flush_batch()
-                    continue
+                else:
+                    future_items[future] = (row_idx, row_values, domain)
+
+            for future in as_completed(future_items):
+                if should_pause and should_pause():
+                    for pending in future_items:
+                        pending.cancel()
+                    flush_batch()
+                    raise ProcessingPaused("任务已暂停，已保存当前进度。")
+                row_idx, row_values, domain = future_items[future]
                 result = future.result()
                 if result.cache_hit:
                     cache_hit_rows += 1
@@ -1098,6 +1173,8 @@ def process_excel(
                 google_login_rows=google_login_rows,
             )
 
+    emit_progress(progress_callback, 94, "正在按原始输入顺序整理结果")
+    sort_csv_by_input_order(input_path, out_csv)
     emit_progress(progress_callback, 95, "正在生成带颜色标注的 Excel")
     write_colored_xlsx(out_csv, out_xlsx, logger=logger)
     emit_log(logger, f"\n完成！CSV: {out_csv}")

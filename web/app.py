@@ -18,13 +18,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from check_blogs.check_blogs import process_excel
+from check_blogs.check_blogs import ProcessingPaused, process_excel
 from processor.process_backlinks import process_backlink_files
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 STATIC_DIR = Path(__file__).resolve().parent / "static"
-TERMINAL_STATUSES = {"completed", "failed"}
+TERMINAL_STATUSES = {"completed", "failed", "paused"}
 
 
 @dataclass(frozen=True)
@@ -75,6 +75,7 @@ class JobManager:
         self.config = config
         self.jobs: dict[str, JobRecord] = {}
         self.event_queues: dict[str, queue.Queue[dict[str, Any]]] = {}
+        self.pause_events: dict[str, threading.Event] = {}
         self.lock = threading.RLock()
         self.executor = ThreadPoolExecutor(max_workers=config.worker_count)
         self.recoverable_job_ids: list[str] = []
@@ -200,12 +201,39 @@ class JobManager:
         with self.lock:
             self.jobs[job_id] = record
             self.event_queues[job_id] = queue.Queue()
+            self.pause_events[job_id] = threading.Event()
             self._persist(record)
         self._publish(job_id, "snapshot", record.public_dict())
         return record
 
     def enqueue(self, job_id: str) -> None:
+        with self.lock:
+            self.pause_events.setdefault(job_id, threading.Event()).clear()
         self.executor.submit(self._run_job, job_id)
+
+    def pause_job(self, job_id: str) -> JobRecord:
+        with self.lock:
+            record = self.jobs.get(job_id)
+            if not record:
+                raise KeyError(job_id)
+            if record.status not in {"queued", "running", "pausing"}:
+                return record
+            self.pause_events.setdefault(job_id, threading.Event()).set()
+        self.update_job(job_id, status="pausing")
+        self.add_log(job_id, "已请求暂停，正在保存已完成结果。")
+        return self.get_job(job_id)
+
+    def resume_job(self, job_id: str) -> JobRecord:
+        with self.lock:
+            record = self.jobs.get(job_id)
+            if not record:
+                raise KeyError(job_id)
+            if record.status != "paused":
+                return record
+        self.update_job(job_id, status="queued", error=None)
+        self.add_log(job_id, "任务已恢复，加入断点续跑队列。")
+        self.enqueue(job_id)
+        return self.get_job(job_id)
 
     def _run_job(self, job_id: str) -> None:
         job_dir = self._job_dir(job_id)
@@ -264,6 +292,7 @@ class JobManager:
                 cache_path=str(self.config.cache_path),
                 domain_interval=self.config.check_blogs_domain_interval,
                 stats_callback=check_blogs_stats,
+                should_pause=lambda: self.pause_events.setdefault(job_id, threading.Event()).is_set(),
             )
 
             if not final_output.exists():
@@ -277,6 +306,9 @@ class JobManager:
                 progress=100,
                 download_path=str(final_output),
             )
+        except ProcessingPaused as exc:
+            self.add_log(job_id, str(exc))
+            self.update_job(job_id, status="paused", error=None)
         except Exception as exc:
             self.add_log(job_id, f"任务失败：{exc}", level="ERROR")
             self.update_job(job_id, status="failed", stage="failed", error=str(exc))
@@ -407,6 +439,20 @@ def create_app(config: AppConfig | None = None) -> FastAPI:
     def get_job(job_id: str) -> dict[str, Any]:
         try:
             return manager.get_job(job_id).public_dict()
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Job not found")
+
+    @app.post("/api/jobs/{job_id}/pause")
+    def pause_job(job_id: str) -> dict[str, Any]:
+        try:
+            return manager.pause_job(job_id).public_dict()
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Job not found")
+
+    @app.post("/api/jobs/{job_id}/resume")
+    def resume_job(job_id: str) -> dict[str, Any]:
+        try:
+            return manager.resume_job(job_id).public_dict()
         except KeyError:
             raise HTTPException(status_code=404, detail="Job not found")
 
