@@ -26,6 +26,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple, List, Set
 import csv, json, tempfile
+from contextlib import contextmanager
 from datetime import datetime
 from urllib.parse import urlparse
 
@@ -173,8 +174,18 @@ class DomainResultCache:
         connection.row_factory = sqlite3.Row
         return connection
 
+    @contextmanager
+    def _connection(self):
+        """Commit or roll back, then always close the SQLite file handle."""
+        connection = self._connect()
+        try:
+            with connection:
+                yield connection
+        finally:
+            connection.close()
+
     def _initialize(self) -> None:
-        with self._connect() as connection:
+        with self._connection() as connection:
             connection.execute("PRAGMA journal_mode=WAL")
             connection.execute(
                 """
@@ -194,7 +205,7 @@ class DomainResultCache:
     def get(self, domain: str) -> DetectionResult | None:
         if not self.path:
             return None
-        with self._connect() as connection:
+        with self._connection() as connection:
             row = connection.execute(
                 "SELECT * FROM domain_results WHERE domain = ? AND rule_version = ?",
                 (domain, CACHE_RULE_VERSION),
@@ -217,7 +228,7 @@ class DomainResultCache:
     def put(self, result: DetectionResult, *, checked_at: float | None = None) -> None:
         if not self.path:
             return
-        with self._connect() as connection:
+        with self._connection() as connection:
             connection.execute(
                 """
                 INSERT INTO domain_results
@@ -242,7 +253,7 @@ class DomainResultCache:
             return 0
         now = time.time()
         imported = 0
-        with self._connect() as connection:
+        with self._connection() as connection:
             for csv_path in Path(jobs_dir).glob("*/result/*.csv"):
                 try:
                     checked_at = csv_path.stat().st_mtime
@@ -1235,30 +1246,41 @@ def process_excel(
                     flush_batch()
 
             async def run_async_checks() -> None:
-                connector = aiohttp.TCPConnector(limit=max_workers, ttl_dns_cache=300)
+                connector = aiohttp.TCPConnector(
+                    limit=max_workers,
+                    limit_per_host=1,
+                    ttl_dns_cache=300,
+                )
                 async with aiohttp.ClientSession(connector=connector) as session:
-                    async def run_one(item: tuple[int, list[Any], str, str]):
-                        row_idx, row_values, url, domain = item
-                        result = await detect_url_async(
-                            session, url, domain, cache, logger, domain_interval
-                        )
-                        return row_idx, row_values, domain, result
+                    work_queue: asyncio.Queue[tuple[int, list[Any], str, str]] = asyncio.Queue()
+                    for item in work_items:
+                        work_queue.put_nowait(item)
 
-                    tasks = [asyncio.create_task(run_one(item)) for item in work_items]
-                    try:
-                        for completed in asyncio.as_completed(tasks):
+                    async def worker() -> None:
+                        while True:
                             if should_pause and should_pause():
-                                for task in tasks:
-                                    task.cancel()
-                                await asyncio.gather(*tasks, return_exceptions=True)
                                 flush_batch()
                                 raise ProcessingPaused("任务已暂停，已保存当前进度。")
-                            row_idx, row_values, domain, result = await completed
+                            try:
+                                _, row_values, url, domain = work_queue.get_nowait()
+                            except asyncio.QueueEmpty:
+                                return
+                            result = await detect_url_async(
+                                session, url, domain, cache, logger, domain_interval
+                            )
                             record_result(row_values, domain, result)
+
+                    tasks = [
+                        asyncio.create_task(worker())
+                        for _ in range(min(max_workers, len(work_items)))
+                    ]
+                    try:
+                        await asyncio.gather(*tasks)
                     finally:
                         for task in tasks:
                             if not task.done():
                                 task.cancel()
+                        await asyncio.gather(*tasks, return_exceptions=True)
 
             def record_result(row_values: list[Any], domain: str, result: DetectionResult) -> None:
                 nonlocal cache_hit_rows, network_checked_rows, processed_now, google_login_rows, pending_batch

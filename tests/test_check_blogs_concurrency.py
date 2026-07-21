@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import asyncio
 import json
+import os
 import tempfile
 import threading
 import time
@@ -177,19 +178,30 @@ class ConcurrentPipelineTests(unittest.TestCase):
             cache = DomainResultCache(str(Path(temp_dir) / "cache.sqlite3"))
             cache.put(DetectionResult("fresh.com", "无评论功能", "", "", "", "success"))
             self.assertIsNotNone(cache.get("fresh.com"))
-            with cache._connect() as connection:
+            with cache._connection() as connection:
                 connection.execute(
                     "UPDATE domain_results SET checked_at = ?, rule_version = ? WHERE domain = ?",
                     (0, CACHE_RULE_VERSION, "fresh.com"),
                 )
             self.assertIsNone(cache.get("fresh.com"))
             cache.put(DetectionResult("versioned.com", "无评论功能", "", "", "", "success"))
-            with cache._connect() as connection:
+            with cache._connection() as connection:
                 connection.execute(
                     "UPDATE domain_results SET rule_version = ? WHERE domain = ?",
                     ("old-rule", "versioned.com"),
                 )
             self.assertIsNone(cache.get("versioned.com"))
+
+    def test_repeated_cache_reads_do_not_leak_file_descriptors(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            cache = DomainResultCache(str(Path(temp_dir) / "cache.sqlite3"))
+            cache.put(DetectionResult("cached.com", "无评论功能", "", "", "", "success"))
+            fd_root = Path("/dev/fd")
+            before = len(os.listdir(fd_root))
+            for _ in range(500):
+                self.assertIsNotNone(cache.get("cached.com"))
+            after = len(os.listdir(fd_root))
+            self.assertLessEqual(after - before, 4)
 
     def test_parallel_fetch_preserves_order_and_reuses_cache(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
