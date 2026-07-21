@@ -360,6 +360,24 @@ class RecoveryTests(unittest.TestCase):
             self.assertIsNone(record.error)
             enqueue.assert_called_once_with(job_id)
 
+    def test_paused_job_can_be_deleted_without_touching_running_job(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            manager = JobManager(AppConfig(storage_root=root, worker_count=1))
+            paused = manager.create_job([])
+            running = manager.create_job([])
+            manager.update_job(paused.job_id, status="paused")
+            manager.update_job(running.job_id, status="running")
+
+            manager.delete_job(paused.job_id)
+
+            self.assertFalse((root / "jobs" / paused.job_id).exists())
+            with self.assertRaises(KeyError):
+                manager.get_job(paused.job_id)
+            self.assertEqual(manager.get_job(running.job_id).status, "running")
+            with self.assertRaises(ValueError):
+                manager.delete_job(running.job_id)
+
 
 class ProcessorConcurrencyTests(unittest.TestCase):
     def test_files_are_read_in_parallel_but_merged_deterministically(self) -> None:

@@ -257,6 +257,19 @@ class JobManager:
         self.enqueue(job_id)
         return self.get_job(job_id)
 
+    def delete_job(self, job_id: str) -> None:
+        """Delete a non-running job and its persisted files."""
+        with self.lock:
+            record = self.jobs.get(job_id)
+            if not record:
+                raise KeyError(job_id)
+            if record.status not in TERMINAL_STATUSES:
+                raise ValueError("Only paused, completed, or failed jobs can be deleted")
+            shutil.rmtree(self._job_dir(job_id))
+            self.jobs.pop(job_id, None)
+            self.event_queues.pop(job_id, None)
+            self.pause_events.pop(job_id, None)
+
     def _run_job(self, job_id: str) -> None:
         job_dir = self._job_dir(job_id)
         upload_dir = job_dir / "uploads"
@@ -480,6 +493,15 @@ def create_app(config: AppConfig | None = None) -> FastAPI:
             return manager.resume_job(job_id).public_dict()
         except KeyError:
             raise HTTPException(status_code=404, detail="Job not found")
+
+    @app.delete("/api/jobs/{job_id}", status_code=204)
+    def delete_job(job_id: str) -> None:
+        try:
+            manager.delete_job(job_id)
+        except KeyError:
+            raise HTTPException(status_code=404, detail="Job not found")
+        except ValueError as exc:
+            raise HTTPException(status_code=409, detail=str(exc))
 
     @app.get("/api/jobs/{job_id}/events")
     async def job_events(job_id: str):
