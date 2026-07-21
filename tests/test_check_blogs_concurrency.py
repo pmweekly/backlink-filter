@@ -339,6 +339,27 @@ class RecoveryTests(unittest.TestCase):
             self.assertEqual(record.status, "paused")
             self.assertNotIn(job_id, manager.recoverable_job_ids)
 
+    def test_failed_job_with_processor_output_can_resume(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            job_id = "20260721-000000-failed"
+            job_dir = root / "jobs" / job_id
+            (job_dir / "processor").mkdir(parents=True)
+            (job_dir / "processor" / "processed_backlinks.xlsx").touch()
+            metadata = {
+                "job_id": job_id, "status": "failed", "stage": "failed",
+                "progress": 52.8, "created_at": "2026-07-21T00:00:00",
+                "updated_at": "2026-07-21T00:01:00", "files": [], "logs": [],
+                "stats": {}, "error": "Too many open files", "download_path": None,
+            }
+            (job_dir / "metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
+            manager = JobManager(AppConfig(storage_root=root, worker_count=1))
+            with patch.object(manager, "enqueue") as enqueue:
+                record = manager.resume_job(job_id)
+            self.assertEqual(record.status, "queued")
+            self.assertIsNone(record.error)
+            enqueue.assert_called_once_with(job_id)
+
 
 class ProcessorConcurrencyTests(unittest.TestCase):
     def test_files_are_read_in_parallel_but_merged_deterministically(self) -> None:

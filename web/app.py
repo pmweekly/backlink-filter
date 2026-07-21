@@ -243,8 +243,15 @@ class JobManager:
             record = self.jobs.get(job_id)
             if not record:
                 raise KeyError(job_id)
-            if record.status != "paused":
+            if record.status not in {"paused", "failed"}:
                 return record
+            if record.status == "failed":
+                job_dir = self._job_dir(job_id)
+                has_uploads = any((job_dir / "uploads").glob("*.xlsx"))
+                has_processor_output = (job_dir / "processor" / "processed_backlinks.xlsx").exists()
+                if not has_uploads and not has_processor_output:
+                    return record
+            record.error = None
         self.update_job(job_id, status="queued", error=None)
         self.add_log(job_id, "任务已恢复，加入断点续跑队列。")
         self.enqueue(job_id)
