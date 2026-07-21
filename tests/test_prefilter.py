@@ -145,12 +145,12 @@ class ProcessorPrefilterIntegrationTests(unittest.TestCase):
 
             fetched_urls: list[str] = []
 
-            def fake_fetch(url: str, logger=None):
+            async def fake_fetch(session, url: str, logger=None):
                 fetched_urls.append(url)
                 return "<html><body><p>ordinary page</p></body></html>", url, ""
 
             with (
-                patch("check_blogs.check_blogs.fetch_page", side_effect=fake_fetch),
+                patch("check_blogs.check_blogs.fetch_page_async", side_effect=fake_fetch),
                 patch(
                     "check_blogs.check_blogs.get_top_domain",
                     side_effect=lambda url: urlparse(url).hostname or "",

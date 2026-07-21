@@ -17,6 +17,7 @@ import json
 import os
 import re
 import unicodedata
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, asdict
 from datetime import date
 from pathlib import Path
@@ -68,6 +69,10 @@ SEO_SPAM_SIGNAL_PATTERN = re.compile(
 
 LogCallback = Callable[[str], None]
 ProgressCallback = Callable[[float, str], None]
+
+
+class ProcessorPaused(Exception):
+    """Raised when processor progress has stopped at a safe file boundary."""
 
 
 @dataclass
@@ -228,6 +233,8 @@ def process_backlink_files(
     use_processed_log: bool = True,
     logger: LogCallback | None = print,
     progress_callback: ProgressCallback | None = None,
+    read_workers: int = 3,
+    should_pause: Callable[[], bool] | None = None,
 ) -> ProcessorResult:
     """Merge, clean, and de-duplicate backlink export files.
 
@@ -275,30 +282,44 @@ def process_backlink_files(
     for path in new_files:
         emit_log(logger, f"  {path.name}")
 
-    frames: list[pd.DataFrame] = []
+    frames_by_path: dict[Path, pd.DataFrame] = {}
     newly_processed: set[str] = set()
     failed_files: list[str] = []
     rows_read = 0
     total_files = len(new_files)
 
-    for index, path in enumerate(new_files, start=1):
-        emit_progress(
-            progress_callback,
-            (index - 1) / total_files * 55,
-            f"正在读取 {path.name}",
-        )
-        try:
-            df = read_file(path)
-            if df.empty:
-                emit_log(logger, f"  跳过（空文件）：{path.name}")
-                continue
-            emit_log(logger, f"  读取 {path.name}：{len(df)} 行")
-            rows_read += len(df)
-            frames.append(df)
-            newly_processed.add(path.name)
-        except Exception as exc:
-            failed_files.append(path.name)
-            emit_log(logger, f"  读取失败，跳过：{path.name} - {exc}")
+    executor = ThreadPoolExecutor(max_workers=max(1, min(read_workers, total_files)))
+    futures = {executor.submit(read_file, path): path for path in new_files}
+    completed_files = 0
+    try:
+        for future in as_completed(futures):
+            if should_pause and should_pause():
+                for pending in futures:
+                    pending.cancel()
+                raise ProcessorPaused("任务已在 Excel 文件边界暂停。")
+            path = futures[future]
+            completed_files += 1
+            emit_progress(
+                progress_callback,
+                completed_files / total_files * 55,
+                f"已读取 {completed_files}/{total_files}：{path.name}",
+            )
+            try:
+                df = future.result()
+                if df.empty:
+                    emit_log(logger, f"  跳过（空文件）：{path.name}")
+                    continue
+                emit_log(logger, f"  读取 {path.name}：{len(df)} 行")
+                rows_read += len(df)
+                frames_by_path[path] = df
+                newly_processed.add(path.name)
+            except Exception as exc:
+                failed_files.append(path.name)
+                emit_log(logger, f"  读取失败，跳过：{path.name} - {exc}")
+    finally:
+        executor.shutdown(wait=False, cancel_futures=True)
+
+    frames = [frames_by_path[path] for path in new_files if path in frames_by_path]
 
     if not frames:
         emit_log(logger, "没有有效数据可处理")
@@ -315,6 +336,9 @@ def process_backlink_files(
             filtered_telegram_seo_spam_rows=0,
             skipped_processed_files=len(valid_files) - len(new_files),
         )
+
+    if should_pause and should_pause():
+        raise ProcessorPaused("任务已在合并前暂停。")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     if output_path.exists():
@@ -343,14 +367,30 @@ def process_backlink_files(
     anchor_column = columns_by_name.get("anchor")
 
     emit_progress(progress_callback, 70, "正在预过滤垃圾外链")
-    filter_reasons = combined.apply(
-        lambda row: classify_prefilter_reason(
-            row.get("Source url", ""),
-            row.get(source_title_column, "") if source_title_column is not None else "",
-            row.get(anchor_column, "") if anchor_column is not None else "",
-        ),
-        axis=1,
+    source_urls = combined["Source url"].tolist()
+    source_titles = (
+        combined[source_title_column].tolist()
+        if source_title_column is not None else [""] * len(combined)
     )
+    anchors = (
+        combined[anchor_column].tolist()
+        if anchor_column is not None else [""] * len(combined)
+    )
+    reasons: list[str | None] = []
+    for start in range(0, len(combined), 5000):
+        if should_pause and should_pause():
+            raise ProcessorPaused("任务已在预过滤期间暂停。")
+        stop = min(start + 5000, len(combined))
+        reasons.extend(
+            classify_prefilter_reason(source_urls[index], source_titles[index], anchors[index])
+            for index in range(start, stop)
+        )
+        emit_progress(
+            progress_callback,
+            70 + (stop / max(len(combined), 1)) * 7,
+            f"正在预过滤垃圾外链 {stop}/{len(combined)}",
+        )
+    filter_reasons = pd.Series(reasons, index=combined.index, dtype="object")
     filtered_search_yahoo_rows = int((filter_reasons == "search_yahoo").sum())
     filtered_telegram_seo_spam_rows = int((filter_reasons == "telegram_seo_spam").sum())
     filtered_rows = filtered_search_yahoo_rows + filtered_telegram_seo_spam_rows
@@ -364,6 +404,9 @@ def process_backlink_files(
         f"Telegram SEO 垃圾 {filtered_telegram_seo_spam_rows} 行）",
     )
     emit_log(logger, f"预过滤后待去重行数：{len(combined)}")
+
+    if should_pause and should_pause():
+        raise ProcessorPaused("任务已在去重前暂停。")
 
     emit_progress(progress_callback, 78, "正在按注册域名去重")
     combined["_reg_domain"] = combined["Source url"].apply(get_registered_domain)

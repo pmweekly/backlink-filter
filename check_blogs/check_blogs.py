@@ -21,8 +21,8 @@ import os
 import re
 import sqlite3
 import threading
+import asyncio
 from dataclasses import asdict, dataclass
-from concurrent.futures import Future, ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple, List, Set
 import csv, json, tempfile
@@ -30,6 +30,7 @@ from datetime import datetime
 from urllib.parse import urlparse
 
 import requests
+import aiohttp
 from bs4 import BeautifulSoup
 
 
@@ -109,7 +110,7 @@ HEADERS = {
 CONNECT_TIMEOUT = float(os.getenv("CHECK_BLOGS_CONNECT_TIMEOUT_SECONDS", "5"))
 READ_TIMEOUT = float(os.getenv("CHECK_BLOGS_READ_TIMEOUT_SECONDS", "20"))
 TOTAL_TIMEOUT = float(os.getenv("CHECK_BLOGS_TOTAL_TIMEOUT_SECONDS", "30"))
-MAX_RESPONSE_BYTES = int(os.getenv("CHECK_BLOGS_MAX_RESPONSE_MB", "5")) * 1024 * 1024
+MAX_RESPONSE_BYTES = int(os.getenv("CHECK_BLOGS_MAX_RESPONSE_MB", "2")) * 1024 * 1024
 RETRY_COUNT     = 1    # 超时/失败不重试，快速失败避免浪费时间
 DEFAULT_CONCURRENCY = max(1, int(os.getenv("CHECK_BLOGS_CONCURRENCY", "16")))
 DOMAIN_INTERVAL_SECONDS = float(os.getenv("CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS", "1.5"))
@@ -119,12 +120,10 @@ CACHE_FAILURE_TTL_SECONDS = int(os.getenv("CHECK_BLOGS_CACHE_FAILURE_TTL_SECONDS
 CACHE_RULE_VERSION = "2026-07-google-comment-v1"
 
 _thread_local = threading.local()
-_executor_lock = threading.Lock()
-_shared_executor: ThreadPoolExecutor | None = None
-_shared_executor_size = 0
 _domain_locks_guard = threading.Lock()
 _domain_locks: dict[str, threading.Lock] = {}
 _domain_last_started: dict[str, float] = {}
+_async_network_slots = threading.BoundedSemaphore(DEFAULT_CONCURRENCY)
 
 
 def _get_session() -> requests.Session:
@@ -139,19 +138,6 @@ def _get_session() -> requests.Session:
         session.mount("https://", adapter)
         _thread_local.session = session
     return session
-
-
-def get_shared_executor(max_workers: int = DEFAULT_CONCURRENCY) -> ThreadPoolExecutor:
-    global _shared_executor, _shared_executor_size
-    max_workers = max(1, int(max_workers))
-    with _executor_lock:
-        if _shared_executor is None:
-            _shared_executor = ThreadPoolExecutor(
-                max_workers=max_workers,
-                thread_name_prefix="check-blogs",
-            )
-            _shared_executor_size = max_workers
-        return _shared_executor
 
 
 def _get_domain_lock(domain: str) -> threading.Lock:
@@ -228,7 +214,7 @@ class DomainResultCache:
             cache_hit=True,
         )
 
-    def put(self, result: DetectionResult) -> None:
+    def put(self, result: DetectionResult, *, checked_at: float | None = None) -> None:
         if not self.path:
             return
         with self._connect() as connection:
@@ -242,12 +228,60 @@ class DomainResultCache:
                     comment_time=excluded.comment_time, final_url=excluded.final_url,
                     outcome=excluded.outcome, checked_at=excluded.checked_at,
                     rule_version=excluded.rule_version
+                WHERE excluded.checked_at >= domain_results.checked_at
                 """,
                 (
                     result.domain, result.label, result.flags, result.comment_time,
-                    result.final_url, result.outcome, time.time(), CACHE_RULE_VERSION,
+                    result.final_url, result.outcome, time.time() if checked_at is None else checked_at, CACHE_RULE_VERSION,
                 ),
             )
+
+    def import_history(self, jobs_dir: str | Path) -> int:
+        """将最近任务的 CSV 结果导入跨任务缓存，不覆盖更新记录。"""
+        if not self.path:
+            return 0
+        now = time.time()
+        imported = 0
+        with self._connect() as connection:
+            for csv_path in Path(jobs_dir).glob("*/result/*.csv"):
+                try:
+                    checked_at = csv_path.stat().st_mtime
+                    if now - checked_at > CACHE_SUCCESS_TTL_SECONDS:
+                        continue
+                    with csv_path.open(newline="", encoding="utf-8-sig") as handle:
+                        reader = csv.reader(handle)
+                        header = next(reader, [])
+                        domain_idx = next(i for i, value in enumerate(header) if "顶级域名" in (value or ""))
+                        label_idx = next(i for i, value in enumerate(header) if "评论表单检测" in (value or ""))
+                        flags_idx = next((i for i, value in enumerate(header) if "特殊标注" in (value or "")), -1)
+                        comment_idx = next((i for i, value in enumerate(header) if "最新评论时间" in (value or "")), -1)
+                        for row in reader:
+                            if len(row) <= max(domain_idx, label_idx) or not row[domain_idx] or not row[label_idx]:
+                                continue
+                            label = row[label_idx]
+                            outcome = "timeout" if label == "访问超时" else "error" if label == "访问失败" else "success"
+                            connection.execute(
+                                """
+                                INSERT INTO domain_results
+                                    (domain, label, flags, comment_time, final_url, outcome, checked_at, rule_version)
+                                VALUES (?, ?, ?, ?, '', ?, ?, ?)
+                                ON CONFLICT(domain) DO UPDATE SET
+                                    label=excluded.label, flags=excluded.flags,
+                                    comment_time=excluded.comment_time, outcome=excluded.outcome,
+                                    checked_at=excluded.checked_at, rule_version=excluded.rule_version
+                                WHERE excluded.checked_at >= domain_results.checked_at
+                                """,
+                                (
+                                    row[domain_idx].strip().lower(), label,
+                                    row[flags_idx] if flags_idx >= 0 and len(row) > flags_idx else "",
+                                    row[comment_idx] if comment_idx >= 0 and len(row) > comment_idx else "",
+                                    outcome, checked_at, CACHE_RULE_VERSION,
+                                ),
+                            )
+                            imported += 1
+                except (OSError, ValueError, csv.Error):
+                    continue
+        return imported
 
 
 def load_checkpoint(checkpoint_path: str, out_csv_path: str, logger: LogCallback | None = print) -> Set[str]:
@@ -511,6 +545,139 @@ def fetch_page(url: str, logger: LogCallback | None = print) -> Tuple[Optional[s
     return None, url, "error"
 
 
+def _early_stop_html(body: bytearray) -> bool:
+    if len(body) < 512 * 1024:
+        return False
+    tail = bytes(body[-256 * 1024:]).lower()
+    if b"</html" in tail:
+        return True
+    sample = bytes(body).lower()
+    return all(signal in sample for signal in (b"comment", b"name", b"email", b"website", b"post comment", b"</form"))
+
+
+async def fetch_page_async(
+    session: aiohttp.ClientSession,
+    url: str,
+    logger: LogCallback | None = print,
+) -> Tuple[Optional[str], str, str]:
+    while not _async_network_slots.acquire(blocking=False):
+        await asyncio.sleep(0.01)
+    try:
+        timeout = aiohttp.ClientTimeout(
+            total=TOTAL_TIMEOUT,
+            connect=CONNECT_TIMEOUT,
+            sock_connect=CONNECT_TIMEOUT,
+            sock_read=READ_TIMEOUT,
+        )
+        try:
+            async with session.get(
+                url,
+                headers=HEADERS,
+                timeout=timeout,
+                allow_redirects=True,
+                max_redirects=5,
+            ) as response:
+                response.raise_for_status()
+                body = bytearray()
+                async for chunk in response.content.iter_chunked(64 * 1024):
+                    body.extend(chunk)
+                    if len(body) >= MAX_RESPONSE_BYTES:
+                        emit_log(logger, f"  [LIMIT] {url} 响应体达到 {MAX_RESPONSE_BYTES // 1024 // 1024}MB，已截断")
+                        break
+                    if _early_stop_html(body):
+                        break
+                encoding = response.charset or "utf-8"
+                return bytes(body).decode(encoding, errors="replace"), str(response.url), ""
+        except asyncio.TimeoutError:
+            emit_log(logger, f"  [TIMEOUT] {url} 总耗时超过 {TOTAL_TIMEOUT}s")
+            return None, url, "timeout"
+        except (aiohttp.ClientError, UnicodeError) as exc:
+            emit_log(logger, f"  [ERROR] {url} -> {exc}")
+            return None, url, "error"
+    finally:
+        _async_network_slots.release()
+
+
+def analyze_html_once(html: str, url: str, final_url: str, domain: str) -> DetectionResult:
+    soup = BeautifulSoup(html, "html.parser")
+    flags: list[str] = []
+    comment_time = ""
+    if detect_game_site(html, url, soup=soup):
+        label = '游戏站'
+        flags.append('游戏网站')
+    else:
+        form_result = detect_comment_form(html, soup=soup)
+        login_type = detect_comment_login(html, soup=soup) if form_result in {"blog", "comment"} else "open"
+        if form_result == "blog":
+            if login_type == "google":
+                label = '博客网站 · 谷歌登录'
+                flags.append('需登录（谷歌登录）')
+            elif login_type == "register":
+                label = '博客网站 · 需注册'
+                flags.append('需登录')
+            elif login_type == "login":
+                label = '博客网站 · 需登录'
+                flags.append('需登录')
+            else:
+                label = '博客网站'
+            comment_time = get_latest_comment_time(html, soup=soup) or ""
+        elif form_result == "comment":
+            if login_type == "google":
+                label = '评论网站 · 谷歌登录'
+                flags.append('需登录（谷歌登录）')
+            else:
+                label = '评论网站'
+        else:
+            label = '无评论功能'
+    return DetectionResult(
+        domain=domain,
+        label=label,
+        flags='；'.join(flags),
+        comment_time=comment_time,
+        final_url=final_url,
+        outcome="success",
+    )
+
+
+async def detect_url_async(
+    session: aiohttp.ClientSession,
+    url: str,
+    domain: str,
+    cache: DomainResultCache,
+    logger: LogCallback | None = print,
+    domain_interval: float = DOMAIN_INTERVAL_SECONDS,
+) -> DetectionResult:
+    cached = await asyncio.to_thread(cache.get, domain)
+    if cached:
+        return cached
+
+    domain_lock = _get_domain_lock(domain)
+    while not domain_lock.acquire(blocking=False):
+        await asyncio.sleep(0.01)
+    try:
+        cached = await asyncio.to_thread(cache.get, domain)
+        if cached:
+            return cached
+
+        with _domain_locks_guard:
+            wait_for = max(0.0, domain_interval - (time.monotonic() - _domain_last_started.get(domain, 0.0)))
+        if wait_for:
+            await asyncio.sleep(wait_for)
+        with _domain_locks_guard:
+            _domain_last_started[domain] = time.monotonic()
+
+        html, final_url, err_type = await fetch_page_async(session, url, logger=logger)
+        if html is None:
+            label = '访问超时' if err_type == "timeout" else '访问失败'
+            result = DetectionResult(domain, label, "", "", final_url, err_type or "error")
+        else:
+            result = await asyncio.to_thread(analyze_html_once, html, url, final_url, domain)
+        await asyncio.to_thread(cache.put, result)
+        return result
+    finally:
+        domain_lock.release()
+
+
 def detect_url(
     url: str,
     domain: str,
@@ -518,69 +685,13 @@ def detect_url(
     logger: LogCallback | None = print,
     domain_interval: float = DOMAIN_INTERVAL_SECONDS,
 ) -> DetectionResult:
-    cached = cache.get(domain)
-    if cached:
-        return cached
+    """同步兼容入口；Web 批处理使用共享 ClientSession 的异步入口。"""
+    async def run() -> DetectionResult:
+        connector = aiohttp.TCPConnector(limit=1, ttl_dns_cache=300)
+        async with aiohttp.ClientSession(connector=connector) as session:
+            return await detect_url_async(session, url, domain, cache, logger, domain_interval)
 
-    domain_lock = _get_domain_lock(domain)
-    with domain_lock:
-        cached = cache.get(domain)
-        if cached:
-            return cached
-
-        with _domain_locks_guard:
-            wait_for = max(0.0, domain_interval - (time.monotonic() - _domain_last_started.get(domain, 0.0)))
-        if wait_for:
-            time.sleep(wait_for)
-        with _domain_locks_guard:
-            _domain_last_started[domain] = time.monotonic()
-
-        html, final_url, err_type = fetch_page(url, logger=logger)
-        flags: list[str] = []
-        comment_time = ""
-        if html is None:
-            label = '访问超时' if err_type == "timeout" else '访问失败'
-            outcome = err_type or "error"
-        elif detect_game_site(html, url):
-            label = '游戏站'
-            flags.append('游戏网站')
-            outcome = "success"
-        else:
-            form_result = detect_comment_form(html)
-            login_type = detect_comment_login(html) if form_result in {"blog", "comment"} else "open"
-            if form_result == "blog":
-                if login_type == "google":
-                    label = '博客网站 · 谷歌登录'
-                    flags.append('需登录（谷歌登录）')
-                elif login_type == "register":
-                    label = '博客网站 · 需注册'
-                    flags.append('需登录')
-                elif login_type == "login":
-                    label = '博客网站 · 需登录'
-                    flags.append('需登录')
-                else:
-                    label = '博客网站'
-                comment_time = get_latest_comment_time(html) or ""
-            elif form_result == "comment":
-                if login_type == "google":
-                    label = '评论网站 · 谷歌登录'
-                    flags.append('需登录（谷歌登录）')
-                else:
-                    label = '评论网站'
-            else:
-                label = '无评论功能'
-            outcome = "success"
-
-        result = DetectionResult(
-            domain=domain,
-            label=label,
-            flags='；'.join(flags),
-            comment_time=comment_time,
-            final_url=final_url,
-            outcome=outcome,
-        )
-        cache.put(result)
-        return result
+    return asyncio.run(run())
 
 
 def _text_contains_any(text: str, keywords) -> bool:
@@ -619,7 +730,7 @@ def _check_submit_button(form) -> bool:
     return False
 
 
-def detect_game_site(html: str, url: str) -> bool:
+def detect_game_site(html: str, url: str, *, soup: BeautifulSoup | None = None) -> bool:
     """
     检测页面是否为游戏站。
     命中逻辑：
@@ -632,7 +743,7 @@ def detect_game_site(html: str, url: str) -> bool:
     if any(kw in domain for kw in ("game", "games", "gaming")):
         return True
 
-    soup = BeautifulSoup(html, "html.parser")
+    soup = soup or BeautifulSoup(html, "html.parser")
 
     def _score(text: str) -> int:
         text_lower = text.lower()
@@ -659,7 +770,7 @@ def detect_game_site(html: str, url: str) -> bool:
     return hit_count >= 2
 
 
-def detect_comment_login(html: str) -> str:
+def detect_comment_login(html: str, *, soup: BeautifulSoup | None = None) -> str:
     """
     检测博客评论区是否有登录/注册门槛。
     返回值（优先级从高到低）：
@@ -678,7 +789,7 @@ def detect_comment_login(html: str) -> str:
     if "disqus.com/embed" in html_lower or "fb-comments" in html_lower or "facebook.com/plugins/comments" in html_lower:
         return "login"
 
-    soup = BeautifulSoup(html, "html.parser")
+    soup = soup or BeautifulSoup(html, "html.parser")
     page_text = soup.get_text(" ", strip=True)
 
     if _text_contains_any(page_text, REGISTER_SIGNALS):
@@ -722,7 +833,7 @@ def _parse_date_str(s: str) -> Optional[datetime]:
     return None
 
 
-def get_latest_comment_time(html: str) -> Optional[str]:
+def get_latest_comment_time(html: str, *, soup: BeautifulSoup | None = None) -> Optional[str]:
     """
     从博客页面提取最近一条评论的发布时间。
     策略（优先级从高到低）：
@@ -731,7 +842,7 @@ def get_latest_comment_time(html: str) -> Optional[str]:
       3. 常见博客评论日期类名选择器
     返回格式化为 'YYYY-MM-DD HH:MM' 的字符串，或 None。
     """
-    soup = BeautifulSoup(html, "html.parser")
+    soup = soup or BeautifulSoup(html, "html.parser")
     dates: List[str] = []
 
     # 策略1: JSON-LD
@@ -795,14 +906,14 @@ def get_latest_comment_time(html: str) -> Optional[str]:
     return dates[0]
 
 
-def detect_comment_form(html: str) -> str:
+def detect_comment_form(html: str, *, soup: BeautifulSoup | None = None) -> str:
     """
     返回值：
       "blog"    — 存在完整评论表单
       "comment" — 存在部分评论区但不完整
       "none"    — 未检测到评论功能
     """
-    soup = BeautifulSoup(html, "html.parser")
+    soup = soup or BeautifulSoup(html, "html.parser")
 
     for form in soup.find_all("form"):
         form_text = _collect_form_text(form)
@@ -1057,8 +1168,8 @@ def process_excel(
             emit_log(logger, f"[WARN] 无法重建续跑统计: {exc}")
 
     cache = DomainResultCache(cache_path or os.getenv("CHECK_BLOGS_CACHE_PATH"))
-    executor = get_shared_executor(max_workers)
-    work_items: list[tuple[int, list[Any], str, Future[DetectionResult] | None]] = []
+    work_items: list[tuple[int, list[Any], str, str]] = []
+    empty_items: list[tuple[int, list[Any]]] = []
 
     for row_idx, row_values in enumerate(rows, 1):
         row_values = list(row_values) if row_values is not None else []
@@ -1068,15 +1179,14 @@ def process_excel(
             if resumed_empty_rows > 0:
                 resumed_empty_rows -= 1
                 continue
-            work_items.append((row_idx, row_values, "", None))
+            empty_items.append((row_idx, row_values))
             continue
         domain = get_top_domain(url).strip().lower() or urlparse(url).netloc.lower()
         if domain in processed_domains or domain in seen_in_run:
             skipped_duplicate_domains += 1
             continue
         seen_in_run.add(domain)
-        future = executor.submit(detect_url, url, domain, cache, logger, domain_interval)
-        work_items.append((row_idx, row_values, domain, future))
+        work_items.append((row_idx, row_values, url, domain))
 
     pending_batch = 0
     processed_now = resumed_rows
@@ -1114,28 +1224,44 @@ def process_excel(
             pending_batch = 0
 
         try:
-            future_items: dict[Future[DetectionResult], tuple[int, list[Any], str]] = {}
-            for row_idx, row_values, domain, future in work_items:
-                if future is None:
-                    out_row = [str(v) if v is not None else '' for v in row_values]
-                    out_row.extend(['', '', '', ''])
-                    writer.writerow(out_row)
-                    processed_now += 1
-                    empty_url_rows += 1
-                    pending_batch += 1
-                    if pending_batch >= checkpoint_batch_size:
-                        flush_batch()
-                else:
-                    future_items[future] = (row_idx, row_values, domain)
-
-            for future in as_completed(future_items):
-                if should_pause and should_pause():
-                    for pending in future_items:
-                        pending.cancel()
+            for _, row_values in empty_items:
+                out_row = [str(v) if v is not None else '' for v in row_values]
+                out_row.extend(['', '', '', ''])
+                writer.writerow(out_row)
+                processed_now += 1
+                empty_url_rows += 1
+                pending_batch += 1
+                if pending_batch >= checkpoint_batch_size:
                     flush_batch()
-                    raise ProcessingPaused("任务已暂停，已保存当前进度。")
-                row_idx, row_values, domain = future_items[future]
-                result = future.result()
+
+            async def run_async_checks() -> None:
+                connector = aiohttp.TCPConnector(limit=max_workers, ttl_dns_cache=300)
+                async with aiohttp.ClientSession(connector=connector) as session:
+                    async def run_one(item: tuple[int, list[Any], str, str]):
+                        row_idx, row_values, url, domain = item
+                        result = await detect_url_async(
+                            session, url, domain, cache, logger, domain_interval
+                        )
+                        return row_idx, row_values, domain, result
+
+                    tasks = [asyncio.create_task(run_one(item)) for item in work_items]
+                    try:
+                        for completed in asyncio.as_completed(tasks):
+                            if should_pause and should_pause():
+                                for task in tasks:
+                                    task.cancel()
+                                await asyncio.gather(*tasks, return_exceptions=True)
+                                flush_batch()
+                                raise ProcessingPaused("任务已暂停，已保存当前进度。")
+                            row_idx, row_values, domain, result = await completed
+                            record_result(row_values, domain, result)
+                    finally:
+                        for task in tasks:
+                            if not task.done():
+                                task.cancel()
+
+            def record_result(row_values: list[Any], domain: str, result: DetectionResult) -> None:
+                nonlocal cache_hit_rows, network_checked_rows, processed_now, google_login_rows, pending_batch
                 if result.cache_hit:
                     cache_hit_rows += 1
                 else:
@@ -1151,6 +1277,8 @@ def process_excel(
                 pending_batch += 1
                 if pending_batch >= checkpoint_batch_size:
                     flush_batch()
+
+            asyncio.run(run_async_checks())
             flush_batch()
 
         except KeyboardInterrupt:

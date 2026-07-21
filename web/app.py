@@ -18,8 +18,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from check_blogs.check_blogs import ProcessingPaused, process_excel
-from processor.process_backlinks import process_backlink_files
+from check_blogs.check_blogs import DomainResultCache, ProcessingPaused, process_excel
+from processor.process_backlinks import ProcessorPaused, process_backlink_files
 
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +39,7 @@ class AppConfig:
     check_blogs_concurrency: int = field(default_factory=lambda: max(1, int(os.getenv("CHECK_BLOGS_CONCURRENCY", "16"))))
     check_blogs_domain_interval: float = field(default_factory=lambda: float(os.getenv("CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS", "1.5")))
     checkpoint_batch_size: int = field(default_factory=lambda: max(1, int(os.getenv("CHECK_BLOGS_CHECKPOINT_BATCH_SIZE", "25"))))
+    processor_read_workers: int = field(default_factory=lambda: max(1, int(os.getenv("PROCESSOR_READ_WORKERS", "3"))))
 
     @property
     def jobs_dir(self) -> Path:
@@ -81,6 +82,8 @@ class JobManager:
         self.recoverable_job_ids: list[str] = []
         self.restart_updated_job_ids: list[str] = []
         self.config.jobs_dir.mkdir(parents=True, exist_ok=True)
+        self.cache = DomainResultCache(str(config.cache_path))
+        self.imported_history_rows = self.cache.import_history(config.jobs_dir)
         self._load_existing_jobs()
 
     def _job_dir(self, job_id: str) -> Path:
@@ -95,6 +98,18 @@ class JobManager:
                 payload = json.loads(metadata_path.read_text(encoding="utf-8"))
                 record = JobRecord(**payload)
                 if record.status not in TERMINAL_STATUSES:
+                    if record.status == "pausing":
+                        record.status = "paused"
+                        record.error = None
+                        record.logs.append({
+                            "time": datetime.now().strftime("%H:%M:%S"),
+                            "level": "INFO",
+                            "message": "服务重启，任务已完成暂停。",
+                        })
+                        record.updated_at = datetime.now().isoformat(timespec="seconds")
+                        self.restart_updated_job_ids.append(record.job_id)
+                        self.jobs[record.job_id] = record
+                        continue
                     job_dir = metadata_path.parent
                     has_uploads = any((job_dir / "uploads").glob("*.xlsx"))
                     has_processor_output = (job_dir / "processor" / "processed_backlinks.xlsx").exists()
@@ -265,6 +280,8 @@ class JobManager:
                     use_processed_log=False,
                     logger=lambda message: self.add_log(job_id, message),
                     progress_callback=processor_progress,
+                    read_workers=self.config.processor_read_workers,
+                    should_pause=lambda: self.pause_events.setdefault(job_id, threading.Event()).is_set(),
                 )
                 self.update_job(job_id, stats={"processor": processor_result.to_dict()})
             if not processor_output.exists():
@@ -306,7 +323,7 @@ class JobManager:
                 progress=100,
                 download_path=str(final_output),
             )
-        except ProcessingPaused as exc:
+        except (ProcessingPaused, ProcessorPaused) as exc:
             self.add_log(job_id, str(exc))
             self.update_job(job_id, status="paused", error=None)
         except Exception as exc:
@@ -395,6 +412,7 @@ def create_app(config: AppConfig | None = None) -> FastAPI:
             "ok": True,
             "storage_root": str(active_config.storage_root),
             "pipeline": "processor->check_blogs",
+            "historical_cache_rows": manager.imported_history_rows,
         }
 
     @app.get("/api/jobs")

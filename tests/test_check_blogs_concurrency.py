@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import asyncio
 import json
 import tempfile
 import threading
@@ -10,15 +11,20 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import openpyxl
+import pandas as pd
+from bs4 import BeautifulSoup as RealBeautifulSoup
 
 from check_blogs.check_blogs import (
     CACHE_RULE_VERSION,
     DetectionResult,
     DomainResultCache,
+    analyze_html_once,
     detect_url,
+    fetch_page_async,
     fetch_page,
     process_excel,
 )
+from processor.process_backlinks import ProcessorPaused, process_backlink_files
 from web.app import AppConfig, JobManager
 
 
@@ -35,6 +41,38 @@ def write_input(path: Path, count: int) -> None:
 
 
 class NetworkConfigurationTests(unittest.TestCase):
+    def test_async_fetch_uses_hard_total_timeout_and_streaming(self) -> None:
+        captured: dict[str, object] = {}
+
+        class Content:
+            async def iter_chunked(self, size):
+                yield ORDINARY_HTML.encode()
+
+        class Response:
+            url = "https://example.com/final"
+            charset = "utf-8"
+            content = Content()
+            def raise_for_status(self):
+                return None
+            async def __aenter__(self):
+                return self
+            async def __aexit__(self, *args):
+                return None
+
+        class Session:
+            def get(self, url, **kwargs):
+                captured.update(kwargs)
+                return Response()
+
+        html, final_url, error = asyncio.run(
+            fetch_page_async(Session(), "https://example.com", logger=None)
+        )
+        self.assertEqual(html, ORDINARY_HTML)
+        self.assertEqual(final_url, "https://example.com/final")
+        self.assertEqual(error, "")
+        self.assertEqual(captured["timeout"].total, 30.0)
+        self.assertEqual(captured["max_redirects"], 5)
+
     def test_fetch_uses_split_timeout(self) -> None:
         response = MagicMock()
         response.text = ORDINARY_HTML
@@ -54,13 +92,13 @@ class NetworkConfigurationTests(unittest.TestCase):
         starts: list[float] = []
         starts_lock = threading.Lock()
 
-        def fake_fetch(url: str, logger=None):
+        async def fake_fetch(session, url: str, logger=None):
             with starts_lock:
                 starts.append(time.monotonic())
             return ORDINARY_HTML, url, ""
 
         cache = DomainResultCache(None)
-        with patch("check_blogs.check_blogs.fetch_page", side_effect=fake_fetch):
+        with patch("check_blogs.check_blogs.fetch_page_async", side_effect=fake_fetch):
             threads = [
                 threading.Thread(
                     target=detect_url,
@@ -77,6 +115,37 @@ class NetworkConfigurationTests(unittest.TestCase):
 
 
 class ConcurrentPipelineTests(unittest.TestCase):
+    def test_html_is_parsed_only_once(self) -> None:
+        calls = 0
+
+        def counting_soup(*args, **kwargs):
+            nonlocal calls
+            calls += 1
+            return RealBeautifulSoup(*args, **kwargs)
+
+        with patch("check_blogs.check_blogs.BeautifulSoup", side_effect=counting_soup):
+            result = analyze_html_once(ORDINARY_HTML, "https://example.com", "https://example.com", "example.com")
+        self.assertEqual(result.label, "无评论功能")
+        self.assertEqual(calls, 1)
+
+    def test_recent_history_is_imported_without_overwriting_newer_cache(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            result_dir = root / "jobs" / "job-1" / "result"
+            result_dir.mkdir(parents=True)
+            csv_path = result_dir / "history.csv"
+            with csv_path.open("w", newline="", encoding="utf-8-sig") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["顶级域名", "评论表单检测", "特殊标注", "最新评论时间"])
+                writer.writerow(["history.example", "博客网站", "", "2026-07-20 10:00"])
+            cache = DomainResultCache(str(root / "cache.sqlite3"))
+            imported = cache.import_history(root / "jobs")
+            self.assertEqual(imported, 1)
+            self.assertEqual(cache.get("history.example").label, "博客网站")
+            cache.put(DetectionResult("history.example", "评论网站", "", "", "", "success"))
+            cache.import_history(root / "jobs")
+            self.assertEqual(cache.get("history.example").label, "评论网站")
+
     def test_slow_first_input_does_not_block_completed_batch_progress(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)
@@ -86,11 +155,11 @@ class ConcurrentPipelineTests(unittest.TestCase):
             updates: list[tuple[float, int]] = []
             started = time.monotonic()
 
-            def fake_fetch(url: str, logger=None):
-                time.sleep(0.45 if "domain-0.com" in url else 0.01)
+            async def fake_fetch(session, url: str, logger=None):
+                await asyncio.sleep(0.45 if "domain-0.com" in url else 0.01)
                 return ORDINARY_HTML, url, ""
 
-            with patch("check_blogs.check_blogs.fetch_page", side_effect=fake_fetch):
+            with patch("check_blogs.check_blogs.fetch_page_async", side_effect=fake_fetch):
                 process_excel(
                     str(input_path), output_path=str(output_path), resume=False,
                     logger=None, max_workers=16, checkpoint_batch_size=25,
@@ -135,19 +204,19 @@ class ConcurrentPipelineTests(unittest.TestCase):
             max_active = 0
             lock = threading.Lock()
 
-            def fake_fetch(url: str, logger=None):
+            async def fake_fetch(session, url: str, logger=None):
                 nonlocal active, max_active
                 with lock:
                     fetched.append(url)
                     active += 1
                     max_active = max(max_active, active)
-                time.sleep(0.1)
+                await asyncio.sleep(0.1)
                 with lock:
                     active -= 1
                 return ORDINARY_HTML, url, ""
 
             started = time.monotonic()
-            with patch("check_blogs.check_blogs.fetch_page", side_effect=fake_fetch):
+            with patch("check_blogs.check_blogs.fetch_page_async", side_effect=fake_fetch):
                 first = process_excel(
                     str(input_path), output_path=str(output_path), resume=False,
                     logger=None, max_workers=16, checkpoint_batch_size=25,
@@ -163,7 +232,7 @@ class ConcurrentPipelineTests(unittest.TestCase):
                 rows = list(csv.reader(handle))[1:]
             self.assertEqual([row[0] for row in rows], [f"page-{index}" for index in range(32)])
 
-            with patch("check_blogs.check_blogs.fetch_page") as second_fetch:
+            with patch("check_blogs.check_blogs.fetch_page_async") as second_fetch:
                 second = process_excel(
                     str(input_path), output_path=str(second_output), resume=False,
                     logger=None, max_workers=16, cache_path=str(cache_path), domain_interval=0,
@@ -178,13 +247,16 @@ class ConcurrentPipelineTests(unittest.TestCase):
             input_path = root / "input.xlsx"
             output_path = root / "result.xlsx"
             write_input(input_path, 3)
-            with patch("check_blogs.check_blogs.fetch_page", return_value=(ORDINARY_HTML, "", "")):
+            async def ordinary_fetch(session, url: str, logger=None):
+                return ORDINARY_HTML, url, ""
+
+            with patch("check_blogs.check_blogs.fetch_page_async", side_effect=ordinary_fetch):
                 process_excel(str(input_path), output_path=str(output_path), resume=False, logger=None, domain_interval=0)
 
             checkpoint = output_path.with_name(f"{output_path.stem}_checkpoint.json")
             checkpoint.write_text(json.dumps({"processed_domains": ["domain-0.com"]}), encoding="utf-8")
             output_path.unlink()
-            with patch("check_blogs.check_blogs.fetch_page") as resumed_fetch:
+            with patch("check_blogs.check_blogs.fetch_page_async") as resumed_fetch:
                 resumed = process_excel(str(input_path), output_path=str(output_path), resume=True, logger=None, domain_interval=0)
             resumed_fetch.assert_not_called()
             self.assertEqual(resumed.resumed_rows, 3)
@@ -206,7 +278,10 @@ class GoogleLoginTests(unittest.TestCase):
             (ordinary_login, "无评论功能"),
             (complete_form, "博客网站 · 谷歌登录"),
         ):
-            with patch("check_blogs.check_blogs.fetch_page", return_value=(html, "https://example.com", "")):
+            async def html_fetch(session, url: str, logger=None, html=html):
+                return html, "https://example.com", ""
+
+            with patch("check_blogs.check_blogs.fetch_page_async", side_effect=html_fetch):
                 result = detect_url("https://example.com", f"{expected}.example", cache, None, 0)
             self.assertEqual(result.label, expected)
             if "谷歌登录" in expected:
@@ -232,6 +307,73 @@ class RecoveryTests(unittest.TestCase):
             record = manager.get_job(job_id)
             self.assertEqual(record.status, "queued")
             self.assertIn(job_id, manager.recoverable_job_ids)
+
+    def test_pausing_job_becomes_paused_without_requeueing(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            job_id = "20260721-000000-pausing"
+            job_dir = root / "jobs" / job_id
+            (job_dir / "uploads").mkdir(parents=True)
+            (job_dir / "uploads" / "input.xlsx").touch()
+            metadata = {
+                "job_id": job_id, "status": "pausing", "stage": "processor",
+                "progress": 12, "created_at": "2026-07-21T00:00:00",
+                "updated_at": "2026-07-21T00:01:00", "files": [], "logs": [],
+                "stats": {}, "error": None, "download_path": None,
+            }
+            (job_dir / "metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
+            manager = JobManager(AppConfig(storage_root=root, worker_count=1))
+            record = manager.get_job(job_id)
+            self.assertEqual(record.status, "paused")
+            self.assertNotIn(job_id, manager.recoverable_job_ids)
+
+
+class ProcessorConcurrencyTests(unittest.TestCase):
+    def test_files_are_read_in_parallel_but_merged_deterministically(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            uploads = root / "uploads"
+            uploads.mkdir()
+            for name in ("a.xlsx", "b.xlsx", "c.xlsx"):
+                (uploads / name).touch()
+
+            def fake_read(path):
+                time.sleep(0.1)
+                return pd.DataFrame({"Source url": [f"https://{Path(path).stem}.example/post"]})
+
+            started = time.monotonic()
+            with patch("processor.process_backlinks.read_file", side_effect=fake_read):
+                result = process_backlink_files(
+                    source_dir=uploads, output_file=root / "result.xlsx",
+                    use_processed_log=False, logger=None, read_workers=3,
+                )
+            self.assertLess(time.monotonic() - started, 0.25)
+            self.assertEqual(result.rows_read, 3)
+            output = pd.read_excel(root / "result.xlsx")
+            self.assertEqual(output["Source url"].tolist(), [
+                "https://a.example/post", "https://b.example/post", "https://c.example/post",
+            ])
+
+    def test_processor_pause_stops_at_file_boundary(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            uploads = root / "uploads"
+            uploads.mkdir()
+            for name in ("a.xlsx", "b.xlsx"):
+                (uploads / name).touch()
+            pause = threading.Event()
+
+            def fake_read(path):
+                pause.set()
+                return pd.DataFrame({"Source url": [f"https://{Path(path).stem}.example"]})
+
+            with patch("processor.process_backlinks.read_file", side_effect=fake_read):
+                with self.assertRaises(ProcessorPaused):
+                    process_backlink_files(
+                        source_dir=uploads, output_file=root / "result.xlsx",
+                        use_processed_log=False, logger=None, read_workers=2,
+                        should_pause=pause.is_set,
+                    )
 
 
 if __name__ == "__main__":
