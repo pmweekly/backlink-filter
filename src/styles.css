@@ -267,7 +267,7 @@ h3 {
 }
 
 .history-row {
-  grid-template-columns: minmax(140px, 1fr) minmax(150px, 1fr) 86px 92px 76px 132px;
+  grid-template-columns: minmax(140px, 1fr) minmax(145px, 0.9fr) minmax(145px, 0.9fr) 86px 92px 76px 132px;
 }
 
 .file-row:first-child,
@@ -615,7 +615,7 @@ h3 {
   }
 
   .history-row {
-    grid-template-columns: minmax(140px, 1fr) minmax(140px, 1fr) 76px 82px 72px 126px;
+    grid-template-columns: minmax(140px, 1fr) minmax(135px, 0.9fr) minmax(135px, 0.9fr) 76px 82px 72px 126px;
   }
 }
 

@@ -63,6 +63,7 @@ class JobRecord:
     stats: dict[str, Any] = field(default_factory=dict)
     error: str | None = None
     download_path: str | None = None
+    completed_at: str | None = None
 
     def public_dict(self) -> dict[str, Any]:
         payload = asdict(self)
@@ -172,6 +173,8 @@ class JobManager:
             record = self.jobs[job_id]
             if status is not None:
                 record.status = status
+                if status == "completed" and not record.completed_at:
+                    record.completed_at = datetime.now().isoformat(timespec="seconds")
             if stage is not None:
                 record.stage = stage
             if progress is not None:

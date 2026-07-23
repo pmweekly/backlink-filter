@@ -24,6 +24,7 @@ from check_blogs.check_blogs import (
     fetch_page_async,
     fetch_page,
     process_excel,
+    write_result_rule_metadata,
 )
 from processor.process_backlinks import ProcessorPaused, process_backlink_files
 from web.app import AppConfig, JobManager
@@ -139,6 +140,7 @@ class ConcurrentPipelineTests(unittest.TestCase):
                 writer = csv.writer(handle)
                 writer.writerow(["顶级域名", "评论表单检测", "特殊标注", "最新评论时间"])
                 writer.writerow(["history.example", "博客网站", "", "2026-07-20 10:00"])
+            write_result_rule_metadata(csv_path)
             cache = DomainResultCache(str(root / "cache.sqlite3"))
             imported = cache.import_history(root / "jobs")
             self.assertEqual(imported, 1)
@@ -146,6 +148,20 @@ class ConcurrentPipelineTests(unittest.TestCase):
             cache.put(DetectionResult("history.example", "评论网站", "", "", "", "success"))
             cache.import_history(root / "jobs")
             self.assertEqual(cache.get("history.example").label, "评论网站")
+
+    def test_history_without_matching_rule_metadata_is_not_imported(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            result_dir = root / "jobs" / "job-1" / "result"
+            result_dir.mkdir(parents=True)
+            csv_path = result_dir / "old-history.csv"
+            with csv_path.open("w", newline="", encoding="utf-8-sig") as handle:
+                writer = csv.writer(handle)
+                writer.writerow(["顶级域名", "评论表单检测", "特殊标注", "最新评论时间"])
+                writer.writerow(["old.example", "博客网站", "", "2026-07-20 10:00"])
+            cache = DomainResultCache(str(root / "cache.sqlite3"))
+            self.assertEqual(cache.import_history(root / "jobs"), 0)
+            self.assertIsNone(cache.get("old.example"))
 
     def test_slow_first_input_does_not_block_completed_batch_progress(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -274,6 +290,45 @@ class ConcurrentPipelineTests(unittest.TestCase):
             self.assertEqual(resumed.resumed_rows, 3)
             self.assertTrue(output_path.exists())
 
+    def test_exact_duplicate_source_url_is_output_with_flag_without_refetch(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            input_path = root / "input.xlsx"
+            output_path = root / "result.xlsx"
+            workbook = openpyxl.Workbook()
+            sheet = workbook.active
+            sheet.append(["Page address", "Source title", "Source url"])
+            sheet.append(["page-0", "title-0", "https://same.example/post"])
+            sheet.append(["page-1", "title-1", "https://same.example/post"])
+            sheet.append(["page-2", "title-2", "https://same.example/other"])
+            workbook.save(input_path)
+
+            fetched: list[str] = []
+
+            async def fake_fetch(session, url: str, logger=None):
+                fetched.append(url)
+                return ORDINARY_HTML, url, ""
+
+            with patch("check_blogs.check_blogs.fetch_page_async", side_effect=fake_fetch):
+                result = process_excel(
+                    str(input_path),
+                    output_path=str(output_path),
+                    resume=False,
+                    logger=None,
+                    domain_interval=0,
+                )
+
+            self.assertEqual(fetched, ["https://same.example/post"])
+            self.assertEqual(result.duplicate_url_rows, 1)
+            self.assertEqual(result.skipped_duplicate_domains, 1)
+            with open(output_path.with_suffix(".csv"), newline="", encoding="utf-8-sig") as handle:
+                rows = list(csv.reader(handle))[1:]
+            self.assertEqual([row[0] for row in rows], ["page-0", "page-1"])
+            self.assertEqual(rows[0][-3], "无评论功能")
+            self.assertEqual(rows[0][-2], "")
+            self.assertEqual(rows[1][-3], "无评论功能")
+            self.assertIn("URL完全重复", rows[1][-2])
+
 
 class GoogleLoginTests(unittest.TestCase):
     def test_google_login_is_only_applied_to_comment_pages(self) -> None:
@@ -300,7 +355,49 @@ class GoogleLoginTests(unittest.TestCase):
                 self.assertEqual(result.flags, "需登录（谷歌登录）")
 
 
+class AiToolDirectoryTests(unittest.TestCase):
+    def test_ai_tool_directory_is_flagged_without_overriding_blog_label(self) -> None:
+        html = """<html><head>
+            <title>AI Tool Directory - Best AI Tools</title>
+            <meta name="description" content="Discover AI tools and submit your AI tool">
+            </head><body><h1>Featured AI Tools</h1><nav>Writing Image Video Chatbot Coding Design</nav>
+            <form><textarea name="comment"></textarea><input name="name"><input name="email">
+            <input name="website"><button>Post Comment</button></form></body></html>"""
+        result = analyze_html_once(html, "https://aitools.example", "https://aitools.example", "aitools.example")
+        self.assertEqual(result.label, "博客网站")
+        self.assertIn("AI工具导航站", result.flags)
+
+    def test_plain_ai_article_is_not_flagged_as_directory(self) -> None:
+        html = """<html><head><title>How to use ChatGPT for SEO</title>
+            <meta name="description" content="A blog article about AI and marketing"></head>
+            <body><h1>How to use ChatGPT for SEO</h1><p>This article reviews AI prompts.</p></body></html>"""
+        result = analyze_html_once(html, "https://blog.example/post", "https://blog.example/post", "blog.example")
+        self.assertEqual(result.label, "无评论功能")
+        self.assertNotIn("AI工具导航站", result.flags)
+
+    def test_ai_directory_flag_combines_with_google_login_flag(self) -> None:
+        html = """<html><head><title>AI Tools Directory</title>
+            <meta name="description" content="Featured AI tools, submit your AI tool"></head>
+            <body><script src="https://accounts.google.com/gsi/client"></script>
+            <h1>Browse AI Tools</h1><nav>Writing Image Video Chatbot Coding Design</nav>
+            <p>Leave a comment</p></body></html>"""
+        result = analyze_html_once(html, "https://directory.example", "https://directory.example", "directory.example")
+        self.assertEqual(result.label, "评论网站 · 谷歌登录")
+        self.assertIn("需登录（谷歌登录）", result.flags)
+        self.assertIn("AI工具导航站", result.flags)
+
+
 class RecoveryTests(unittest.TestCase):
+    def test_completed_job_records_completed_at(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            manager = JobManager(AppConfig(storage_root=root, worker_count=1))
+            record = manager.create_job([])
+            manager.update_job(record.job_id, status="completed")
+            completed = manager.get_job(record.job_id)
+            self.assertIsNotNone(completed.completed_at)
+            self.assertEqual(completed.public_dict()["completed_at"], completed.completed_at)
+
     def test_non_terminal_job_with_processor_output_is_requeued(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             root = Path(temp_dir)

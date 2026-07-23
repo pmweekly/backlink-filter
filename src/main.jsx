@@ -305,6 +305,8 @@ function App() {
               <div><span>缓存命中</span><strong>{formatNumber(currentStats.cache_hit_rows)}</strong></div>
               <div><span>断点恢复</span><strong>{formatNumber(currentStats.resumed_rows)}</strong></div>
               <div><span>Google 登录</span><strong>{formatNumber(currentStats.google_login_rows)}</strong></div>
+              <div><span>AI工具导航站</span><strong>{formatNumber(currentStats.ai_tool_directory_rows)}</strong></div>
+              <div><span>重复URL</span><strong>{formatNumber(currentStats.duplicate_url_rows)}</strong></div>
               <div><span>博客网站</span><strong>{formatNumber(currentStats.label_counts?.['博客网站'])}</strong></div>
             </div>
 
@@ -335,6 +337,7 @@ function App() {
               <div className="history-row table-head">
                 <span>任务 ID</span>
                 <span>开始时间</span>
+                <span>完成时间</span>
                 <span>输入文件</span>
                 <span>检测行数</span>
                 <span>状态</span>
@@ -343,7 +346,8 @@ function App() {
               {latestCompletedJobs.length ? latestCompletedJobs.map((item) => (
                 <div className="history-row" key={item.job_id}>
                   <span>{item.job_id}</span>
-                  <span>{item.created_at}</span>
+                  <span>{item.created_at || '-'}</span>
+                  <span>{item.completed_at || item.updated_at || '-'}</span>
                   <span>{item.files?.length || 0} 个文件</span>
                   <span>{formatNumber(item.stats?.check_blogs?.processed_rows)}</span>
                   <span className="ready"><Check size={15} />完成</span>

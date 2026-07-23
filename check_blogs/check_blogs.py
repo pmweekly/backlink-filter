@@ -26,6 +26,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable, Optional, Tuple, List, Set
 import csv, json, tempfile
+from collections import defaultdict, deque
 from contextlib import contextmanager
 from datetime import datetime
 from urllib.parse import urlparse
@@ -55,6 +56,8 @@ class CheckBlogsResult:
     cache_hit_rows: int = 0
     resumed_rows: int = 0
     google_login_rows: int = 0
+    ai_tool_directory_rows: int = 0
+    duplicate_url_rows: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -118,7 +121,7 @@ DOMAIN_INTERVAL_SECONDS = float(os.getenv("CHECK_BLOGS_DOMAIN_INTERVAL_SECONDS",
 CHECKPOINT_BATCH_SIZE = max(1, int(os.getenv("CHECK_BLOGS_CHECKPOINT_BATCH_SIZE", "25")))
 CACHE_SUCCESS_TTL_SECONDS = int(os.getenv("CHECK_BLOGS_CACHE_SUCCESS_TTL_SECONDS", "604800"))
 CACHE_FAILURE_TTL_SECONDS = int(os.getenv("CHECK_BLOGS_CACHE_FAILURE_TTL_SECONDS", "21600"))
-CACHE_RULE_VERSION = "2026-07-google-comment-v1"
+CACHE_RULE_VERSION = "2026-07-ai-directory-duplicate-url-v1"
 
 _thread_local = threading.local()
 _domain_locks_guard = threading.Lock()
@@ -256,6 +259,8 @@ class DomainResultCache:
         with self._connection() as connection:
             for csv_path in Path(jobs_dir).glob("*/result/*.csv"):
                 try:
+                    if not result_matches_current_rule(csv_path):
+                        continue
                     checked_at = csv_path.stat().st_mtime
                     if now - checked_at > CACHE_SUCCESS_TTL_SECONDS:
                         continue
@@ -471,6 +476,68 @@ GAME_KEYWORDS = [
     "download game", "free game", "play game",
 ]
 
+AI_TOOL_DIRECTORY_STRONG_SIGNALS = [
+    "ai tool directory",
+    "ai tools directory",
+    "ai tools list",
+    "ai tool list",
+    "ai tools navigation",
+    "ai工具导航",
+    "ai 工具导航",
+    "ai工具目录",
+    "ai 工具目录",
+    "ai工具箱",
+    "ai 工具箱",
+    "ai工具集",
+    "ai 工具集",
+    "ai导航",
+    "ai 导航",
+]
+
+AI_TOOL_DIRECTORY_CONTEXT_SIGNALS = [
+    "submit tool",
+    "submit your tool",
+    "submit your ai tool",
+    "add your tool",
+    "featured ai tools",
+    "top ai tools",
+    "best ai tools",
+    "discover ai tools",
+    "browse ai tools",
+    "ai tools for",
+    "工具收录",
+    "提交工具",
+    "收录工具",
+    "发现ai工具",
+    "发现 ai 工具",
+    "精选ai工具",
+    "精选 ai 工具",
+    "热门ai工具",
+    "热门 ai 工具",
+]
+
+AI_TOOL_CATEGORY_SIGNALS = [
+    "writing",
+    "image",
+    "video",
+    "chatbot",
+    "coding",
+    "productivity",
+    "marketing",
+    "design",
+    "research",
+    "automation",
+    "文案",
+    "图像",
+    "视频",
+    "聊天",
+    "编程",
+    "设计",
+    "营销",
+    "效率",
+    "自动化",
+]
+
 # 评论需要登录/注册的信号
 LOGIN_SIGNALS = [
     "you must be logged in",
@@ -501,6 +568,36 @@ GOOGLE_SIGNALS = [
     "google sign in",
     "gsi/client",
 ]
+
+SPECIAL_FLAG_AI_TOOL_DIRECTORY = "AI工具导航站"
+SPECIAL_FLAG_DUPLICATE_URL = "URL完全重复"
+
+
+def append_special_flag(flags: str, flag: str) -> str:
+    parts = [part for part in flags.split("；") if part]
+    if flag not in parts:
+        parts.append(flag)
+    return "；".join(parts)
+
+
+def result_rule_metadata_path(csv_path: str | Path) -> Path:
+    return Path(f"{csv_path}.metadata.json")
+
+
+def write_result_rule_metadata(csv_path: str | Path) -> None:
+    metadata_path = result_rule_metadata_path(csv_path)
+    metadata_path.write_text(
+        json.dumps({"cache_rule_version": CACHE_RULE_VERSION}, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
+
+def result_matches_current_rule(csv_path: str | Path) -> bool:
+    try:
+        metadata = json.loads(result_rule_metadata_path(csv_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return False
+    return metadata.get("cache_rule_version") == CACHE_RULE_VERSION
 
 
 def get_top_domain(url: str) -> str:
@@ -640,6 +737,8 @@ def analyze_html_once(html: str, url: str, final_url: str, domain: str) -> Detec
                 label = '评论网站'
         else:
             label = '无评论功能'
+    if detect_ai_tool_directory_site(html, url, soup=soup):
+        flags.append(SPECIAL_FLAG_AI_TOOL_DIRECTORY)
     return DetectionResult(
         domain=domain,
         label=label,
@@ -779,6 +878,47 @@ def detect_game_site(html: str, url: str, *, soup: BeautifulSoup | None = None) 
         hit_count += min(_score(nav.get_text()), 1)
 
     return hit_count >= 2
+
+
+def detect_ai_tool_directory_site(html: str, url: str, *, soup: BeautifulSoup | None = None) -> bool:
+    """
+    保守识别 AI 工具导航/目录站。
+    普通 AI 文章或 SaaS 登录页不应因为提到 AI/ChatGPT 被误标。
+    """
+    soup = soup or BeautifulSoup(html, "html.parser")
+    domain = get_top_domain(url).lower()
+    html_lower = html.lower()
+
+    scoped_parts: list[str] = [domain]
+    title_tag = soup.find("title")
+    if title_tag:
+        scoped_parts.append(title_tag.get_text(" ", strip=True))
+    for meta in soup.find_all("meta"):
+        name = (meta.get("name") or meta.get("property") or "").lower()
+        if name in {"keywords", "description", "og:title", "og:description", "twitter:title", "twitter:description"}:
+            scoped_parts.append(meta.get("content") or "")
+    for tag_name in ("h1", "h2", "nav"):
+        for tag in soup.find_all(tag_name):
+            scoped_parts.append(tag.get_text(" ", strip=True))
+
+    link_texts = [anchor.get_text(" ", strip=True) for anchor in soup.find_all("a", limit=120)]
+    scoped_text = " ".join(scoped_parts + link_texts).lower()
+
+    strong_hits = sum(1 for signal in AI_TOOL_DIRECTORY_STRONG_SIGNALS if signal in scoped_text)
+    context_hits = sum(1 for signal in AI_TOOL_DIRECTORY_CONTEXT_SIGNALS if signal in scoped_text)
+    category_hits = sum(1 for signal in AI_TOOL_CATEGORY_SIGNALS if signal in scoped_text)
+    ai_tool_phrase_hits = len(re.findall(r"\bai\s+tools?\b", scoped_text))
+
+    has_directory_word = any(word in scoped_text for word in ("directory", "list", "navigation", "toolbox", "工具导航", "工具目录", "工具箱", "工具集", "导航"))
+    has_collection_action = context_hits > 0 or len(link_texts) >= 12
+
+    if strong_hits >= 1 and (context_hits >= 1 or category_hits >= 3 or ai_tool_phrase_hits >= 2):
+        return True
+    if ai_tool_phrase_hits >= 3 and has_directory_word and has_collection_action:
+        return True
+    if any(signal in html_lower for signal in ("submit your ai tool", "featured ai tools", "ai工具导航", "提交工具")):
+        return True
+    return False
 
 
 def detect_comment_login(html: str, *, soup: BeautifulSoup | None = None) -> str:
@@ -1035,36 +1175,41 @@ def count_data_rows(input_path: str) -> int:
     return max((ws.max_row or 1) - 1, 0)
 
 
+def stringify_row(row_values: list[Any]) -> list[str]:
+    return [str(v) if v is not None else '' for v in row_values]
+
+
+def normalize_source_url_key(url: str) -> str:
+    return url.strip()
+
+
 def sort_csv_by_input_order(input_path: str, csv_path: str) -> None:
     """并发期间允许完成结果即时落盘，最终导出前按原始输入顺序重排。"""
-    order: dict[str, int] = {}
+    order_by_row: dict[tuple[str, ...], deque[int]] = defaultdict(deque)
     input_rows = _iter_rows(input_path)
     try:
-        input_header = [str(value or "").strip().lower() for value in next(input_rows)]
+        next(input_rows)
     except StopIteration:
         return
-    source_idx = next((i for i, value in enumerate(input_header) if value == "source url"), 2)
     for index, row in enumerate(input_rows):
-        raw_url = row[source_idx] if source_idx < len(row) else ""
-        url = str(raw_url).strip() if raw_url else ""
-        if not url:
-            continue
-        domain = get_top_domain(url).strip().lower() or urlparse(url).netloc.lower()
-        order.setdefault(domain, index)
+        order_by_row[tuple(stringify_row(list(row)))].append(index)
 
     with open(csv_path, newline="", encoding="utf-8-sig") as source:
         reader = csv.reader(source)
         header = next(reader, [])
         rows = list(reader)
-    domain_idx = next((i for i, value in enumerate(header) if "顶级域名" in (value or "")), -1)
-    if domain_idx < 0:
-        return
-    rows.sort(
-        key=lambda row: order.get(
-            row[domain_idx].strip().lower() if len(row) > domain_idx else "",
-            len(order) + 1,
-        )
-    )
+    source_column_count = max(len(header) - 4, 0)
+    ordered_rows: list[tuple[int, int, list[str]]] = []
+    fallback_order = len(order_by_row) + len(rows) + 1
+    for csv_index, row in enumerate(rows):
+        row_key = tuple(row[:source_column_count])
+        if order_by_row.get(row_key):
+            order_index = order_by_row[row_key].popleft()
+        else:
+            order_index = fallback_order + csv_index
+        ordered_rows.append((order_index, csv_index, row))
+    ordered_rows.sort(key=lambda item: (item[0], item[1]))
+    rows = [row for _, _, row in ordered_rows]
     directory = os.path.dirname(csv_path) or "."
     fd, temp_path = tempfile.mkstemp(dir=directory, prefix=".sorted", text=True)
     try:
@@ -1157,7 +1302,11 @@ def process_excel(
     network_checked_rows = 0
     cache_hit_rows = 0
     google_login_rows = 0
+    ai_tool_directory_rows = 0
+    duplicate_url_rows = 0
     resumed_empty_rows = 0
+    resumed_row_counts: dict[tuple[str, ...], int] = defaultdict(int)
+    resumed_results_by_domain: dict[str, DetectionResult] = {}
 
     if csv_exists:
         try:
@@ -1166,13 +1315,38 @@ def process_excel(
                 existing_header = next(existing_reader, [])
                 label_idx = next((i for i, value in enumerate(existing_header) if '评论表单检测' in (value or '')), -1)
                 domain_idx = next((i for i, value in enumerate(existing_header) if '顶级域名' in (value or '')), -1)
+                flags_idx = next((i for i, value in enumerate(existing_header) if '特殊标注' in (value or '')), -1)
+                comment_idx = next((i for i, value in enumerate(existing_header) if '最新评论时间' in (value or '')), -1)
                 for existing_row in existing_reader:
                     resumed_rows += 1
+                    resumed_row_counts[tuple(existing_row[:len(header_row)])] += 1
+                    existing_label = ""
+                    existing_flags = ""
                     if label_idx >= 0 and len(existing_row) > label_idx:
                         existing_label = existing_row[label_idx]
                         label_counts[existing_label] = label_counts.get(existing_label, 0) + 1
                         if '谷歌登录' in existing_label:
                             google_login_rows += 1
+                    if flags_idx >= 0 and len(existing_row) > flags_idx:
+                        existing_flags = existing_row[flags_idx]
+                        if SPECIAL_FLAG_AI_TOOL_DIRECTORY in existing_flags:
+                            ai_tool_directory_rows += 1
+                        if SPECIAL_FLAG_DUPLICATE_URL in existing_flags:
+                            duplicate_url_rows += 1
+                    if domain_idx >= 0 and len(existing_row) > domain_idx and existing_row[domain_idx] and existing_label:
+                        domain = existing_row[domain_idx].strip().lower()
+                        resumed_results_by_domain.setdefault(
+                            domain,
+                            DetectionResult(
+                                domain=domain,
+                                label=existing_label,
+                                flags=existing_flags,
+                                comment_time=existing_row[comment_idx] if comment_idx >= 0 and len(existing_row) > comment_idx else "",
+                                final_url="",
+                                outcome="success",
+                                cache_hit=True,
+                            ),
+                        )
                     if domain_idx >= 0 and (len(existing_row) <= domain_idx or not existing_row[domain_idx]):
                         resumed_empty_rows += 1
         except Exception as exc:
@@ -1181,19 +1355,38 @@ def process_excel(
     cache = DomainResultCache(cache_path or os.getenv("CHECK_BLOGS_CACHE_PATH"))
     work_items: list[tuple[int, list[Any], str, str]] = []
     empty_items: list[tuple[int, list[Any]]] = []
+    duplicate_items_by_domain: dict[str, list[tuple[int, list[Any]]]] = defaultdict(list)
+    ready_duplicate_items: list[tuple[int, list[Any], str, DetectionResult]] = []
+    first_url_by_domain: dict[str, str] = {}
 
     for row_idx, row_values in enumerate(rows, 1):
         row_values = list(row_values) if row_values is not None else []
+        row_key = tuple(stringify_row(row_values))
         raw_url = row_values[source_url_col_idx] if source_url_col_idx < len(row_values) else ""
         url = str(raw_url).strip() if raw_url else ""
         if not url:
+            if resumed_row_counts.get(row_key, 0) > 0:
+                resumed_row_counts[row_key] -= 1
+                continue
             if resumed_empty_rows > 0:
                 resumed_empty_rows -= 1
                 continue
             empty_items.append((row_idx, row_values))
             continue
         domain = get_top_domain(url).strip().lower() or urlparse(url).netloc.lower()
-        if domain in processed_domains or domain in seen_in_run:
+        url_key = normalize_source_url_key(url)
+        first_url_key = first_url_by_domain.setdefault(domain, url_key)
+        if resumed_row_counts.get(row_key, 0) > 0:
+            resumed_row_counts[row_key] -= 1
+            continue
+        if url_key == first_url_key and (domain in processed_domains or domain in seen_in_run):
+            existing_result = resumed_results_by_domain.get(domain) or cache.get(domain)
+            if existing_result:
+                ready_duplicate_items.append((row_idx, row_values, domain, existing_result))
+            else:
+                duplicate_items_by_domain[domain].append((row_idx, row_values))
+            continue
+        if domain in processed_domains or domain in seen_in_run or url_key != first_url_key:
             skipped_duplicate_domains += 1
             continue
         seen_in_run.add(domain)
@@ -1225,6 +1418,8 @@ def process_excel(
                     "cache_hit_rows": cache_hit_rows,
                     "resumed_rows": resumed_rows,
                     "google_login_rows": google_login_rows,
+                    "ai_tool_directory_rows": ai_tool_directory_rows,
+                    "duplicate_url_rows": duplicate_url_rows,
                     "label_counts": dict(label_counts),
                 })
             emit_progress(
@@ -1234,14 +1429,75 @@ def process_excel(
             )
             pending_batch = 0
 
+        def write_result_row(
+            row_values: list[Any],
+            domain: str,
+            result: DetectionResult,
+            *,
+            extra_flag: str = "",
+            count_network: bool = False,
+            count_cache: bool = False,
+            count_duplicate: bool = False,
+        ) -> None:
+            nonlocal cache_hit_rows, network_checked_rows, processed_now
+            nonlocal google_login_rows, ai_tool_directory_rows, duplicate_url_rows, pending_batch
+            flags = append_special_flag(result.flags, extra_flag) if extra_flag else result.flags
+            if count_cache:
+                cache_hit_rows += 1
+            if count_network:
+                network_checked_rows += 1
+            if count_duplicate:
+                duplicate_url_rows += 1
+            out_row = stringify_row(row_values)
+            out_row.extend([domain, result.label, flags, result.comment_time])
+            writer.writerow(out_row)
+            processed_now += 1
+            label_counts[result.label] = label_counts.get(result.label, 0) + 1
+            if '谷歌登录' in result.label:
+                google_login_rows += 1
+            if SPECIAL_FLAG_AI_TOOL_DIRECTORY in flags:
+                ai_tool_directory_rows += 1
+            pending_batch += 1
+
+        def record_result(row_values: list[Any], domain: str, result: DetectionResult) -> None:
+            write_result_row(
+                row_values,
+                domain,
+                result,
+                count_cache=result.cache_hit,
+                count_network=not result.cache_hit,
+            )
+            for _, duplicate_row in duplicate_items_by_domain.pop(domain, []):
+                write_result_row(
+                    duplicate_row,
+                    domain,
+                    result,
+                    extra_flag=SPECIAL_FLAG_DUPLICATE_URL,
+                    count_duplicate=True,
+                )
+            processed_domains.add(domain)
+            if pending_batch >= checkpoint_batch_size:
+                flush_batch()
+
         try:
             for _, row_values in empty_items:
-                out_row = [str(v) if v is not None else '' for v in row_values]
+                out_row = stringify_row(row_values)
                 out_row.extend(['', '', '', ''])
                 writer.writerow(out_row)
                 processed_now += 1
                 empty_url_rows += 1
                 pending_batch += 1
+                if pending_batch >= checkpoint_batch_size:
+                    flush_batch()
+
+            for _, row_values, domain, result in ready_duplicate_items:
+                write_result_row(
+                    row_values,
+                    domain,
+                    result,
+                    extra_flag=SPECIAL_FLAG_DUPLICATE_URL,
+                    count_duplicate=True,
+                )
                 if pending_batch >= checkpoint_batch_size:
                     flush_batch()
 
@@ -1282,30 +1538,13 @@ def process_excel(
                                 task.cancel()
                         await asyncio.gather(*tasks, return_exceptions=True)
 
-            def record_result(row_values: list[Any], domain: str, result: DetectionResult) -> None:
-                nonlocal cache_hit_rows, network_checked_rows, processed_now, google_login_rows, pending_batch
-                if result.cache_hit:
-                    cache_hit_rows += 1
-                else:
-                    network_checked_rows += 1
-                out_row = [str(v) if v is not None else '' for v in row_values]
-                out_row.extend([domain, result.label, result.flags, result.comment_time])
-                writer.writerow(out_row)
-                processed_domains.add(domain)
-                processed_now += 1
-                label_counts[result.label] = label_counts.get(result.label, 0) + 1
-                if '谷歌登录' in result.label:
-                    google_login_rows += 1
-                pending_batch += 1
-                if pending_batch >= checkpoint_batch_size:
-                    flush_batch()
-
             asyncio.run(run_async_checks())
             flush_batch()
 
         except KeyboardInterrupt:
             flush_batch()
             emit_log(logger, '\n[中断] 已保存当前进度，退出')
+            write_result_rule_metadata(out_csv)
             write_colored_xlsx(out_csv, out_xlsx, logger=logger)
             return CheckBlogsResult(
                 output_file=out_xlsx,
@@ -1321,10 +1560,13 @@ def process_excel(
                 cache_hit_rows=cache_hit_rows,
                 resumed_rows=resumed_rows,
                 google_login_rows=google_login_rows,
+                ai_tool_directory_rows=ai_tool_directory_rows,
+                duplicate_url_rows=duplicate_url_rows,
             )
 
     emit_progress(progress_callback, 94, "正在按原始输入顺序整理结果")
     sort_csv_by_input_order(input_path, out_csv)
+    write_result_rule_metadata(out_csv)
     emit_progress(progress_callback, 95, "正在生成带颜色标注的 Excel")
     write_colored_xlsx(out_csv, out_xlsx, logger=logger)
     emit_log(logger, f"\n完成！CSV: {out_csv}")
@@ -1344,6 +1586,8 @@ def process_excel(
         cache_hit_rows=cache_hit_rows,
         resumed_rows=resumed_rows,
         google_login_rows=google_login_rows,
+        ai_tool_directory_rows=ai_tool_directory_rows,
+        duplicate_url_rows=duplicate_url_rows,
     )
 
 
